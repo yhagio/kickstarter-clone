@@ -35,14 +35,9 @@ sudo npm install -g babel-cli
 
 ### Project TechStack
 
-**Front-End**
-- React.js
-- Redux
-- React-Router
-
-**Back-End**
 - Node.js with Expressjs
 - MongoDB hosted on MongoLab
+- Deployment on Heroku
 
 ### Project Roadmap / Todo
 Front-End
