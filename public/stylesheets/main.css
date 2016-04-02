@@ -1,0 +1,30 @@
+h1 {
+  color: green;
+}
+
+p {
+  color: blue;
+}
+
+.main {
+  margin-top: 60px;
+}
+
+.project-detail {
+  padding: 10px 5px 5px 5px;
+  margin-bottom: 5px;
+}
+
+.project-card {
+  border: 1px solid #000;
+  padding-bottom: 10px;
+}
+
+img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.project-stats {
+  margin-top: 10px;
+}
