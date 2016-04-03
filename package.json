@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "Kickstarter Clone",
   "scripts": {
-    "dev": "node build/index.js",
-    "build": "babel src -d build && npm run dev",
+    "prod": "babel src -d build && forever start build/index.js",
+    "dev": "babel src -d build && nodemon -L build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yuichi Hagio",
@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.15.0",
     "cloudinary": "^1.3.0",
+    "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-flash": "0.0.2",

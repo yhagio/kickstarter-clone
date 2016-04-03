@@ -23,6 +23,7 @@ sudo apt-get update
 sudo npm install -g npm
 curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -
 sudo apt-get install -y nodejs
+sudo npm install -g nodemon forever
 sudo service mongodb start
 cd /vagrant
 npm start
@@ -34,13 +35,10 @@ sudo npm install -g babel-cli
 ```
 
 ### Project TechStack
-
-- Node.js with Expressjs
-- MongoDB hosted on MongoLab
-- Deployment on Heroku
-
-**3rd party services**
+- Vagrant(Ubuntu) + Node.js + Expressjs + MongoDB
 - [Cloudinary](http://cloudinary.com/documentation/node_integration#getting_started_guide) for image hosting
+- [MongoLab](https://mlab.com/) for MongoDB hosting
+- [Heroku](https://www.heroku.com/) for deployment
 
 ### Project Roadmap / Todo
 Front-End
@@ -69,3 +67,16 @@ Back-End
 - [ ] Projects - User can create projects (i.e. rewards & options)
 - [ ] Projects - User can pledge projects (Payment)
 - [ ] Payment - User can update / cancel pledge amount
+
+
+#### deployment
+
+Set environmental variables.
+```
+export MONGOLAB_URI=
+export SESSION_SECRET=
+export CLOUD_NAME=
+export CLOUD_API=
+export CLOUD_SECRET=
+npm run prod
+```

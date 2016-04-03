@@ -28,6 +28,10 @@ var _expressSession = require('express-session');
 
 var _expressSession2 = _interopRequireDefault(_expressSession);
 
+var _connectMongo = require('connect-mongo');
+
+var _connectMongo2 = _interopRequireDefault(_connectMongo);
+
 var _morgan = require('morgan');
 
 var _morgan2 = _interopRequireDefault(_morgan);
@@ -40,7 +44,11 @@ var _connectFlash = require('connect-flash');
 
 var _connectFlash2 = _interopRequireDefault(_connectFlash);
 
+var _config = require('./config');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var MongoStore = (0, _connectMongo2.default)(_expressSession2.default);
 
 exports.default = function (app) {
   app.set('views', _path2.default.join(__dirname, '../views'));
@@ -50,12 +58,18 @@ exports.default = function (app) {
   app.use(_bodyParser2.default.urlencoded({ extended: false }));
   app.use(_express2.default.static('public'));
   app.use((0, _cookieParser2.default)());
+
   app.use((0, _expressSession2.default)({
-    secret: 'secret_key',
-    cookie: { maxAge: 1209600000 },
-    resave: true,
-    saveUninitialized: true
+    'secret': process.env.SESSION_SECRET || _config.mongoConfig.secretKey,
+    'cookie': { 'maxAge': 1209600000 },
+    'store': new MongoStore({
+      url: process.env.MONGOLAB_URI || _config.mongoConfig.db,
+      autoReconnect: true
+    }),
+    'resave': true,
+    'saveUninitialized': true
   }));
+
   app.use((0, _morgan2.default)('combined'));
   app.use((0, _helmet2.default)());
   app.use((0, _connectFlash2.default)());
