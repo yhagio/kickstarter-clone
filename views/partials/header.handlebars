@@ -14,7 +14,7 @@
 
       <ul class="nav navbar-nav">
         <li class="active"><a href="/projects">Projects</a></li>
-        <li class=""><a href="/">Create Project</a></li>
+        <li class=""><a href="/create-project">Create Project</a></li>
       </ul>
 
       <form class="navbar-form navbar-nav" role="search" action="">
@@ -40,3 +40,8 @@
     </div>
   </div>
 </nav>
+{{#each sessionFlash}}
+  <div class="flash {{ @key }}">
+    <strong>{{ this }}</strong>
+  </div>
+{{/each}}

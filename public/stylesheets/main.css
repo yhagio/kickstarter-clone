@@ -20,11 +20,47 @@ p {
   padding-bottom: 10px;
 }
 
-img {
+.img-thumbnail {
   max-width: 150px;
   max-height: 150px;
 }
 
 .project-stats {
   margin-top: 10px;
+}
+
+.error {
+  color: red;
+  font-style: italic;
+}
+
+.success {
+  color: green;
+  font-style: italic;
+}
+
+
+.flash {
+  margin-top: 60px;
+  margin-bottom: -50px;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  -webkit-animation: fadeInOut 5s;
+  animation: fadeInOut 5s;
+  z-index: 1000;
+}
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    16% {
+       opacity: 1;
+    }
+    84% {
+       opacity: 1;
+    }
+    100% {
+       opacity: 0;
+    }
 }
