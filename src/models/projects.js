@@ -1,29 +1,10 @@
 import mongoose from 'mongoose';
 
-const sample_project = {
-  creator: {
-    first_name: 'Yuichi',
-    last_name: 'Hagio'
-  },
-  project_name: 'Aurora Project',
-  short_description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt',
-  long_description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum',
-  funding_goal: 15000,
-  funding_end_date: new Date(+new Date() + 7*24*60*60*1000),
-  file_path: 'http://res.cloudinary.com/dck7vqmjo/image/upload/v1459690100/sample.jpg'
-};
-
 const projectSchema = new mongoose.Schema({
-  'creator': {
-    'first_name': {
-      'type': String,
-      'required': true
-    },
-    'last_name': {
-      'type': String,
-      'required': true
-    }
-  },
+  // createdBy: {
+  // 	type: mongoose.Schema.Types.ObjectId,
+  // 	ref: 'User'
+  // },
 
   'project_name': {
     'type': String,
@@ -55,7 +36,28 @@ const projectSchema = new mongoose.Schema({
 
   'file_path': {
     'type': String
+  },
+
+  'num_backers': {
+    'type': Number,
+    'default': 0
+  },
+
+  'current_funding': {
+    'type': Number,
+    'default': 0
+  },
+
+  'estimated_delivery': {
+    'type': Date,
+    'required': true
+  },
+
+  location: {
+    type: String,
+    required: true
   }
+
 });
 
 const Project = mongoose.model('Project', projectSchema);

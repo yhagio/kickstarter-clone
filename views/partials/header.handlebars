@@ -7,14 +7,17 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Kickstarter Clone</a>
+      <a class="navbar-brand brand-color" href="/">Kickstarter Clone</a>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
 
       <ul class="nav navbar-nav">
-        <li class="active"><a href="/projects">Projects</a></li>
-        <li class=""><a href="/create-project">Create Project</a></li>
+        <li class=""><a href="/projects">Discover</a></li>
+        {{#if current_user }}
+          <li class=""><a href="/create-project">Start a project</a></li>
+        {{/if}}
+        <li class=""><a href="/create-project">About</a></li>
       </ul>
 
       <form class="navbar-form navbar-nav" role="search" action="">
@@ -27,19 +30,25 @@
       </form>
 
     <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Profile</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Log out</a></li>
-        </ul>
-      </li>
+      {{#if current_user }}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Profile</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Log out</a></li>
+          </ul>
+        </li>
+      {{ else }}
+        <li class=""><a href="/signup">Sign Up</a></li>
+        <li class=""><a href="/login">Log In</a></li>
+      {{/if}}
     </ul>
 
     </div>
   </div>
 </nav>
+
 {{#each sessionFlash}}
   <div class="flash {{ @key }}">
     <strong>{{ this }}</strong>

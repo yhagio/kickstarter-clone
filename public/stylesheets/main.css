@@ -1,15 +1,21 @@
-h1 {
-  color: green;
-}
-
-p {
-  color: blue;
-}
-
 .main {
   margin-top: 60px;
 }
 
+.brand-color {
+  color: #2bde73;
+}
+
+/* Overwrite */
+a.navbar-brand.brand-color {
+  color: #2bde73;
+}
+
+nav.navbar.navbar-default {
+  background: #fff;
+}
+
+/* Projects */
 .project-detail {
   padding: 10px 5px 5px 5px;
   margin-bottom: 5px;
@@ -29,6 +35,16 @@ p {
   margin-top: 10px;
 }
 
+/* Back / Submit button with overwrite */
+.btn.pledge-button {
+  background: #2bde73;
+  border: none;
+  padding: 15px 20px;
+  font-size: 1.2em;
+  color: #fff;
+}
+
+/* Flash */
 .error {
   color: red;
   font-style: italic;

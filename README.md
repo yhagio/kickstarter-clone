@@ -41,32 +41,27 @@ sudo npm install -g babel-cli
 - [Heroku](https://www.heroku.com/) for deployment
 
 ### Project Roadmap / Todo
-Front-End
-- [ ] UI - Front Page
-- [ ] UI - Authentication - Register Form
-- [ ] UI - Authentication - Login Form
-- [ ] UI - Authentication - Forgot Password Form
-- [ ] UI - Navigation Bar
-- [ ] UI - Project List
-- [ ] UI - Project List (with Filter)
-- [ ] UI - Project Detail
-- [ ] UI - Project Discussion / Comment - Form, List
-- [ ] UI - Project Creation Form
-- [ ] UI - Project Update Form
-- [ ] UI - Project Management Page (Amount, Supporters, etc)
-- [ ] UI - Social Share Buttons
 
-Back-End
-- [ ] Initial Setup
+- [X] Initial Setup
+- [X] Projects - User can create projects, form, save into db (Basic)
+- [ ] Projects - Create project (Edge case, Error handling)
+- [X] Projects - List projects, project page (Basic)
+- [ ] Projects - Fetch project list with limit & skip (Scale)
+
 - [ ] Authentication - User Registration
 - [ ] Authentication - User Login / Logout
 - [ ] Authentication - User Forgot password / Issue new password
 - [ ] Authentication - User can update profile
 - [ ] Authentication - User can delete account
+
 - [ ] Payment - Verify user's funding account
-- [ ] Projects - User can create projects (i.e. rewards & options)
-- [ ] Projects - User can pledge projects (Payment)
+- [ ] Payment - User can back projects (Payment)
 - [ ] Payment - User can update / cancel pledge amount
+
+- [ ] Styling UI
+
+- [ ] Email - Mailgun Integration (Forgot password)
+- [ ] Email - Mailgun Integration (After back a project)
 
 
 #### deployment

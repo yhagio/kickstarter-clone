@@ -26,6 +26,8 @@ var _projects = require('../models/projects');
 
 var _projects2 = _interopRequireDefault(_projects);
 
+var _helpers = require('../helpers/helpers');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 _cloudinary2.default.config({
@@ -42,17 +44,20 @@ var projectHandler = {
         return res.redirect('/');
       }
 
+      // TODO: dayTil()
+      // TODO: progressbar percentage
+
       return res.render('projects/project-list', { projects: projects });
     });
   },
   getProjectPage: function getProjectPage(req, res) {
     _projects2.default.findOne({ _id: req.params.id }, function (err, project) {
       if (err) {
-        req.flash('error', 'Something went wrong. Refresh.');
+        req.flash('error', 'No project found.');
         return res.redirect('/');
       }
 
-      return res.render('projects/project-page', { project: project });
+      return res.render('projects/project-page', { project: project, dayTil: (0, _helpers.getDayTilEnd)(project.funding_end_date) });
     });
   },
   postProjectCreate: function postProjectCreate(req, res) {
@@ -82,7 +87,9 @@ var projectHandler = {
             long_description: fields.long_description,
             funding_goal: fields.funding_goal,
             funding_end_date: fields.funding_end_date,
-            file_path: result.secure_url
+            file_path: result.secure_url,
+            estimated_delivery: fields.estimated_delivery,
+            location: fields.location
           });
 
           // Save in Database
@@ -110,7 +117,5 @@ var projectHandler = {
     });
   }
 };
-
-function createProject(project) {}
 
 exports.default = projectHandler;

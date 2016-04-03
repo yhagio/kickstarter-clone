@@ -4,6 +4,7 @@ import fs from 'fs';
 import cloudinary from 'cloudinary';
 import { cloudinaryConfig } from '../config';
 import Project from '../models/projects';
+import { getDayTilEnd } from '../helpers/helpers';
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
@@ -19,6 +20,9 @@ const projectHandler = {
         return res.redirect('/');
       }
 
+      // TODO: dayTil()
+      // TODO: progressbar percentage
+
       return res.render(
         'projects/project-list',
         {projects: projects}
@@ -29,13 +33,13 @@ const projectHandler = {
   getProjectPage(req, res) {
     Project.findOne({_id: req.params.id}, (err, project) => {
       if (err) {
-        req.flash('error', 'Something went wrong. Refresh.');
+        req.flash('error', 'No project found.');
         return res.redirect('/');
       }
 
       return res.render(
         'projects/project-page',
-        {project: project}
+        {project: project, dayTil: getDayTilEnd(project.funding_end_date)}
       );
     });
   },
@@ -67,7 +71,9 @@ const projectHandler = {
             long_description: fields.long_description,
             funding_goal: fields.funding_goal,
             funding_end_date: fields.funding_end_date,
-            file_path: result.secure_url
+            file_path: result.secure_url,
+            estimated_delivery: fields.estimated_delivery,
+            location: fields.location
           });
 
           // Save in Database
@@ -97,10 +103,6 @@ const projectHandler = {
     });
 
   }
-}
-
-function createProject(project) {
-
 }
 
 export default projectHandler;
