@@ -16,7 +16,19 @@ var _fs = require('fs');
 
 var _fs2 = _interopRequireDefault(_fs);
 
+var _cloudinary = require('cloudinary');
+
+var _cloudinary2 = _interopRequireDefault(_cloudinary);
+
+var _config = require('../config');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_cloudinary2.default.config({
+  cloud_name: _config.config.cloud_name,
+  api_key: _config.config.api_key,
+  api_secret: _config.config.api_secret
+});
 
 var projects = [{ name: 'Hello', id: 1 }, { name: 'Hola', id: 2 }, { name: 'Bonjour', id: 3 }, { name: 'Bon dia', id: 4 }, { name: 'Konnichiwa', id: 5 }];
 
@@ -51,47 +63,33 @@ var projectHandler = {
 
     // parse the incoming request containing the form data
     form.parse(req, function (err, fields, files) {
+
       if (err) {
         console.log('Parsing error: \n', err);
       }
 
-      formObject = {
-        project_name: fields.project_name,
-        short_description: fields.short_description,
-        long_description: fields.long_description,
-        funding_goal: fields.funding_goal,
-        funding_end_date: fields.funding_end_date,
-        file_name: files.cover_photo.name,
-        file_path: files.cover_photo.path
-      };
-    });
+      if (files.cover_photo.size > 0) {
+        _cloudinary2.default.uploader.upload(files.cover_photo.path, function (result) {
+          console.log('Success upload: ', result);
+        });
 
-    // store all uploads in the /uploads directory
-    form.uploadDir = _path2.default.join(__dirname, '../../uploads');
+        formObject = {
+          project_name: fields.project_name,
+          short_description: fields.short_description,
+          long_description: fields.long_description,
+          funding_goal: fields.funding_goal,
+          funding_end_date: fields.funding_end_date,
+          file_name: files.cover_photo.name,
+          file_path: files.cover_photo.path
+        };
 
-    // every time a file has been uploaded successfully,
-    // rename it to it's orignal name and if no file, unlink
-    form.on('file', function (field, file) {
-      // console.log('FILE', file);
-      if (file.size > 0) {
-        _fs2.default.rename(file.path, _path2.default.join(form.uploadDir, file.name));
+        req.flash('success', 'Success!');
+        return res.redirect('/');
       } else {
-        _fs2.default.unlink(file.path);
-      }
-    });
 
-    // once all the files have been uploaded,
-    // send a response to the client
-    form.on('end', function () {
-      if (!formObject.file_name) {
         req.flash('error', 'Cover photo is missing!');
         return res.redirect('/create-project');
       }
-
-      // TODO: Save the project (formObject) in database
-
-      req.flash('success', 'Success!');
-      return res.redirect('/');
     });
 
     // log any errors that occur

@@ -1,6 +1,14 @@
 import path from 'path';
 import formidable from 'formidable';
 import fs from 'fs';
+import cloudinary from 'cloudinary';
+import { config } from '../config';
+
+cloudinary.config({
+  cloud_name: config.cloud_name ,
+  api_key: config.api_key,
+  api_secret: config.api_secret
+});
 
 const projects = [
   { name: 'Hello', id: 1},
@@ -49,48 +57,35 @@ const projectHandler = {
 
     // parse the incoming request containing the form data
     form.parse(req, (err, fields, files) => {
+
       if (err) {
         console.log('Parsing error: \n', err);
       }
 
-      formObject = {
-        project_name: fields.project_name,
-        short_description: fields.short_description,
-        long_description: fields.long_description,
-        funding_goal: fields.funding_goal,
-        funding_end_date: fields.funding_end_date,
-        file_name: files.cover_photo.name,
-        file_path: files.cover_photo.path
-      };
+      if (files.cover_photo.size > 0) {
+        cloudinary.uploader.upload(files.cover_photo.path, (result) => {
+          console.log('Success upload: ', result);
+        });
 
-    });
+        formObject = {
+          project_name: fields.project_name,
+          short_description: fields.short_description,
+          long_description: fields.long_description,
+          funding_goal: fields.funding_goal,
+          funding_end_date: fields.funding_end_date,
+          file_name: files.cover_photo.name,
+          file_path: files.cover_photo.path
+        };
 
-    // store all uploads in the /uploads directory
-    form.uploadDir = path.join(__dirname, '../../uploads')
+        req.flash('success','Success!');
+        return res.redirect('/');
 
-    // every time a file has been uploaded successfully,
-    // rename it to it's orignal name and if no file, unlink
-    form.on('file', (field, file) => {
-      // console.log('FILE', file);
-      if (file.size > 0) {
-        fs.rename(file.path, path.join(form.uploadDir, file.name));
       } else {
-        fs.unlink(file.path);
-      }
-    });
 
-    // once all the files have been uploaded,
-    // send a response to the client
-    form.on('end', () => {
-      if (!formObject.file_name) {
         req.flash('error', 'Cover photo is missing!');
         return res.redirect('/create-project');
       }
 
-      // TODO: Save the project (formObject) in database
-
-      req.flash('success','Success!');
-      return res.redirect('/');
     });
 
     // log any errors that occur

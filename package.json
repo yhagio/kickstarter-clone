@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "body-parser": "^1.15.0",
+    "cloudinary": "^1.3.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
     "express-flash": "0.0.2",

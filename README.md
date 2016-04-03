@@ -39,6 +39,9 @@ sudo npm install -g babel-cli
 - MongoDB hosted on MongoLab
 - Deployment on Heroku
 
+**3rd party services**
+- [Cloudinary](http://cloudinary.com/documentation/node_integration#getting_started_guide) for image hosting
+
 ### Project Roadmap / Todo
 Front-End
 - [ ] UI - Front Page
