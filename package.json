@@ -2,6 +2,10 @@
   "name": "kickstarterclone",
   "version": "1.0.0",
   "description": "Kickstarter Clone",
+  "engines": {
+    "node": "4.4.2",
+    "npm": "3.8.5"
+  },
   "scripts": {
     "prod": "babel src -d build && forever start build/index.js",
     "dev": "babel src -d build && nodemon -L build/index.js",
