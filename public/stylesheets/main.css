@@ -10,7 +10,7 @@ html, body {
   color: #2bde73;
 }
 
-/* Overwrite */
+/* Overwrite Bootstrap */
 a.navbar-brand.brand-color,
 a.navbar-brand.brand-color:hover {
   font-family: Impact;
@@ -27,7 +27,8 @@ nav.navbar.navbar-default {
   background: #fff;
 }
 
-.navbar-default .navbar-nav>li>a {
+.navbar-default .navbar-nav>li>a,
+.auth-link {
   font-weight: bold;
 }
 
