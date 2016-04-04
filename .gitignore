@@ -1,4 +1,11 @@
 node_modules
 npm-debug.log
 build
+
+handlers
+helpers
+models
 config.js
+express-config.js
+index.js
+routes.js

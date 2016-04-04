@@ -66,13 +66,17 @@ sudo npm install -g babel-cli
 
 #### deployment
 
+Signup Heroku and install heroku toolbelt
+Create heroku app
+```
+heroku create
+```
+then, set config vars from settings for environmental variables
+like MONGOLAB_URI, CLOUD_API, etc
+
+**Some issues** quick fix:
+- move all files and folder from `build` to root and
+- change `express-config.js` from `(__dirname, '../views'))` to `(__dirname, '/views'))`
+- then push to deploy
+
 Deployed at heroku: https://obscure-meadow-67002.herokuapp.com/
-Set environmental variables.
-```
-export MONGOLAB_URI=
-export SESSION_SECRET=
-export CLOUD_NAME=
-export CLOUD_API=
-export CLOUD_SECRET=
-npm run prod
-```
