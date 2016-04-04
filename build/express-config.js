@@ -44,11 +44,11 @@ var _connectFlash = require('connect-flash');
 
 var _connectFlash2 = _interopRequireDefault(_connectFlash);
 
-var _config = require('./config');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var MongoStore = (0, _connectMongo2.default)(_expressSession2.default);
+
+// import { mongoConfig } from './config';
 
 exports.default = function (app) {
   app.set('views', _path2.default.join(__dirname, '../views'));
@@ -60,10 +60,10 @@ exports.default = function (app) {
   app.use((0, _cookieParser2.default)());
 
   app.use((0, _expressSession2.default)({
-    'secret': process.env.SESSION_SECRET || _config.mongoConfig.secretKey,
+    'secret': process.env.SESSION_SECRET, // || mongoConfig.secretKey,
     'cookie': { 'maxAge': 1209600000 },
     'store': new MongoStore({
-      url: process.env.MONGOLAB_URI || _config.mongoConfig.db,
+      url: process.env.MONGOLAB_URI, // || mongoConfig.db,
       autoReconnect: true
     }),
     'resave': true,

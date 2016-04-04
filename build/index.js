@@ -20,8 +20,6 @@ var _mongoose = require('mongoose');
 
 var _mongoose2 = _interopRequireDefault(_mongoose);
 
-var _config = require('./config');
-
 var _expressConfig = require('./express-config');
 
 var _expressConfig2 = _interopRequireDefault(_expressConfig);
@@ -34,8 +32,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var app = (0, _express2.default)();
 
+// import { mongoConfig } from './config';
 
-_mongoose2.default.connect(process.env.MONGOLAB_URI || _config.mongoConfig.db, {}, function (err) {
+_mongoose2.default.connect(process.env.MONGOLAB_URI /* || mongoConfig.db */, {}, function (err) {
   if (err) {
     console.log('Connection Error: ', err);
   } else {

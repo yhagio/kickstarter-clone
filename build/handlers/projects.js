@@ -20,8 +20,6 @@ var _cloudinary = require('cloudinary');
 
 var _cloudinary2 = _interopRequireDefault(_cloudinary);
 
-var _config = require('../config');
-
 var _projects = require('../models/projects');
 
 var _projects2 = _interopRequireDefault(_projects);
@@ -30,10 +28,17 @@ var _helpers = require('../helpers/helpers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
+//   api_key: process.env.CLOUD_API || cloudinaryConfig.api_key,
+//   api_secret: process.env.CLOUD_SECRET || cloudinaryConfig.api_secret
+// });
+
+// import { cloudinaryConfig } from '../config';
 _cloudinary2.default.config({
-  cloud_name: process.env.CLOUD_NAME || _config.cloudinaryConfig.cloud_name,
-  api_key: process.env.CLOUD_API || _config.cloudinaryConfig.api_key,
-  api_secret: process.env.CLOUD_SECRET || _config.cloudinaryConfig.api_secret
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API,
+  api_secret: process.env.CLOUD_SECRET
 });
 
 var projectHandler = {
