@@ -8,6 +8,7 @@
     "npm": "3.8.5"
   },
   "scripts": {
+    "build": "babel src -d build",
     "prod": "babel src -d build && forever start build/index.js",
     "dev": "babel src -d build && nodemon -L build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

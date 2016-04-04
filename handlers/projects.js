@@ -35,6 +35,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // });
 
 // import { cloudinaryConfig } from '../config';
+
 _cloudinary2.default.config({
   cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.CLOUD_API,
