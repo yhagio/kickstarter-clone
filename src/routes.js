@@ -7,6 +7,12 @@ export default (app) => {
       res.render('home');
     });
 
+  // Sign up
+  app.route('/signup')
+    .get((req, res) => {
+      res.render('authentication/signup');
+    });
+
   // Project Lit
   app.route('/projects')
     .get(projectHandler.getProjectList);

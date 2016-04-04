@@ -1,3 +1,7 @@
+html, body {
+  font-family: 'Helvetica Neue', Helvetica, Arial;
+}
+
 .main {
   margin-top: 60px;
 }
@@ -7,12 +11,35 @@
 }
 
 /* Overwrite */
-a.navbar-brand.brand-color {
+a.navbar-brand.brand-color,
+a.navbar-brand.brand-color:hover {
+  font-family: Impact;
+  font-weight: bold;
+  font-size: 1.4em;
   color: #2bde73;
+}
+
+a.navbar-brand.brand-color>span {
+  color: #333;
 }
 
 nav.navbar.navbar-default {
   background: #fff;
+}
+
+.navbar-default .navbar-nav>li>a {
+  font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a.login-link {
+  font-size: 1em;
+  color: #00A0FF;
+}
+
+/* Sign up */
+.sub-container {
+  max-width: 400px;
+  margin: auto;
 }
 
 /* Projects */
