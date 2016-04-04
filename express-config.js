@@ -51,7 +51,7 @@ var MongoStore = (0, _connectMongo2.default)(_expressSession2.default);
 // import { mongoConfig } from './config';
 
 exports.default = function (app) {
-  app.set('views', _path2.default.join(__dirname, '../views'));
+  app.set('views', _path2.default.join(__dirname, '/views'));
   app.engine('handlebars', (0, _expressHandlebars2.default)({ defaultLayout: 'main' }));
   app.set('view engine', 'handlebars');
   app.use(_bodyParser2.default.json());
