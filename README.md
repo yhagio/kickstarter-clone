@@ -66,6 +66,7 @@ sudo npm install -g babel-cli
 
 #### deployment
 
+Deployed at heroku: https://obscure-meadow-67002.herokuapp.com/
 Set environmental variables.
 ```
 export MONGOLAB_URI=
