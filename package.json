@@ -13,9 +13,10 @@
     "dev": "babel src -d build && nodemon -L build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Yuichi Hagio",
+  "author": "Yuichi Hagio <yhagio87@gmail.com> (http://github.com/yhagio)",
   "license": "MIT",
   "dependencies": {
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.15.0",
     "cloudinary": "^1.3.0",
     "connect-mongo": "^1.1.0",
@@ -26,8 +27,11 @@
     "express-session": "^1.13.0",
     "formidable": "^1.0.17",
     "helmet": "^1.3.0",
+    "mailgun-js": "^0.7.7",
     "mongoose": "^4.4.10",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",

@@ -34,13 +34,17 @@ To use ES2015
 sudo npm install -g babel-cli
 ```
 
-### Project TechStack
-- Vagrant(Ubuntu) + Node.js + Expressjs + MongoDB
+### TechStack
+- [Vagrant(Ubuntu 14.04 LTS)](https://atlas.hashicorp.com/ubuntu/boxes/trusty64)
+- [Node.js - v4.4.2](https://nodejs.org)
+- [Expressjs - v4x](http://expressjs.com/)
+- [MongoDB - v2.4.9](https://www.mongodb.org/)
+- [Bootstrap - v3.3.6](http://getbootstrap.com/)
 - [Cloudinary](http://cloudinary.com/documentation/node_integration#getting_started_guide) for image hosting
 - [MongoLab](https://mlab.com/) for MongoDB hosting
 - [Heroku](https://www.heroku.com/) for deployment
 
-### Project Roadmap / Todo
+### Project Todo
 
 - [X] Initial Setup
 - [X] Projects - User can create projects, form, save into db (Basic)
@@ -64,7 +68,7 @@ sudo npm install -g babel-cli
 - [ ] Email - Mailgun Integration (After back a project)
 
 
-#### deployment
+### Deployment
 
 Signup Heroku and install heroku toolbelt
 Create heroku app
@@ -74,9 +78,9 @@ heroku create
 then, set config vars from settings for environmental variables
 like MONGOLAB_URI, CLOUD_API, etc
 
-**Some issues** quick fix:
-- move all files and folder from `build` to root and
-- change `express-config.js` from `(__dirname, '../views'))` to `(__dirname, '/views'))`
-- then push to deploy
+**Some issues when deployed at Heroku** -> Quick fix:
+- Move all files and folder inside `/build` to root
+- Then, change in the file `express-config.js` from `(__dirname, '../views'))` to `(__dirname, '/views'))`
+- Then push to Heroku
 
-Deployed at heroku: https://obscure-meadow-67002.herokuapp.com/
+Deployed at Heroku: https://obscure-meadow-67002.herokuapp.com/
