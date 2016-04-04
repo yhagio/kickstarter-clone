@@ -68,10 +68,6 @@ const projectHandler = {
           // files.cover_photo.name
 
           let newProject = new Project({
-            creator: {
-              first_name: 'Yuichi',
-              last_name: 'Hagio'
-            },
             project_name: fields.project_name,
             short_description: fields.short_description,
             long_description: fields.long_description,

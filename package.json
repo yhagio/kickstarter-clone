@@ -2,6 +2,7 @@
   "name": "kickstarterclone",
   "version": "1.0.0",
   "description": "Kickstarter Clone",
+  "main": "build/index.js",
   "engines": {
     "node": "4.4.2",
     "npm": "3.8.5"

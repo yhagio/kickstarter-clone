@@ -83,10 +83,6 @@ var projectHandler = {
           // files.cover_photo.name
 
           var newProject = new _projects2.default({
-            creator: {
-              first_name: 'Yuichi',
-              last_name: 'Hagio'
-            },
             project_name: fields.project_name,
             short_description: fields.short_description,
             long_description: fields.long_description,

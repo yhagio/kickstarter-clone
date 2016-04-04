@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
+import Mongoose from 'mongoose';
 
-const projectSchema = new mongoose.Schema({
+const projectSchema = new Mongoose.Schema({
   // createdBy: {
   // 	type: mongoose.Schema.Types.ObjectId,
   // 	ref: 'User'
@@ -60,6 +60,6 @@ const projectSchema = new mongoose.Schema({
 
 });
 
-const Project = mongoose.model('Project', projectSchema);
+const Project = Mongoose.model('Project', projectSchema);
 
 export default Project;
