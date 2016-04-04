@@ -9,7 +9,7 @@ const MongoStore = _MongoStore(session);
 import morgan from 'morgan';
 import helmet from 'helmet';
 import flash from 'connect-flash';
-import { mongoConfig } from './config';
+// import { mongoConfig } from './config';
 
 export default (app) => {
   app.set('views', path.join(__dirname, '../views'));
@@ -21,10 +21,10 @@ export default (app) => {
   app.use(cookieParser());
 
   app.use(session({
-    'secret': process.env.SESSION_SECRET || mongoConfig.secretKey,
+    'secret': process.env.SESSION_SECRET, // || mongoConfig.secretKey,
     'cookie': {'maxAge': 1209600000},
     'store': new MongoStore({
-      url: process.env.MONGOLAB_URI || mongoConfig.db,
+      url: process.env.MONGOLAB_URI, // || mongoConfig.db,
       autoReconnect: true
     }),
     'resave': true,

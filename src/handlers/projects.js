@@ -2,14 +2,20 @@ import path from 'path';
 import formidable from 'formidable';
 import fs from 'fs';
 import cloudinary from 'cloudinary';
-import { cloudinaryConfig } from '../config';
+// import { cloudinaryConfig } from '../config';
 import Project from '../models/projects';
 import { getDayTilEnd } from '../helpers/helpers';
 
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
+//   api_key: process.env.CLOUD_API || cloudinaryConfig.api_key,
+//   api_secret: process.env.CLOUD_SECRET || cloudinaryConfig.api_secret
+// });
+
 cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
-  api_key: process.env.CLOUD_API || cloudinaryConfig.api_key,
-  api_secret: process.env.CLOUD_SECRET || cloudinaryConfig.api_secret
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API,
+  api_secret: process.env.CLOUD_SECRET
 });
 
 const projectHandler = {

@@ -4,9 +4,9 @@ import path from 'path';
 import formidable from 'formidable';
 import fs from 'fs';
 import mongoose from 'mongoose';
-import { mongoConfig } from './config';
+// import { mongoConfig } from './config';
 
-mongoose.connect(process.env.MONGOLAB_URI || mongoConfig.db, {}, (err)=> {
+mongoose.connect(process.env.MONGOLAB_URI /* || mongoConfig.db */, {}, (err)=> {
   if (err) {
     console.log('Connection Error: ', err);
   } else {
