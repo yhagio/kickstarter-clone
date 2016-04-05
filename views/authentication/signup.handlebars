@@ -1,39 +1,95 @@
 <div class="sub-container">
-<div class="row">
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <form method="POST" action="#" role="form">
-        <div class="form-group">
-          <h2>Sign up</h2>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="signupName">Your name</label>
-          <input id="signupName" type="text" maxlength="50" class="form-control" placeholder="Name">
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="signupEmail">Email</label>
-          <input id="signupEmail" type="email" maxlength="50" class="form-control" placeholder="Email">
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="signupEmailagain">Email again</label>
-          <input id="signupEmailagain" type="email" maxlength="50" class="form-control" placeholder="Email again">
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="signupPassword">Password</label>
-          <input id="signupPassword" type="password" maxlength="25" class="form-control" placeholder="Minimum 6 characters" length="40">
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="signupPasswordagain">Password again</label>
-          <input id="signupPasswordagain" type="password" maxlength="25" class="form-control" placeholder="Password again">
-        </div>
-        <div class="form-group">
-          <button id="signupSubmit" type="submit" class="btn btn-info btn-block pledge-button">Sign me up!</button>
-        </div>
-        <p class="form-group">By creating an account, you agree to our <a href="/terms-of-use">Terms of Use</a> and our <a href="/privacy">Privacy Policy</a>.</p>
-        <hr>
-        <p></p>Already have an account? <a href="/login" class="auth-link ">Log in</a></p>
-      </form>
+  <div class="row">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <form method="POST" action="/signup" role="form">
+
+          <div class="form-group">
+            <h2>Sign up</h2>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="signupName">Your name</label>
+            <input
+              id="signupName"
+              name="signupName"
+              type="text"
+              maxlength="50"
+              class="form-control"
+              placeholder="Name"
+              autocomplete="name"
+              autofocus
+              required />
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="signupEmail">Email</label>
+            <input
+              id="signupEmail"
+              name="signupEmail"
+              type="email"
+              maxlength="50"
+              class="form-control"
+              placeholder="Email"
+              autocomplete="email"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="signupEmailagain">Email again</label>
+            <input
+              id="signupEmailagain"
+              name="signupEmailagain"
+              type="email"
+              maxlength="50"
+              class="form-control"
+              placeholder="Email again"
+              autocomplete="email"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="signupPassword">Password</label>
+            <input
+              id="signupPassword"
+              name="signupPassword"
+              type="password"
+              maxlength="25"
+              class="form-control"
+              placeholder="Minimum 6 characters"
+              length="40"
+              required />
+          </div>
+
+          <div class="form-group">
+            <label class="control-label" for="signupPasswordagain">Password again</label>
+            <input
+              id="signupPasswordagain"
+              name="signupPasswordagain"
+              type="password"
+              maxlength="25"
+              class="form-control"
+              placeholder="Password again"
+              required />
+          </div>
+
+          <div class="form-group">
+            <button id="signupSubmit" type="submit" class="btn btn-info btn-block pledge-button">Sign me up!</button>
+          </div>
+
+          <p class="form-group">By creating an account, you agree to our <a href="/terms-of-use">Terms of Use</a> and our <a href="/privacy">Privacy Policy</a>.</p>
+
+          <hr>
+
+          <p>
+            Already have an account?
+            <a href="/login" class="auth-link ">Log in</a>
+          </p>
+
+        </form>
+
+      </div>
     </div>
   </div>
-</div>
 </div>

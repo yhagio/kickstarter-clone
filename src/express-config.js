@@ -9,6 +9,7 @@ const MongoStore = _MongoStore(session);
 import morgan from 'morgan';
 import helmet from 'helmet';
 import flash from 'connect-flash';
+import passport from 'passport';
 // import { mongoConfig } from './config';
 
 export default (app) => {
@@ -34,6 +35,8 @@ export default (app) => {
   app.use(morgan('combined'));
   app.use(helmet());
   app.use(flash());
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Custom flash middleware
   app.use(function(req, res, next){

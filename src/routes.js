@@ -1,3 +1,4 @@
+import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
 
 export default (app) => {
@@ -11,7 +12,8 @@ export default (app) => {
 
   // Sign up
   app.route('/signup')
-    .get((req, res) => res.render('authentication/signup'));
+    .get((req, res) => res.render('authentication/signup'))
+    .post(authHandler.signup);
 
   // Log in
   app.route('/login')
