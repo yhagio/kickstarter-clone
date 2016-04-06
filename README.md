@@ -48,11 +48,11 @@ sudo npm install -g babel-cli
 
 - [X] Initial Setup
 - [X] Projects - User can create projects, form, save into db (Basic)
-- [ ] Projects - Create project (Edge case, Error handling)
+- [ ] Projects - Create project (Edge case * Checking user inputs)
 - [X] Projects - List projects, project page (Basic)
 - [ ] Projects - Fetch project list with limit & skip (Scale)
 
-- [ ] Authentication - User Registration
+- [ ] Authentication - User Registration (Check user inputs)
 - [ ] Authentication - User Login / Logout
 - [ ] Authentication - User Forgot password / Issue new password
 - [ ] Authentication - User can update profile

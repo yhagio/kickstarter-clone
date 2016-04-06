@@ -3,7 +3,7 @@
   <div class="project-card text-center">
     <div class="project-info">
       <a href="/projects/{{this.id}}">
-        <img class="img-responsive center-block img-thumbnail" src="http://lorempixel.com/400/200/">
+        <img class="img-responsive center-block img-thumbnail" src="{{ this.file_path }}">
       </a>
       <strong>
         <a href="/projects/{{ this.id }}">{{ this.project_name }}</a> by {{ this.createdBy.name}}
@@ -13,9 +13,9 @@
     </div>
     <div class="project-stats">
       <div class="row">
-        <div class="col-sm-4 text-center">68% <br/> funded </div>
-        <div class="col-sm-4 text-center">$1390 <br/> pledged </div>
-        <div class="col-sm-4 text-center">28 <br/> days left</div>
+        <div class="col-sm-4 text-center">{{ fundingPercentage }}% <br/> funded </div>
+        <div class="col-sm-4 text-center">${{ this.current_funding }} <br/> pledged </div>
+        <div class="col-sm-4 text-center">{{ this.tilEnd }} <br/> left</div>
       </div>
     </div>
   </div>

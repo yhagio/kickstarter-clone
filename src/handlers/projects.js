@@ -6,7 +6,7 @@ import cloudinary from 'cloudinary';
 
 import Project from '../models/project';
 
-import { getDayTilEnd } from '../helpers/helpers';
+import { getDayTilEnd, getFundingPercentage } from '../helpers/helpers';
 
 // cloudinary.config({
 //   cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
@@ -30,9 +30,11 @@ const projectHandler = {
         return res.redirect('/');
       }
 
-      console.log('projects', projects);
-
-      // TODO: dayTil()
+      projects.forEach((project) => {
+        project.tilEnd = getDayTilEnd(project.funding_end_date);
+        project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
+      });
+      
       // TODO: progressbar percentage
 
       return res.render(
@@ -48,8 +50,6 @@ const projectHandler = {
         req.flash('error', 'No project found.');
         return res.redirect('/');
       }
-
-      console.log('Project: ', project);
 
       return res.render(
         'projects/project-page',

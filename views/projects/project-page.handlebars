@@ -12,7 +12,7 @@
 
     <div class="panel">
       <p class="text-center">{{ project.short_description }}</p>
-      <img class="img-responsive center-block" src="http://lorempixel.com/500/690/" width="680" height="500">
+      <img class="img-responsive center-block" src="{{ project.file_path }}" width="680" height="500">
     </div>
 
     <div>
@@ -23,15 +23,15 @@
   <div class="col-sm-4" style="border: 0px solid #F00">
 
     <div class="panel">
-      <span class="project-progress">45</span> pledges
+      <span class="project-progress">{{ project.num_backers }}</span> pledges
     </div>
 
     <div class="panel">
-      <span class="project-progress"> <strong>$5000</strong><br /></span> pledged of ${{ project.funding_goal }} goal
+      <span class="project-progress"> <strong>${{ project.current_funding }}</strong><br /></span> pledged of ${{ project.funding_goal }} goal
     </div>
 
     <div class="panel">
-      <span class="project-progress"> {{ dayTil }} </span>days left
+      <span class="project-progress"> {{ dayTil }} </span> left
     </div>
 
     <div class="panel">
