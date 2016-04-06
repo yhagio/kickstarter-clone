@@ -14,7 +14,7 @@
 
       <ul class="nav navbar-nav">
         <li class=""><a href="/projects">Discover</a></li>
-        {{#if current_user }}
+        {{#if loggedin }}
           <li class=""><a href="/create-project">Start a project</a></li>
         {{/if}}
         <li class=""><a href="/about">About</a></li>
@@ -30,13 +30,13 @@
       </form>
 
     <ul class="nav navbar-nav navbar-right">
-      {{#if current_user }}
+      {{#if loggedin }}
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Profile</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">Log out</a></li>
+            <li><a href="/logout">Log out</a></li>
           </ul>
         </li>
       {{ else }}

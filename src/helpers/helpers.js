@@ -2,3 +2,10 @@ export const getDayTilEnd = (endDate) => {
   let timeDiff = Math.abs(new Date(endDate).getTime() - new Date().getTime());
   return Math.ceil(timeDiff / (1000 * 3600 * 24));
 }
+
+export function isLoggedIn(req, res, next){
+  if (!req.isAuthenticated()) {
+    return next();
+  } 
+  return res.redirect('/projects');
+}

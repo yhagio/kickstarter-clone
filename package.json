@@ -8,9 +8,9 @@
     "npm": "3.8.5"
   },
   "scripts": {
-    "build": "babel src -d build",
-    "prod": "babel src -d build && forever start build/index.js",
-    "dev": "babel src -d build && nodemon -L build/index.js",
+    "build": "rm -rf build && babel src -d build",
+    "prod": "rm -rf build && babel src -d build && forever start build/index.js",
+    "dev": "rm -rf build && babel src -d build && node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Yuichi Hagio <yhagio87@gmail.com> (http://github.com/yhagio)",

@@ -2,19 +2,36 @@
 <div class="row">
   <div class="panel panel-default">
     <div class="panel-body">
-      <form method="POST" action="#" role="form">
+      <form method="POST" action="/login" role="form">
         <div class="form-group">
           <h2>Log in</h2>
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="signupEmail">Email</label>
-          <input id="signupEmail" type="email" maxlength="50" class="form-control" placeholder="Your Email">
+          <label class="control-label" for="loginEmail">Email</label>
+          <input 
+            id="loginEmail"
+            name="loginEmail"
+            type="email"
+            maxlength="50"
+            class="form-control"
+            placeholder="Your Email" 
+            autocomplete="email"
+            autofocus 
+            required />
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="signupPassword">Password</label>
-          <input id="signupPassword" type="password" maxlength="25" class="form-control" placeholder="Your password" length="40">
+          <label class="control-label" for="loginPassword">Password</label>
+          <input 
+            id="loginPassword"
+            name="loginPassword"
+            type="password"
+            maxlength="25"
+            class="form-control"
+            placeholder="Your password"
+            length="40"
+            required />
         </div>
 
         <div class="form-group">
@@ -22,7 +39,7 @@
         </div>
 
         <div class="form-group">
-          <button id="signupSubmit" type="submit" class="btn btn-info btn-block pledge-button">Log me in!</button>
+          <button id="loginSubmit" type="submit" class="btn btn-info btn-block pledge-button">Log me in!</button>
         </div>
         <hr>
         <p></p>New to KickstarterClone? <a href="/signup" class="auth-link ">Sign up!</a></p>

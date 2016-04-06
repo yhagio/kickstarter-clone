@@ -38,6 +38,11 @@ export default (app) => {
   app.use(passport.initialize());
   app.use(passport.session());
 
+  app.use(function (req, res, next) {
+    res.locals.loggedin = req.isAuthenticated();
+    next();
+  });
+
   // Custom flash middleware
   app.use(function(req, res, next){
     // if there's a flash message in the session request, make it available in the response, then delete it

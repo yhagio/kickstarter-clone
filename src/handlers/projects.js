@@ -4,7 +4,7 @@ import fs from 'fs';
 import cloudinary from 'cloudinary';
 // import { cloudinaryConfig } from '../config';
 
-import Project from '../models/projects';
+import Project from '../models/project';
 
 import { getDayTilEnd } from '../helpers/helpers';
 
@@ -22,11 +22,15 @@ cloudinary.config({
 
 const projectHandler = {
   getProjectList(req, res) {
-    Project.find({}).limit(20).exec((err, projects) => {
+    // console.log('USER: ', req.user);
+
+    Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
       if (err) {
         req.flash('error', 'Something went wrong. Refresh.');
         return res.redirect('/');
       }
+
+      console.log('projects', projects);
 
       // TODO: dayTil()
       // TODO: progressbar percentage
@@ -39,11 +43,13 @@ const projectHandler = {
   },
 
   getProjectPage(req, res) {
-    Project.findOne({_id: req.params.id}, (err, project) => {
+    Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
       if (err) {
         req.flash('error', 'No project found.');
         return res.redirect('/');
       }
+
+      console.log('Project: ', project);
 
       return res.render(
         'projects/project-page',
@@ -53,6 +59,12 @@ const projectHandler = {
   },
 
   postProjectCreate(req, res) {
+
+    if (!req.user) {
+      req.flash('error', 'You need to login first!');
+      return res.redirect('/login');
+    }
+
     // create an incoming form object
     const form = new formidable.IncomingForm();
 
@@ -60,16 +72,16 @@ const projectHandler = {
     form.parse(req, (err, fields, files) => {
 
       if (err) {
-        console.log('Parsing error: \n', err);
+        // console.log('Parsing error: \n', err);
+        req.flash('error', 'Failed to create your project. Try again.');
+        return res.redirect('/create-project');
       }
 
       if (files.cover_photo.size > 0) {
         cloudinary.uploader.upload(files.cover_photo.path, (result) => {
-          console.log('Success upload: ', result);
-
-          // files.cover_photo.name
 
           let newProject = new Project({
+            createdBy: req.user,
             project_name: fields.project_name,
             short_description: fields.short_description,
             long_description: fields.long_description,
@@ -80,18 +92,25 @@ const projectHandler = {
             location: fields.location
           });
 
+          // TODO: check fields
+
           // Save in Database
           newProject.save((err, result) => {
             if (err) {
-              console.log('save err: ', err);
+              // console.log('save err: ', err);
+              req.flash('error', 'Something went wrong, project creation failed.');
+              return res.redirect('/create-project');
+
             } else {
-              console.log('saved! ', result);
+              // console.log('saved! ', result);
+              req.flash('success','Project created!');
+              return res.redirect('/projects');
             }
           });
         });
 
-        req.flash('success','Success!');
-        return res.redirect('/');
+        // req.flash('success','Success!');
+        // return res.redirect('/');
 
       } else {
 
@@ -103,7 +122,9 @@ const projectHandler = {
 
     // log any errors that occur
     form.on('error', (err) => {
-      console.log('An error has occured: \n' + err);
+      // console.log('An error has occured: \n' + err);
+      req.flash('error', 'Failed to create project.');
+      return res.redirect('/create-project');
     });
 
   }

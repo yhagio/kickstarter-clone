@@ -1,5 +1,8 @@
 import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
+import { isAuthenticated } from './helpers/passport-config';
+import { isLoggedIn } from './helpers/helpers';
+
 
 export default (app) => {
   // Home
@@ -12,15 +15,23 @@ export default (app) => {
 
   // Sign up
   app.route('/signup')
+    .all(isLoggedIn)
     .get((req, res) => res.render('authentication/signup'))
     .post(authHandler.signup);
 
   // Log in
   app.route('/login')
-    .get((req, res) => res.render('authentication/login'));
+    .all(isLoggedIn)
+    .get((req, res) => res.render('authentication/login'))
+    .post(authHandler.login);
+
+  // Log in
+  app.route('/logout')
+    .get(authHandler.logout);
 
   // Forgot password
   app.route('/forgot-password')
+    .all(isLoggedIn)
     .get((req, res) => res.render('authentication/forgot-password'));
 
   // Terms of Use
@@ -41,6 +52,7 @@ export default (app) => {
 
   // Create Project Page
   app.route('/create-project')
+    .all(isAuthenticated)
     .get((req, res) => res.render('projects/project-create'))
     .post(projectHandler.postProjectCreate);
 }
