@@ -32,7 +32,10 @@
     "mongoose": "^4.4.10",
     "morgan": "^1.7.0",
     "passport": "^0.3.2",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "passport-oauth": "^1.0.0",
+    "querystring": "^0.2.0",
+    "request": "^2.70.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",

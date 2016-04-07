@@ -55,4 +55,31 @@ export default (app) => {
     .all(isAuthenticated)
     .get((req, res) => res.render('projects/project-create'))
     .post(projectHandler.postProjectCreate);
+
+  app.route('/profile')
+    .all(isAuthenticated)
+    .get((req, res) => res.render('profile/profile'));
+
+  // Stripe Connect
+  app.route('/authorize')
+    .get(authHandler.authorize);
+
+  app.route('/oauth/callback')
+    .get(authHandler.oauthCallback);
+
+  /* === Passport Oauth way ===
+  http://passportjs.org/docs/oauth
+  
+  app.route('/auth/provider')
+    .get(passport.authenticate('provider'));
+  app.route('/auth/provider/callback'),
+    .get(
+      passport.authenticate(
+        'provider', { 
+          successRedirect: '/',
+          failureRedirect: '/profile'
+        }
+      )
+    );
+  */
 }
