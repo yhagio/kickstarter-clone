@@ -1,6 +1,7 @@
 import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
 import paymentHandler from './handlers/payment';
+import { sendNewPassword } from './handlers/resetPassword';
 import { isAuthenticated } from './helpers/passport-config';
 import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
 import passport from 'passport';
@@ -26,14 +27,15 @@ export default (app) => {
     .get((req, res) => res.render('authentication/login'))
     .post(authHandler.login);
 
-  // Log in
+  // Log out
   app.route('/logout')
     .get(authHandler.logout);
 
   // Forgot password
   app.route('/forgot-password')
     .all(isLoggedIn)
-    .get((req, res) => res.render('authentication/forgot-password'));
+    .get((req, res) => res.render('authentication/forgot-password'))
+    .post(sendNewPassword);
 
   // Terms of Use
   app.route('/terms-of-use')
