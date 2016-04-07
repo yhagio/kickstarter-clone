@@ -2,17 +2,10 @@ import path from 'path';
 import formidable from 'formidable';
 import fs from 'fs';
 import cloudinary from 'cloudinary';
-// import { cloudinaryConfig } from '../config';
 
 import Project from '../models/project';
 
 import { getDayTilEnd, getFundingPercentage } from '../helpers/helpers';
-
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME || cloudinaryConfig.cloud_name ,
-//   api_key: process.env.CLOUD_API || cloudinaryConfig.api_key,
-//   api_secret: process.env.CLOUD_SECRET || cloudinaryConfig.api_secret
-// });
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -54,6 +47,21 @@ const projectHandler = {
       return res.render(
         'projects/project-page',
         {project: project, dayTil: getDayTilEnd(project.funding_end_date)}
+      );
+    });
+  },
+
+  // Where user back a project
+  getProjectRewardsPage(req, res) {
+    Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
+      if (err) {
+        req.flash('error', 'No project found.');
+        return res.redirect('/');
+      }
+
+      return res.render(
+        'projects/project-rewards',
+        {project: project}
       );
     });
   },
@@ -108,9 +116,6 @@ const projectHandler = {
             }
           });
         });
-
-        // req.flash('success','Success!');
-        // return res.redirect('/');
 
       } else {
 

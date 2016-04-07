@@ -14,6 +14,7 @@ export function connectOAuthed(req, res, next){
   return res.redirect('/profile');
 }
 
+// Check if user has connected to Stripe connect
 export function isOauthed(user) {
   if (user.stripe.access_token) {
     return true;

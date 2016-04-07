@@ -97,6 +97,5 @@ Deployed at Heroku: https://obscure-meadow-67002.herokuapp.com/
 
 
 ### Notes
-- Project creator needs to have Stripe account and manages their customers
-- User Clicks Connect Stripe button in Profile
-- Save stripe info in
+Stripe Connect authentication for project creator with Passport-OAuth2Strategy <br />
+Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163

@@ -35,7 +35,8 @@
     "passport-local": "^1.0.0",
     "passport-oauth": "^1.0.0",
     "querystring": "^0.2.0",
-    "request": "^2.70.0"
+    "request": "^2.70.0",
+    "stripe": "^4.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.6.5",

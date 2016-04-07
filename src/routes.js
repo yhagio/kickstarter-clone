@@ -1,8 +1,9 @@
 import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
+import paymentHandler from './handlers/payment';
 import { isAuthenticated } from './helpers/passport-config';
 import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
-
+import passport from 'passport';
 
 export default (app) => {
   // Home
@@ -61,26 +62,25 @@ export default (app) => {
     .all(isAuthenticated)
     .get((req, res) => res.render('profile/profile', {isOauthed: isOauthed(req.user)}));
 
-  // Stripe Connect
+  // Stripe Connect - Custom Option Way 
   app.route('/authorize')
     .get(authHandler.authorize);
 
   app.route('/oauth/callback')
     .get(authHandler.oauthCallback);
 
-  /* === Passport Oauth way ===
-  http://passportjs.org/docs/oauth
-
-  app.route('/auth/provider')
+  /* >>>>>>>>> Stripe Connect - Passport Oauth way 
+  // http://passportjs.org/docs/oauth
+  app.route('/authorize')
     .get(passport.authenticate('provider'));
-  app.route('/auth/provider/callback'),
-    .get(
-      passport.authenticate(
-        'provider', { 
-          successRedirect: '/',
-          failureRedirect: '/profile'
-        }
-      )
-    );
-  */
+  app.route('/oauth/callback')
+    .get(authHandler.oauthCallBackPassport);
+  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
+  
+
+  app.route('/projects/:id/rewards')
+    .all(isAuthenticated)
+    .get(projectHandler.getProjectRewardsPage)
+    .post(paymentHandler.backProject);    
+    
 }

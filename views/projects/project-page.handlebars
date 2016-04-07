@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-sm-12" style="border: 0px solid #F00">
     <div class="panel">
-      <h1 class="text-center">{{ project.project_name }} {{id}}</h1>
+      <h1 class="text-center">{{ project.project_name }}</h1>
       <div class="text-center"> by {{ project.createdBy.name }}</div>
     </div>
   </div>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="panel">
-      <a href="#" class="btn pledge-button">Back the project</a>
+      <a href="/projects/{{ project.id }}/rewards" class="btn pledge-button">Back the project</a>
     </div>
 
   </div>
