@@ -1,0 +1,1 @@
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/hagio/dev/products/kickstarter-clone","disabled":false},"/var/www":{"create":true,"group":"root","owner":"root","guestpath":"/var/www","hostpath":"/Users/hagio/dev/products/kickstarter-clone-client","disabled":false}}}

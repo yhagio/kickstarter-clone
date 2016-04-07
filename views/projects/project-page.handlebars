@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-sm-12" style="border: 0px solid #F00">
+    <div class="panel">
+      <h1 class="text-center">{{ project.project_name }}</h1>
+      <div class="text-center"> by {{ project.createdBy.name }}</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-8" style="border: 0px solid #ddd">
+
+    <div class="panel">
+      <p class="text-center">{{ project.short_description }}</p>
+      <img class="img-responsive center-block" src="{{ project.file_path }}" width="680" height="500">
+    </div>
+
+    <div>
+      <p class="text-center">{{ project.long_description }}</p>
+    </div>
+
+  </div>
+  <div class="col-sm-4" style="border: 0px solid #F00">
+
+    <div class="panel">
+      <span class="project-progress">{{ project.num_backers }}</span> pledges
+    </div>
+
+    <div class="panel">
+      <span class="project-progress"> <strong>${{ project.current_funding }}</strong><br /></span> pledged of ${{ project.funding_goal }} goal
+    </div>
+
+    <div class="panel">
+      <span class="project-progress"> {{ dayTil }} </span> left
+    </div>
+
+    <div class="panel">
+      <a href="/projects/{{ project.id }}/rewards" class="btn pledge-button">Back the project</a>
+    </div>
+
+  </div>
+</div>
