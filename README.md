@@ -94,3 +94,9 @@ like MONGOLAB_URI, CLOUD_API, etc
 - Then push to Heroku
 
 Deployed at Heroku: https://obscure-meadow-67002.herokuapp.com/
+
+
+### Notes
+- Project creator needs to have Stripe account and manages their customers
+- User Clicks Connect Stripe button in Profile
+- Save stripe info in

@@ -1,3 +1,14 @@
-<a href="/authorize">
-  <img src="images/blue-on-light.png" alt="Connect with Stripe">
-</a>
+<div class="contianer">
+  {{#if isOauthed }}
+    <p>Authorized. You can create a project</p>
+    <a href="/create-project" class="btn pledge-button">Create Project</a>
+  {{ else }}
+    <p>* You need to have a Stripe account, if you don't have one, sign up Stripe first</p>
+    <a href="https://dashboard.stripe.com/">Stripe</a>
+    <br />
+    <p>If you have Stripe account, connect with our platform.</p>
+    <a href="/authorize">
+      <img src="images/blue-on-light.png" alt="Connect with Stripe">
+    </a>
+  {{/if}}
+</div>

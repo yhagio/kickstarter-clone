@@ -1,7 +1,7 @@
 import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
 import { isAuthenticated } from './helpers/passport-config';
-import { isLoggedIn } from './helpers/helpers';
+import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
 
 
 export default (app) => {
@@ -53,12 +53,13 @@ export default (app) => {
   // Create Project Page
   app.route('/create-project')
     .all(isAuthenticated)
+    .all(connectOAuthed)
     .get((req, res) => res.render('projects/project-create'))
     .post(projectHandler.postProjectCreate);
 
   app.route('/profile')
     .all(isAuthenticated)
-    .get((req, res) => res.render('profile/profile'));
+    .get((req, res) => res.render('profile/profile', {isOauthed: isOauthed(req.user)}));
 
   // Stripe Connect
   app.route('/authorize')
@@ -69,7 +70,7 @@ export default (app) => {
 
   /* === Passport Oauth way ===
   http://passportjs.org/docs/oauth
-  
+
   app.route('/auth/provider')
     .get(passport.authenticate('provider'));
   app.route('/auth/provider/callback'),

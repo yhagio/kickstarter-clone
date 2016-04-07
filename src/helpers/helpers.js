@@ -6,6 +6,21 @@ export function isLoggedIn(req, res, next){
   return res.redirect('/projects');
 }
 
+// Check if user is authenticated through Stripe
+export function connectOAuthed(req, res, next){
+  if (req.user && req.user.stripe.access_token) {
+    return next();
+  } 
+  return res.redirect('/profile');
+}
+
+export function isOauthed(user) {
+  if (user.stripe.access_token) {
+    return true;
+  } 
+  return false;
+}
+
 // Calculate the day until it expires
 export function getDayTilEnd(endDate) {
   let timeDiff = new Date(endDate).getTime() - new Date().getTime();
