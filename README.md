@@ -70,7 +70,7 @@ sudo npm install -g babel-cli
 - [ ] Email - Mailgun Integration (After back a project)
 - [ ] Email - Notification
 
-- [ ] Social - User can comment (Disqus)
+- [ ] Social - User can comment (Disqus-like)
 - [ ] Social - User can share (Twitter, Facebook, Email)
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown

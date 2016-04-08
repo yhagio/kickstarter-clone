@@ -38,11 +38,6 @@ const projectSchema = new Mongoose.Schema({
     'type': String
   },
 
-  'num_backers': {
-    'type': Number,
-    'default': 0
-  },
-
   'current_funding': {
     'type': Number,
     'default': 0
@@ -56,7 +51,17 @@ const projectSchema = new Mongoose.Schema({
   location: {
     type: String,
     required: true
-  }
+  },
+
+  backers: [{
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }],
+
+  comments: [{
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Comment'
+  }]
 
 });
 

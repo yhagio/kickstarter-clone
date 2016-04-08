@@ -29,7 +29,28 @@ const userSchema = new Mongoose.Schema({
     stripe_user_id: { // Connected Account ID
       type: String
     }
-  }
+  },
+
+  website: {
+    type: String
+  },
+
+  picture: {
+    type: String
+  },
+
+  biography: {
+    type: String
+  },
+
+  location: {
+    type: String
+  }, 
+
+  backedProjects: [{
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Project'
+  }]
 
 });
 
