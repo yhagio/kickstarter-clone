@@ -1,3 +1,4 @@
+
 // This identifies your website in the createToken call below
 Stripe.setPublishableKey('pk_test_Xn5nWxjEXpqZ4SJQQs1cyB2K');
 
