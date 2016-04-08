@@ -1,6 +1,7 @@
 import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
 import paymentHandler from './handlers/payment';
+import profileHandler from './handlers/profile';
 import { sendNewPassword } from './handlers/resetPassword';
 import { isAuthenticated } from './helpers/passport-config';
 import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
@@ -62,7 +63,12 @@ export default (app) => {
 
   app.route('/profile')
     .all(isAuthenticated)
-    .get((req, res) => res.render('profile/profile', {isOauthed: isOauthed(req.user)}));
+    .get(profileHandler.getProfile);
+
+  app.route('/profile/edit')
+    .all(isAuthenticated)
+    .get(profileHandler.getProfile)
+    .post(profileHandler.updateProfile);
 
   // Stripe Connect - Custom Option Way 
   app.route('/authorize')

@@ -1,4 +1,5 @@
 <div class="contianer">
+  <h3>Profile</h3>
   {{#if isOauthed }}
     <p>Authorized. You can create a project</p>
     <a href="/create-project" class="btn pledge-button">Create Project</a>
@@ -11,4 +12,7 @@
       <img src="images/blue-on-light.png" alt="Connect with Stripe">
     </a>
   {{/if}}
+  <p>Name: {{ user.name }}</p>
+  <p>Email: {{ user.email }}</p>
+  <a href="/profile/edit" class="btn pledge-button">Update Profile</a>
 </div>
