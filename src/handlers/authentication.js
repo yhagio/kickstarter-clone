@@ -4,14 +4,55 @@ import { isAuthenticated } from '../helpers/passport-config';
 import User from '../models/user';
 import qs from 'querystring';
 import request from 'request';
+import { 
+  checkName,
+  checkEmail,
+  checkEmailAgain,
+  checkPassword,
+  checkPasswordAgain,
+} from '../helpers/validations';
 
 
 const authHandler = {
   signup(req, res, next) {
-
     async.waterfall(
       [
         function(callback) {
+          // Even though I checked the user inputs in browser,
+          // check user inputs again in server
+          // because I don't trust users ;)
+
+          let errors = [];
+
+          const checkNameResult = checkName(req.body.signupName);
+          const checkEmailResult = checkEmail(req.body.signupEmail);
+          const checkEmailAgainResult = checkEmailAgain(req.body.signupEmail, req.body.signupEmailagain);
+          const checkPasswordResult = checkPassword(req.body.signupPassword);
+          const checkPasswordAgainResult = checkPasswordAgain(req.body.signupPassword, req.body.signupPasswordagain);
+
+          // Gather all the errors
+          if (checkNameResult !== null) {
+            errors.push(checkNameResult);
+          }
+          if (checkEmailResult !== null) {
+            errors.push(checkEmailResult);
+          }
+          if (checkEmailAgainResult !== null) {
+            errors.push(checkEmailAgainResult);
+          }
+          if (checkPasswordResult !== null) {
+            errors = errors.concat(checkPasswordResult);
+          }
+          if (checkPasswordAgainResult !== null) {
+            errors.push(checkPasswordAgainResult);
+          }
+          
+          // If there are any errors, notify them in browser!
+          if (errors.length > 0) {
+            req.flash('danger', errors);
+            return res.redirect('/signup');
+          }
+
           // Create a new User object
           let userObj = new User({
             name: req.body.signupName,
@@ -19,17 +60,15 @@ const authHandler = {
             password: req.body.signupPassword
           });
 
-          // TODO: check fields
-
           // Check if user already exists
           User.findOne({ email: req.body.signupEmail}, (err, user) => {
             if (err) {
-              req.flash('error', 'Something went wrong. Please try again.')
+              req.flash('danger', 'Something went wrong. Please try again.')
               return res.redirect('/signup');
             }
 
             if (user) {
-              req.flash('error', 'Account with the email already exists.');
+              req.flash('danger', 'Account with the email already exists.');
               return res.redirect('/signup');
             }
             
@@ -37,7 +76,7 @@ const authHandler = {
             userObj.save((saveErr, signUpUser) => {
               if (saveErr) {
                 console.log('ERR', saveErr);
-                req.flash('error', 'Could not save new user, please try again.')
+                req.flash('danger', 'Could not save new user, please try again.')
                 return res.redirect('/signup');
               }
 
@@ -50,12 +89,12 @@ const authHandler = {
         function(user) {
           req.logIn(user, function(err) {
             if (err) {
-              req.flash('error', 'Login failed, try to log in again.');
+              req.flash('danger', 'Login failed, try to log in again.');
               return res.redirect('/login');
             }
 
             req.flash('success', 'Signed up & Logged in!');
-            return res.redirect('/projects');
+            return res.redirect('/profile');
           });
         }
       ]
@@ -71,7 +110,7 @@ const authHandler = {
 
   login(req, res) {    
     passport.authenticate('local', {
-      successRedirect: '/projects',
+      successRedirect: '/profile',
       failureRedirect: '/login',
       failureFlash: true
     })(req, res);
@@ -112,7 +151,7 @@ const authHandler = {
       }
     }, function(err, r, body) {
       if (err) {
-        req.flash('error', err.error_description);
+        req.flash('danger', err.error_description);
         return res.redirect('/profile');
       }
 
@@ -133,7 +172,7 @@ const authHandler = {
       // Update the user information (Adding Stripe inofrmation)
       User.findOneAndUpdate({_id: req.user._id}, userObject, (err, user) => {
         if (err) {
-          req.flash('error', 'Could not process the authentication. Try again.');
+          req.flash('danger', 'Could not process the authentication. Try again.');
           return res.redirect('/profile');
         } else {
           req.flash('info', 'Successfully authenticated');

@@ -1,18 +1,25 @@
 <div class="contianer">
-  <h3>Profile</h3>
+  <div class="well">
+    <h3>{{ user.name }}</h3>
+    <p>Email: <strong>{{ user.email }}</strong></p>
+  </div>
+
+  <hr />
+  
+  <a href="/profile/edit" class="btn pledge-button">Update Profile</a>
+
+  <hr />
   {{#if isOauthed }}
     <p>Authorized. You can create a project</p>
     <a href="/create-project" class="btn pledge-button">Create Project</a>
   {{ else }}
-    <p>* You need to have a Stripe account, if you don't have one, sign up Stripe first</p>
-    <a href="https://dashboard.stripe.com/">Stripe</a>
-    <br />
-    <p>If you have Stripe account, connect with our platform.</p>
+    <h4>Would you like to create a project?</h4>
+    <p>* You need to have a Stripe account, if you don't have one, sign up Stripe <a href="https://www.stripe.com/"><strong>HERE</strong></a></p>
+    <p>Connect your Stripe account with our platform.</p>
     <a href="/authorize">
       <img src="images/blue-on-light.png" alt="Connect with Stripe">
     </a>
   {{/if}}
-  <p>Name: {{ user.name }}</p>
-  <p>Email: {{ user.email }}</p>
-  <a href="/profile/edit" class="btn pledge-button">Update Profile</a>
+  
+
 </div>

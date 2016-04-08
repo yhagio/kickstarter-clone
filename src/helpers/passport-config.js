@@ -39,11 +39,12 @@ passport.use('local',
       }
 
       if (!user) {
-        return done(null, false, req.flash('error', 'User not found with this email.'));
+        return done(null, false, req.flash('danger', 'User not found with this email.'));
       }
 
       if (!user.comparePassword(password)) {
-        return done(null, false, req.flash('error', 'Incorrect password.'));
+        return done(null, false, req.flash('danger', 'Incorrect password.'));
+
       }
 
       return done(null, user);

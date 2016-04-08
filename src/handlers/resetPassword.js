@@ -58,16 +58,16 @@ export const sendNewPassword = function(req, res){
 
           mailgun.messages().send(data, function (error, body) {
             if(error){
-              req.flash('error', 'Something went wrong...try again');
+              req.flash('danger', 'Something went wrong...try again');
               return res.redirect('/forgot-password');
             } else {
-              req.flash('info', 'Successfully sent to your email');
+              req.flash('success', 'Successfully sent to your email');
               return res.redirect('/login');
             }
           });
 
         } else {
-          req.flash('error', 'No user found with this email');
+          req.flash('danger', 'No user found with this email');
           return res.redirect('/forgot-password');
         }
       });

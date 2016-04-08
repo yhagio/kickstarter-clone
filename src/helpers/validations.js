@@ -1,66 +1,95 @@
-// Validate user's email format
-export const validateEmail = (email) => {
-  let errorMessage = '';
-  const regex = /\S+@\S+\.\S+/;
+// Check Name
+export const checkName = (name) => {
+  let errorMsg = "";
+  const trimmedName = name.trim();
+
+  if(trimmedName.length < 1) {
+    errorMsg += 'Name required';
+  }
+
+  if(trimmedName.length > 30){
+    errorMsg += 'Name should be shorter than 30';
+  }
+
+  if(errorMsg.length > 0){
+    return errorMsg;
+  }
+  return null;
+}
+
+// Validate Email
+export const checkEmail = (email) => {
+  let errorMsg = "";
   const trimmedEmail = email.trim();
 
-  if (trimmedEmail.length > 50) {
-    errorMessage = '* Email is too long, please use shorter email address';
+  if (!email.match(/^\S+@\S+\.\S+$/)) {
+    errorMsg += "Email must be in valid format";
   }
 
-  if (!regex.test(trimmedEmail) || trimmedEmail.length === 0) {
-    errorMessage = '* Email must be in valid format';
+  if (errorMsg.length > 0) {
+    return errorMsg;
   }
-
-  return errorMessage;
-};
-
-// Validate user's password format
-export const validatePassword = (password) => {
-  let errorMessages = [];
-
-  if (password.length > 25) {
-    errorMessages.push('* Must be fewer than 50 chars');
-  }
-
-  if (password.length < 8) {
-    errorMessages.push('* Must be longer than 7 chars');
-  }
-
-  // if (!password.match(/[\!\@\#\$\%\^\&\*]/g)) {
-  //   errorMessages.push('* Missing a symbol(! @ # $ % ^ & *)');
-  // }
-
-  if (!password.match(/\d/g)) {
-    errorMessages.push('* Must have a number');
-  }
-
-  if (!password.match(/[a-z]/g)) {
-    errorMessages.push('* Must have a lowercase letter');
-  }
-
-  if (!password.match(/[A-Z]/g)) {
-    errorMessages.push('* Must have an uppercase letter');
-  }
-
-  return errorMessages;
+  return null;
 }
 
-// Validate user's text input length
-// Must be 1 - (limit) characters
-export const validateStrLength = (limit, text) => {
-  let errorMessage = '';
-  if (text.trim().length > limit) {
-    errorMessage = `* Cannot be more than ${limit} characters`;
-  } else if (text.trim().length <= 0) {
-    errorMessage = '* Cannot be empty';
-  } else {
-    errorMessage = '';
+// validate email confirmation
+export const checkEmailAgain = (email, emailAgain) => {
+  let errorMsg = "";
+  const trimmedEmail = email.trim();
+  const trimmedEmailAgain = emailAgain.trim();
+
+  if (email !== emailAgain) {
+    errorMsg = "Email confirmation doesn't match Email";
   }
-  return errorMessage;
+  
+  if (errorMsg.length > 0) {
+    return errorMsg;
+  }
+  return null;
 }
 
-// Validate both inputs are same
-export const areBothSame = (input1, input2) => {
-  return (input1 === input2) ? true : false;
+// Check Password
+export const checkPassword = (password) => {
+  let errors = [];
+  const trimmedPassword = password.trim();
+
+  if (trimmedPassword.length > 30) {
+    errors.push("Password must be less than 31 chars");
+  }
+
+  if (trimmedPassword.length < 8) {
+    errors.push("Password must be longer than 7 chars");
+  }
+
+  if (!trimmedPassword.match(/\d/g)) {
+    errors.push("Password needs a number");
+  }
+
+  if (!trimmedPassword.match(/[a-z]/g)) {
+    errors.push("Password needs a lowercase letter");
+  }
+
+  if (!trimmedPassword.match(/[A-Z]/g)) {
+    errors.push("Password needs an uppercase letter");
+  }
+
+  if (errors.length > 0) {
+    return errors;
+  }
+  return null;
+}
+
+export const checkPasswordAgain = (password, passwordAgain) => {
+  let errorMsg = "";
+  const trimmedPassword = password.trim();
+  const trimmedPasswordAgain = passwordAgain.trim();
+
+  if (trimmedPassword !== trimmedPasswordAgain) {
+    errorMsg = "Password confirmation doesn't match Password";
+  }
+  
+  if (errorMsg.length > 0) {
+    return errorMsg;
+  }
+  return null;
 }

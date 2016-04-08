@@ -43,6 +43,22 @@ nav.navbar.navbar-default {
   margin: auto;
 }
 
+.signup-errors {
+  background: rgba(240,0,0,0.48);
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 10px 0 3px 0px;
+  display: none;
+}
+
+.signup-errors.show {
+  display: block;
+}
+
+.form-note {
+  font-size: 0.9em;
+}
+
 /* Projects */
 .project-detail {
   padding: 10px 5px 5px 5px;
@@ -73,7 +89,7 @@ nav.navbar.navbar-default {
 }
 
 /* Flash */
-.error {
+/*.error {
   color: red;
   font-style: italic;
 }
@@ -90,26 +106,24 @@ nav.navbar.navbar-default {
   width: 100%;
   text-align: center;
   opacity: 0;
-  -webkit-animation: fadeInOut 5s;
-  animation: fadeInOut 5s;
+  -webkit-animation: fadeInOut 7s;
+  animation: fadeInOut 7s;
   z-index: 1000;
 }
 @keyframes fadeInOut {
-    0% {
-        opacity: 0;
-    }
-    16% {
-       opacity: 1;
-    }
-    84% {
-       opacity: 1;
-    }
-    100% {
-       opacity: 0;
-    }
-}
-
-
+  0% {
+    opacity: 0;
+  }
+  16% {
+    opacity: 1;
+  }
+  84% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}*/
 
 
 /* Stripe Connect Button */

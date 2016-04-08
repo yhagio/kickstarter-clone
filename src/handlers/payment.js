@@ -11,7 +11,7 @@ const paymentHandler = {
     // Retrieve the id by populating 'user.stripe' fields
     Project.findById(req.params.id).populate('createdBy', 'stripe').exec(function(err, project) {
       if (err) {
-        req.flash('error', 'Could not find the project / user. Try again.');
+        req.flash('danger', 'Could not find the project / user. Try again.');
         return res.redirect(`/projects/${req.params.id}/rewards`);
       }
       // Option 1: Charge directly
@@ -29,7 +29,7 @@ const paymentHandler = {
         if (error) {
 
           console.log('Stripe Charge Failed: \n', error);
-          req.flash('error', error.message);
+          req.flash('danger', error.message);
           return res.redirect(`/projects/${req.params.id}/rewards`);
         }
 

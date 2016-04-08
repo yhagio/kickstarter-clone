@@ -17,7 +17,7 @@ const projectHandler = {
 
     Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
       if (err) {
-        req.flash('error', 'Something went wrong. Refresh.');
+        req.flash('danger', 'Something went wrong. Refresh.');
         return res.redirect('/');
       }
 
@@ -38,7 +38,7 @@ const projectHandler = {
   getProjectPage(req, res) {
     Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
       if (err) {
-        req.flash('error', 'No project found.');
+        req.flash('danger', 'No project found.');
         return res.redirect('/');
       }
 
@@ -53,7 +53,7 @@ const projectHandler = {
   getProjectRewardsPage(req, res) {
     Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
       if (err) {
-        req.flash('error', 'No project found.');
+        req.flash('danger', 'No project found.');
         return res.redirect('/');
       }
 
@@ -67,7 +67,7 @@ const projectHandler = {
   postProjectCreate(req, res) {
 
     if (!req.user) {
-      req.flash('error', 'You need to login first!');
+      req.flash('danger', 'You need to login first!');
       return res.redirect('/login');
     }
 
@@ -79,7 +79,7 @@ const projectHandler = {
 
       if (err) {
         // console.log('Parsing error: \n', err);
-        req.flash('error', 'Failed to create your project. Try again.');
+        req.flash('danger', 'Failed to create your project. Try again.');
         return res.redirect('/create-project');
       }
 
@@ -104,7 +104,7 @@ const projectHandler = {
           newProject.save((err, result) => {
             if (err) {
               // console.log('save err: ', err);
-              req.flash('error', 'Something went wrong, project creation failed.');
+              req.flash('danger', 'Something went wrong, project creation failed.');
               return res.redirect('/create-project');
 
             } else {
@@ -117,7 +117,7 @@ const projectHandler = {
 
       } else {
 
-        req.flash('error', 'Cover photo is missing!');
+        req.flash('danger', 'Cover photo is missing!');
         return res.redirect('/create-project');
       }
 
@@ -126,7 +126,7 @@ const projectHandler = {
     // log any errors that occur
     form.on('error', (err) => {
       // console.log('An error has occured: \n' + err);
-      req.flash('error', 'Failed to create project.');
+      req.flash('danger', 'Failed to create project.');
       return res.redirect('/create-project');
     });
 

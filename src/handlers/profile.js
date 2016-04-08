@@ -5,7 +5,7 @@ const profileHandler = {
   getProfile(req, res) {
     User.findById(req.user._id, (err, user) => {
       if (err) {
-        req.flash('error', 'Could not find the user. Try again.');
+        req.flash('danger', 'Could not find the user. Try again.');
         return res.redirect('/');
       }
 

@@ -15,7 +15,9 @@
       <ul class="nav navbar-nav">
         <li class=""><a href="/projects">Discover</a></li>
         {{#if loggedin }}
-          <li class=""><a href="/create-project">Start a project</a></li>
+          {{#if canCreateProject}}
+            <li class=""><a href="/create-project">Start a project</a></li>
+          {{/if}}
         {{/if}}
         <li class=""><a href="/about">About</a></li>
       </ul>
@@ -49,8 +51,14 @@
   </div>
 </nav>
 
-{{#each sessionFlash}}
-  <div class="flash {{ @key }}">
-    <strong>{{ this }}</strong>
+
+{{#if sessionFlash}}
+  <div class="alert alert-{{ sessionFlashKey }} alert-dismissible" style="max-width: 430px; margin: 60px auto -50px;">
+    <button class="close" type="button" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{#each sessionFlashArray}}
+      <p>{{ this }}</p>
+    {{/each}}
   </div>
-{{/each}}
+{{/if}}
