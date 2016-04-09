@@ -123,6 +123,8 @@ function checkPasswordAgain(e) {
   return null;
 }
 
+if (window.location.pathname === '/signup') {
+
 document.getElementById('signup-form').addEventListener('submit', function(e) {
   
   resetInnerHTML('signup-errors-list');
@@ -167,3 +169,5 @@ document.getElementById('signup-form').addEventListener('submit', function(e) {
   }
 
 }, false);
+
+}
