@@ -10,6 +10,12 @@ html, body {
   color: #2bde73;
 }
 
+/* FORM */
+form .form-group input {
+  font-size: 1.2em;
+  letter-spacing: 1px;
+}
+
 /* Overwrite Bootstrap */
 a.navbar-brand.brand-color,
 a.navbar-brand.brand-color:hover {
@@ -77,6 +83,11 @@ nav.navbar.navbar-default {
 
 .project-stats {
   margin-top: 10px;
+}
+
+/* Stripe Form Button */
+.stripe-error {
+  display: block;
 }
 
 /* Back / Submit button with overwrite */

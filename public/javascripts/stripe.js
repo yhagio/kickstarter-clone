@@ -8,6 +8,7 @@ function stripeResponseHandler(status, response) {
   if (response.error) {
     // Show the errors on the form
     $form.find('.payment-errors').text(response.error.message);
+    $form.find('.payment-errors').addClass('alert alert-danger stripe-error');
     $form.find('button').prop('disabled', false);
   } else {
     // response contains id and card, which contains additional card details
