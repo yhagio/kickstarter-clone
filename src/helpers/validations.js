@@ -134,7 +134,7 @@ export const checkFundingEndDate = (end_date) => {
 // checkEstimatedDelivery
 export const checkEstimatedDelivery = (estimate_date) => {
   if (estimate_date < new Date()) {
-    return 'Funding end date must be later than today.';
+    return 'Estimate Delivery date must be later than today.';
   }
 
   return null;

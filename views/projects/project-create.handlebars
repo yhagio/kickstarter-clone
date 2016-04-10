@@ -1,6 +1,16 @@
-<div class="row">
+<div class="project-form-box">
 
-<form class="form-horizontal" method="POST" action="/create-project" enctype="multipart/form-data">
+<form id="project-form" class="form-horizontal" method="POST" action="/create-project" enctype="multipart/form-data">
+
+  <div class="form-group">
+    <h2>Create Project</h2>
+  </div>
+  
+  <div id="project-errors-box" class="form-group project-errors">
+    <ul id="project-errors-list">
+
+    </ul>
+  </div>
 
   <div class="form-group">
     <label for="project_name" class="col-sm-2 control-label">Project Name</label>
@@ -8,8 +18,12 @@
       <input 
         type="text"
         class="form-control"
+        id="project_name"
         name="project_name"
-        placeholder="Max 80 words" />
+        maxlength="80"
+        placeholder="Max 80 words"
+        autofocus="" 
+        required />
     </div>
   </div>
 
@@ -18,9 +32,12 @@
     <div class="col-sm-10">
       <textarea
         class="form-control"
+        id="short_description"
         name="short_description"
         rows="5"
-        placeholder="Max 140 words"></textarea>
+        maxlength="140"
+        placeholder="Max 140 words"
+        required ></textarea>
     </div>
   </div>
 
@@ -29,9 +46,12 @@
     <div class="col-sm-10">
       <textarea
         class="form-control"
+        id="long_description"
         name="long_description"
         rows="10"
-        placeholder="Max 400 words"></textarea>
+        maxlength="400"
+        placeholder="Max 400 words"
+        required ></textarea>
     </div>
   </div>
   
@@ -65,7 +85,8 @@
         type="file"
         class="form-control"
         id="cover_photo"
-        name="cover_photo" />
+        name="cover_photo"
+        required />
     </div>
   </div>
 
@@ -75,9 +96,11 @@
       <input 
         type="number"
         class="form-control"
+        id="funding_goal"
         name="funding_goal"
         min="0"
-        placeholder="$" />
+        placeholder="$"
+        required />
     </div>
   </div>
 
@@ -88,7 +111,9 @@
       <input 
         type='text'
         class="form-control"
-        name="funding_end_date" />
+        id="funding_end_date"
+        name="funding_end_date"
+        required />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
@@ -102,7 +127,9 @@
       <input
         type='text'
         class="form-control"
-        name="estimated_delivery" />
+        id="estimated_delivery"
+        name="estimated_delivery"
+        required />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
@@ -115,8 +142,10 @@
       <input
         type="text"
         class="form-control"
+        id="location"
         name="location"
-        placeholder="City, Country" />
+        placeholder="City, Country"
+        required />
     </div>
   </div>
 

@@ -11,3 +11,8 @@ $(function () {
 $(function () {
   $('#datetimepicker2').datetimepicker();
 });
+
+// Reset innerHTML value of an element
+function resetInnerHTML(elementID){
+  return document.getElementById(elementID).innerHTML = "";
+}

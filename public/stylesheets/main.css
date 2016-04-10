@@ -45,18 +45,24 @@ nav.navbar.navbar-default {
   color: #00A0FF;
 }
 
-/* Sign up */
-.sub-container {
-  max-width: 400px;
-  margin: auto;
-}
-
-.signup-errors {
+/* Errors Form */
+.signup-errors,
+.project-errors {
   background: rgba(240,0,0,0.48);
   font-weight: bold;
   border-radius: 10px;
   padding: 10px 0 3px 0px;
   display: none;
+}
+
+.project-errors.show {
+  margin: 10px 0;
+}
+
+/* Sign up */
+.sub-container {
+  max-width: 400px;
+  margin: auto;
 }
 
 .signup-errors.show {
@@ -85,6 +91,12 @@ nav.navbar.navbar-default {
 
 .project-stats {
   margin-top: 10px;
+}
+
+/* Project form */
+.project-form-box {
+  max-width: 600px;
+  margin: auto;
 }
 
 /* Stripe Form Button */

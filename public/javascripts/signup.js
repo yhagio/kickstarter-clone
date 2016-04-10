@@ -1,13 +1,7 @@
 'use strict';
 
-// Reset innerHTML value of an element
-function resetInnerHTML(elementID){
-  return document.getElementById(elementID).innerHTML = "";
-}
-
 // Check Name
 function checkName(e){
-
   var name = document.getElementById('signupName').value.trim();
   var errorMsg = "";
 
@@ -31,11 +25,7 @@ function checkName(e){
 
 // Validate Email
 function checkEmail(e){
-  // var email = "";
-
   var email = document.getElementById('signupEmail').value.trim();
-
-  // resetInnerHTML('errEmail');
   var errorMsg = "";
 
   if (!email.match(/^\S+@\S+\.\S+$/)) {
@@ -125,49 +115,49 @@ function checkPasswordAgain(e) {
 
 if (window.location.pathname === '/signup') {
 
-document.getElementById('signup-form').addEventListener('submit', function(e) {
-  
-  resetInnerHTML('signup-errors-list');
+  document.getElementById('signup-form').addEventListener('submit', function(e) {
+    
+    resetInnerHTML('signup-errors-list');
 
-  var errors = [];
+    var errors = [];
 
-  var checkNameResult = checkName(e);
-  var checkEmailResult = checkEmail(e);
-  var checkEmailAgainResult = checkEmailAgain(e);
-  var checkPasswordResult = checkPassword(e);
-  var checkPasswordAgainResult = checkPasswordAgain(e);
+    var checkNameResult = checkName(e);
+    var checkEmailResult = checkEmail(e);
+    var checkEmailAgainResult = checkEmailAgain(e);
+    var checkPasswordResult = checkPassword(e);
+    var checkPasswordAgainResult = checkPasswordAgain(e);
 
-  // Gather all the errors
-  if (checkNameResult !== null) {
-    errors.push(checkNameResult);
-  }
-  if (checkEmailResult !== null) {
-    errors.push(checkEmailResult);
-  }
-  if (checkEmailAgainResult !== null) {
-    errors.push(checkEmailAgainResult);
-  }
-  if (checkPasswordResult !== null) {
-    errors = errors.concat(checkPasswordResult);
-  }
-  if (checkPasswordAgainResult !== null) {
-    errors.push(checkPasswordAgainResult);
-  }
+    // Gather all the errors
+    if (checkNameResult !== null) {
+      errors.push(checkNameResult);
+    }
+    if (checkEmailResult !== null) {
+      errors.push(checkEmailResult);
+    }
+    if (checkEmailAgainResult !== null) {
+      errors.push(checkEmailAgainResult);
+    }
+    if (checkPasswordResult !== null) {
+      errors = errors.concat(checkPasswordResult);
+    }
+    if (checkPasswordAgainResult !== null) {
+      errors.push(checkPasswordAgainResult);
+    }
 
-  if (errors.length > 0) {
-    document.getElementById('signup-errors-box').className += ' show';
-  }
+    if (errors.length > 0) {
+      document.getElementById('signup-errors-box').className += ' show';
+      window.scrollTo(0, 0);
+    }
 
-  // Display the errors
+    // Display the errors
+    var errorList = document.getElementById('signup-errors-list');
+    for (var i = 0; errors.length > i; i++) {
+      var li = document.createElement("li");
+      var errorText = document.createTextNode(errors[i]);
+      li.appendChild(errorText);
+      errorList.appendChild(li);
+    }
 
-  var errorList = document.getElementById('signup-errors-list');
-  for (var i = 0; errors.length > i; i++) {
-    var li = document.createElement("li");
-    var errorText = document.createTextNode(errors[i]);
-    li.appendChild(errorText);
-    errorList.appendChild(li);
-  }
-
-}, false);
+  }, false);
 
 }

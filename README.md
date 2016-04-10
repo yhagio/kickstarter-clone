@@ -100,12 +100,11 @@ Stripe Connect authentication for project creator with Passport-OAuth2Strategy <
 Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
 
 #### Side notes
-- Project creation form validation
+- Project creation form validation (Cliet)
 - Profile Update - Password, Email, Name
 - Multiple rewards options (create them & payment options)
 - Limit / Skip fetching of Projects from databse
 - Search Projects
-- Add Categories (tag, page)
 - Progress Bar of funding
 - Expiration of funding / Countdown update
 - Commenting (Fetch comments at Profile, ProjectPage - Skip / Limit)
