@@ -11,7 +11,9 @@ html, body {
 }
 
 /* FORM */
-form .form-group input {
+form .form-group input,
+form .form-group textarea,
+form .form-group select {
   font-size: 1.2em;
   letter-spacing: 1px;
 }

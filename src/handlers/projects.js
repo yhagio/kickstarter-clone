@@ -96,7 +96,7 @@ const projectHandler = {
   
       let errors = [];
 
-      const checkProjectNameResult = validateStringLength(fields.project_name, 40, 'Project Name');
+      const checkProjectNameResult = validateStringLength(fields.project_name, 80, 'Project Name');
       const checkShortDescriptionResult = validateStringLength(fields.short_description, 140, 'Short Description');
       const checkLongDescriptionResult = validateStringLength(fields.long_description, 400, 'Long Description');
       const checkFundingGoalResult = checkFundingGoal(fields.funding_goal);

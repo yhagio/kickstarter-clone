@@ -5,35 +5,79 @@
   <div class="form-group">
     <label for="project_name" class="col-sm-2 control-label">Project Name</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="project_name" name="project_name">
+      <input 
+        type="text"
+        class="form-control"
+        name="project_name"
+        placeholder="Max 80 words" />
     </div>
   </div>
 
   <div class="form-group">
     <label for="short_description" class="col-sm-2 control-label">Short Description</label>
     <div class="col-sm-10">
-      <textarea class="form-control" id="short_description" name="short_description" rows="5"></textarea>
+      <textarea
+        class="form-control"
+        name="short_description"
+        rows="5"
+        placeholder="Max 140 words"></textarea>
     </div>
   </div>
 
   <div class="form-group">
     <label for="long_description" class="col-sm-2 control-label">Long Description</label>
     <div class="col-sm-10">
-      <textarea class="form-control" id="long_description" name="long_description" rows="15"></textarea>
+      <textarea
+        class="form-control"
+        name="long_description"
+        rows="10"
+        placeholder="Max 400 words"></textarea>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="category" class="col-sm-2 control-label">Category</label>
+    <div class="col-sm-10">
+      <select class="form-control" name="category">
+        <option value="Art">Art</option>
+        <option value="Comics">Comics</option>
+        <option value="Crafts">Crafts</option>
+        <option value="Dance">Dance</option>
+        <option value="Design">Design</option>
+        <option value="Fashion">Fashion</option>
+        <option value="Film and Video">Film and Video</option>
+        <option value="Food">Food</option>
+        <option value="Games">Games</option>
+        <option value="Journalism">Journalism</option>
+        <option value="Music">Music</option>
+        <option value="Photography">Photography</option>
+        <option value="Publishing">Publishing</option>
+        <option value="Technology">Technology</option>
+        <option value="Theater">Theater</option>
+      </select>
     </div>
   </div>
 
   <div class="form-group">
     <label for="cover_photo" class="col-sm-2 control-label">Cover Photo</label>
     <div class="col-sm-3">
-      <input type="file" class="form-control" id="cover_photo" name="cover_photo">
+      <input
+        type="file"
+        class="form-control"
+        id="cover_photo"
+        name="cover_photo" />
     </div>
   </div>
 
   <div class="form-group">
     <label for="funding_goal" class="col-sm-2 control-label">Funding Goal ($)</label>
     <div class="col-sm-2">
-      <input type="number" class="form-control" id="funding_goal" name="funding_goal">
+      <input 
+        type="number"
+        class="form-control"
+        name="funding_goal"
+        min="0"
+        placeholder="$" />
     </div>
   </div>
 
@@ -41,36 +85,38 @@
     <label for="funding_end_date" class="col-sm-2 control-label">Funding End Date</label>
 
     <div class='col-sm-3 input-group date' id='datetimepicker1' style="padding-left: 15px">
-      <input type='text' class="form-control" name="funding_end_date"/>
+      <input 
+        type='text'
+        class="form-control"
+        name="funding_end_date" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
-
-    {{!-- <div class="col-sm-3">
-      <input type="date" class="form-control" id="funding_end_date" name="funding_end_date">
-    </div> --}}
   </div>
 
   <div class="form-group">
     <label for="estimated_delivery" class="col-sm-2 control-label">Estimated Delivery</label>
 
     <div class='col-sm-3 input-group date' id='datetimepicker2' style="padding-left: 15px">
-      <input type='text' class="form-control" name="estimated_delivery"/>
+      <input
+        type='text'
+        class="form-control"
+        name="estimated_delivery" />
       <span class="input-group-addon">
         <span class="glyphicon glyphicon-calendar"></span>
       </span>
     </div>
-
-{{!--     <div class="col-sm-3">
-      <input type="date" class="form-control" id="estimated_delivery" name="estimated_delivery">
-    </div> --}}
   </div>
 
   <div class="form-group">
     <label for="location" class="col-sm-2 control-label">Location</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" id="location" name="location">
+      <input
+        type="text"
+        class="form-control"
+        name="location"
+        placeholder="City, Country" />
     </div>
   </div>
 
