@@ -59,3 +59,16 @@ export function getDayTilEnd(endDate) {
 export function getFundingPercentage(goal$, current$) {
   return (current$ / goal$) * 100;
 }
+
+// Check String length
+export function validateStringLength(text, limit, subject) {
+  let errorMessage = '';
+  if (text.trim().length > limit) {
+    errorMessage = `${subject} cannot be more than ${limit} characters.`;
+  } else if (text.trim().length <= 0) {
+    errorMessage = `${subject} cannot be empty.`;
+  } else {
+    errorMessage = null;
+  }
+  return errorMessage;
+}

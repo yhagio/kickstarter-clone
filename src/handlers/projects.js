@@ -3,7 +3,13 @@ import formidable from 'formidable';
 import fs from 'fs';
 import cloudinary from 'cloudinary';
 import Project from '../models/project';
-import { getDayTilEnd, getFundingPercentage } from '../helpers/helpers';
+import { getDayTilEnd, getFundingPercentage, validateStringLength } from '../helpers/helpers';
+import { 
+  checkFundingGoal,
+  checkFundingEndDate,
+  checkEstimatedDelivery,
+  checkLocation
+} from '../helpers/validations';
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -77,14 +83,68 @@ const projectHandler = {
     // parse the incoming request containing the form data
     form.parse(req, (err, fields, files) => {
 
+      console.log('fields: ', fields);
+
+      let endingDate = new Date(fields.funding_end_date);
+      let deliveryDate = new Date(fields.estimated_delivery);
+
       if (err) {
         // console.log('Parsing error: \n', err);
         req.flash('danger', 'Failed to create your project. Try again.');
         return res.redirect('/create-project');
       }
+  
+      let errors = [];
 
-      if (files.cover_photo.size > 0) {
-        cloudinary.uploader.upload(files.cover_photo.path, (result) => {
+      const checkProjectNameResult = validateStringLength(fields.project_name, 40, 'Project Name');
+      const checkShortDescriptionResult = validateStringLength(fields.short_description, 140, 'Short Description');
+      const checkLongDescriptionResult = validateStringLength(fields.long_description, 400, 'Long Description');
+      const checkFundingGoalResult = checkFundingGoal(fields.funding_goal);
+      const checkFundingEndDateResult = checkFundingEndDate(endingDate);
+      const checkEstimatedDeliveryResult = checkEstimatedDelivery(deliveryDate);
+      const checkLocationResult = checkLocation(fields.location);
+
+      // Check fields
+      // Check: project_name, short_description, long_description
+      if (checkProjectNameResult !== null) {
+        errors.push(checkProjectNameResult);
+      }
+      if (checkShortDescriptionResult !== null) {
+        errors.push(checkShortDescriptionResult);
+      }
+      if (checkLongDescriptionResult !== null) {
+        errors.push(checkLongDescriptionResult)
+      }
+      // Check Amount: funding_goal
+      if (checkFundingGoalResult !== null) {
+        errors.push(checkFundingGoalResult);
+      }
+      // Date check: funding_end_date, estimated_delivery
+      if (checkFundingEndDateResult !== null) {
+        errors.push(checkFundingEndDateResult);
+      }
+      if (checkEstimatedDeliveryResult !== null) {
+        errors.push(checkEstimatedDeliveryResult);
+      }
+      // Check location
+      if (checkLocationResult !== null) {
+        errors.push(checkLocationResult);
+      }
+      // Check if it has image
+      if (files.cover_photo.size === 0) {
+        errors.push('Cover photo is missing!');
+      }
+
+      console.log('Errors: ', errors);
+      
+      // Final check
+      if (errors.length > 0) {
+        req.flash('danger', errors);
+        return res.redirect('/create-project');
+      }
+
+      // if (files.cover_photo.size > 0) {
+        cloudinary.uploader.upload(files.cover_photo.path, (data) => {
 
           let newProject = new Project({
             createdBy: req.user,
@@ -92,13 +152,11 @@ const projectHandler = {
             short_description: fields.short_description,
             long_description: fields.long_description,
             funding_goal: fields.funding_goal,
-            funding_end_date: fields.funding_end_date,
-            file_path: result.secure_url,
-            estimated_delivery: fields.estimated_delivery,
+            funding_end_date: endingDate,
+            file_path: data.secure_url,
+            estimated_delivery: deliveryDate,
             location: fields.location
           });
-
-          // TODO: check fields
 
           // Save in Database
           newProject.save((err, result) => {
@@ -115,11 +173,12 @@ const projectHandler = {
           });
         });
 
-      } else {
+      // } 
+      // else {
 
-        req.flash('danger', 'Cover photo is missing!');
-        return res.redirect('/create-project');
-      }
+      //   req.flash('danger', 'Cover photo is missing!');
+      //   return res.redirect('/create-project');
+      // }
 
     });
 

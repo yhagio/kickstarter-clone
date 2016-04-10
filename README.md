@@ -47,6 +47,7 @@ sudo npm install -g babel-cli
 - [Cloudinary](http://cloudinary.com/documentation/node_integration#getting_started_guide) for image hosting
 - [MongoLab](https://mlab.com/) for MongoDB hosting
 - [Heroku](https://www.heroku.com/) for deployment
+- [Bootstrap 3 Datepicker v4](http://eonasdan.github.io/bootstrap-datetimepicker/)
 
 ### Project Todo
 
@@ -97,3 +98,18 @@ Deployed at Heroku: https://obscure-meadow-67002.herokuapp.com/
 ### Notes
 Stripe Connect authentication for project creator with Passport-OAuth2Strategy <br />
 Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
+
+#### Side notes
+- Project creation form validation
+- Profile Update - Password, Email, Name
+- Multiple rewards options (create them & payment options)
+- Limit / Skip fetching of Projects from databse
+- Search Projects
+- Add Categories (tag, page)
+- Progress Bar of funding
+- Expiration of funding / Countdown update
+- Commenting (Fetch comments at Profile, ProjectPage - Skip / Limit)
+- Share (Facebook, Twitter, Email, Linkedin, etc)
+
+Elastic Search hosting
+- https://facetflow.com/#plans

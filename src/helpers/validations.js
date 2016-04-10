@@ -1,3 +1,7 @@
+////////////////////////////////////////////////////
+////////// Validations of Signup Form /////////////
+////////////////////////////////////////////////////
+
 // Check Name
 export const checkName = (name) => {
   let errorMsg = "";
@@ -17,7 +21,7 @@ export const checkName = (name) => {
   return null;
 }
 
-// Validate Email
+// Check Email
 export const checkEmail = (email) => {
   let errorMsg = "";
   const trimmedEmail = email.trim();
@@ -32,7 +36,7 @@ export const checkEmail = (email) => {
   return null;
 }
 
-// validate email confirmation
+// Check email confirmation
 export const checkEmailAgain = (email, emailAgain) => {
   let errorMsg = "";
   const trimmedEmail = email.trim();
@@ -79,6 +83,7 @@ export const checkPassword = (password) => {
   return null;
 }
 
+// Check Password Confirmation
 export const checkPasswordAgain = (password, passwordAgain) => {
   let errorMsg = "";
   const trimmedPassword = password.trim();
@@ -91,5 +96,63 @@ export const checkPasswordAgain = (password, passwordAgain) => {
   if (errorMsg.length > 0) {
     return errorMsg;
   }
+  return null;
+}
+
+////////////////////////////////////////////////////
+/////// Validations of Project Creation Form ///////
+////////////////////////////////////////////////////
+
+// checkFundingGoal
+export const checkFundingGoal = (goal) => {
+  if (goal.length <= 0) {
+    return 'Funding goal is required';
+  }
+
+  const intGoal = parseInt(goal);
+
+  if (isNaN(intGoal) === true) {
+    return 'Funding goal must be number.';
+  }
+  
+  if (intGoal <= 0) {
+    return 'Funding goal must be greater then 0.';
+  }
+
+  return null;
+}
+
+// checkFundingEndDate
+export const checkFundingEndDate = (end_date) => {
+  if (end_date < new Date()) {
+    return 'Funding end date must be later than today.';
+  }
+
+  return null;
+}
+
+// checkEstimatedDelivery
+export const checkEstimatedDelivery = (estimate_date) => {
+  if (estimate_date < new Date()) {
+    return 'Funding end date must be later than today.';
+  }
+
+  return null;
+}
+
+// checkLocation
+export const checkLocation = (location) => {
+  if (isNaN(parseInt(location)) === false) {
+    return 'Location name cannot be number';
+  }
+  
+  if (location.length <= 0) {
+    return 'Location name is required';
+  }
+
+  if (location.length > 30) {
+    return 'Location name is too long';
+  }
+
   return null;
 }

@@ -53,6 +53,11 @@ const projectSchema = new Mongoose.Schema({
     required: true
   },
 
+  category: {
+    type: String,
+    required: true
+  },
+
   backers: [{
     type: Mongoose.Schema.Types.ObjectId,
     ref: 'User'
