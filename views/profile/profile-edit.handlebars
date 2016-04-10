@@ -1,6 +1,169 @@
-<div class="contianer">
-  <h3>Update Profile</h3>  
-  <p>Name: {{ user.name }}</p>
-  <p>Email: {{ user.email }}</p>
+<div class="container">
+  
+  <form action="/update-profile" method="POST" class="panel panel-primary" style="padding: 0 15px">
+    <div class="form-group">
+      <h2>Update Profile</h2>
+    </div>
+    
+    <div id="profile-errors-box" class="form-group profile-errors">
+      <ul id="profile-errors-list">
+
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profileName">Your name</label>
+      <input
+        id="profileName"
+        name="profileName"
+        type="text"
+        maxlength="50"
+        class="form-control"
+        placeholder="Name"
+        autocomplete="name"
+        value="{{ user.name }}"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="bio">Biography</label>
+      <textarea
+        class="form-control"
+        id="bio"
+        name="bio"
+        rows="5"
+        maxlength="300"
+        placeholder="Max 300 words"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profile-website">Website</label>
+      <input
+        id="profile-website"
+        name="profile-website"
+        type="text"
+        maxlength="120"
+        class="form-control"
+        placeholder="Your website or blog URL" />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profile-location">Location</label>
+      <input
+        id="profile-location"
+        name="profile-location"
+        type="text"
+        maxlength="40"
+        class="form-control"
+        placeholder="City, Country" />
+    </div>
+
+    <div class="form-group">
+      <button id="updateProfile" type="submit" class="btn btn-info btn-block pledge-button">UPDATE PROFILE</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <form action="/update-profile-email" method="POST" class="panel panel-primary" style="padding: 0 15px">
+    <div class="form-group">
+      <h2>Update Eamil</h2>
+    </div>
+    
+    <div id="profile-email-errors-box" class="form-group profile-errors">
+      <ul id="profile-email-errors-list">
+
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profileEmail">Email</label>
+      <input
+        id="profileEmail"
+        name="profileEmail"
+        type="email"
+        maxlength="50"
+        class="form-control"
+        placeholder="Email"
+        autocomplete="email"
+        value="{{ user.email }}"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profileEmailagain">Email Confirmation</label>
+      <input
+        id="profileEmailagain"
+        name="profileEmailagain"
+        type="email"
+        maxlength="50"
+        class="form-control"
+        placeholder="Email again"
+        autocomplete="email"
+        required />
+    </div>
+
+    <div class="form-group">
+      <button id="updateEmail" type="submit" class="btn btn-info btn-block pledge-button">UPDATE EMAIL</button>
+    </div>
+  </form>
+
+  <hr />
+
+  <form action="/update-profile-password" method="POST" class="panel panel-primary" style="padding: 0 15px">
+    <div class="form-group">
+      <h2>Update Password</h2>
+    </div>
+    
+    <div id="profile-password-errors-box" class="form-group profile-errors">
+      <ul id="profile-password-errors-list">
+
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profileCurrentPassword">Current Password</label><br />
+      <input
+        id="profileCurrentPassword"
+        name="profileCurrentPassword"
+        type="password"
+        maxlength="25"
+        class="form-control"
+        placeholder="Minimum 8 characters"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profileNewPassword">New Password</label><br />
+      <span class="form-note">* Longer than 7 characers with number, lowercase, and uppercase.</span>
+      <input
+        id="profileNewPassword"
+        name="profileNewPassword"
+        type="password"
+        maxlength="25"
+        class="form-control"
+        placeholder="Minimum 8 characters"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label class="control-label" for="profilePasswordagain">New Password Confirmation</label>
+      <input
+        id="profilePasswordagain"
+        name="profilePasswordagain"
+        type="password"
+        maxlength="25"
+        class="form-control"
+        placeholder="Password again"
+        required />
+    </div>
+
+    <div class="form-group">
+      <button id="updatePassword" type="submit" class="btn btn-info btn-block pledge-button">UPDATE PASSWORD</button>
+    </div>
+  </form>
+
+  <hr />
+
   <a href="/profile" class="btn pledge-button">View Profile</a>
 </div>

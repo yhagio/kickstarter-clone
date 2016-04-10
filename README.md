@@ -53,19 +53,20 @@ sudo npm install -g babel-cli
 
 - [X] Initial Setup
 - [X] Projects - User can create projects, form, save into db (Basic)
-- [ ] Projects - Create project (Edge case * Checking user inputs)
+- [X] Projects - Create project (Edge case * Checking user inputs)
+- [ ] Projects - Create Rewards, Display Rewards Page
 - [X] Projects - List projects, project page (Basic)
 - [ ] Projects - Fetch project list with limit & skip (Scale)
 
-- [ ] Authentication - User Registration (Check user inputs)
+- [X] Authentication - User Singup (Check user inputs)
 - [X] Authentication - User Login / Logout
 - [X] Authentication - User Forgot password / Issue new password
 - [ ] Authentication - User can update profile
 - [ ] Authentication - User can delete account
 
 - [X] Payment - Verify user's funding account
-- [ ] Payment - User can back projects (Payment)
-- [ ] Payment - User can update / cancel pledge amount
+- [ ] Payment - User can back projects (Payment, Select rewards)
+- [ ] Payment - User can update profile
 
 - [X] Email - Mailgun Integration (Forgot password)
 - [ ] Email - Mailgun Integration (After back a project)
@@ -75,7 +76,7 @@ sudo npm install -g babel-cli
 - [ ] Social - User can share (Twitter, Facebook, Email)
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
-- [ ] Projects - Better Date/Time picker UI
+- [X] Projects - Better Date/Time picker UI
 - [ ] PerfMatters - Compile, faster insight speed
 
 ### Deployment
@@ -100,7 +101,6 @@ Stripe Connect authentication for project creator with Passport-OAuth2Strategy <
 Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
 
 #### Side notes
-- Project creation form validation (Cliet)
 - Profile Update - Password, Email, Name
 - Multiple rewards options (create them & payment options)
 - Limit / Skip fetching of Projects from databse
@@ -112,3 +112,4 @@ Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
 
 Elastic Search hosting
 - https://facetflow.com/#plans
+- Bonsai

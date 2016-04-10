@@ -113,6 +113,17 @@ nav.navbar.navbar-default {
   color: #fff;
 }
 
+/* Profile Page */
+.profile-section {
+
+}
+
+.profile-details {
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 1.1em;
+}
+
 /* Flash */
 /*.error {
   color: red;
