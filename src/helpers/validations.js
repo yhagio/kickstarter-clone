@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////
-////////// Validations of Signup Form /////////////
+////////// Validations of Signup / Profile Update Form /////////////
 ////////////////////////////////////////////////////
 
 // Check Name
@@ -167,10 +167,4 @@ export const checkStrLength = (text, limit, subject) => {
     errorMessage = null;
   }
   return errorMessage;
-}
-
-// check website
-// can be empty
-export const checkWebsite = (website) => {
-
 }
