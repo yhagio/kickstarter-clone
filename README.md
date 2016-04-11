@@ -54,30 +54,32 @@ sudo npm install -g babel-cli
 - [X] Initial Setup
 - [X] Projects - User can create projects, form, save into db (Basic)
 - [X] Projects - Create project (Edge case * Checking user inputs)
-- [ ] Projects - Create Rewards, Display Rewards Page
 - [X] Projects - List projects, project page (Basic)
-- [ ] Projects - Fetch project list with limit & skip (Scale)
-
+- [X] Projects - Better Date/Time picker UI
 - [X] Authentication - User Singup (Check user inputs)
 - [X] Authentication - User Login / Logout
 - [X] Authentication - User Forgot password / Issue new password
-- [ ] Authentication - User can update profile
-- [ ] Authentication - User can delete account
-
-- [X] Payment - Verify user's funding account
-- [ ] Payment - User can back projects (Payment, Select rewards)
-- [ ] Payment - User can update profile
-
+- [X] Authentication - User can update profile (Name, Email, Bio, Password)
 - [X] Email - Mailgun Integration (Forgot password)
-- [ ] Email - Mailgun Integration (After back a project)
-- [ ] Email - Notification
+- [X] Payment - Verify user's funding account
 
 - [ ] Social - User can comment (Disqus-like)
 - [ ] Social - User can share (Twitter, Facebook, Email)
+
+- [ ] Projects - Search with Elasticsearch (Bonsai)
+- [ ] Projects - Fetch project list with limit & skip (Scale)
+- [ ] Projects - Create Rewards, Display Rewards Page
+- [ ] Payment - User can back projects (Select rewards)
+- [ ] Email - Mailgun Integration (After back a project)
+
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
-- [X] Projects - Better Date/Time picker UI
+- [ ] Email - Notification
 - [ ] PerfMatters - Compile, faster insight speed
+
+Consider:
+- [ ] Authentication - User can delete account
+- [ ] Stripe / Payment account update (Credit Card info)
 
 ### Deployment
 
