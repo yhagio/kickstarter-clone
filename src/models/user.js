@@ -35,11 +35,11 @@ const userSchema = new Mongoose.Schema({
     type: String
   },
 
-  picture: {
+  photo: {
     type: String
   },
 
-  biography: {
+  bio: {
     type: String
   },
 

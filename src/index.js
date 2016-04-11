@@ -3,7 +3,14 @@ const app = express();
 import path from 'path';
 import formidable from 'formidable';
 import fs from 'fs';
+import cloudinary from 'cloudinary';
 import mongoose from 'mongoose';
+
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUD_API,
+  api_secret: process.env.CLOUD_SECRET
+});
 
 mongoose.connect(process.env.MONGOLAB_URI /* || mongoConfig.db */, {}, (err)=> {
   if (err) {

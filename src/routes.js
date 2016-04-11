@@ -61,14 +61,31 @@ export default (app) => {
     .get((req, res) => res.render('projects/project-create'))
     .post(projectHandler.postProjectCreate);
 
+  // Prpfile
   app.route('/profile')
     .all(isAuthenticated)
     .get(profileHandler.getProfile);
 
+  // Profile Update
   app.route('/profile/edit')
     .all(isAuthenticated)
-    .get(profileHandler.getProfile)
+    .get(profileHandler.getProfile);
+
+  app.route('/update-profile')
+    .all(isAuthenticated)
     .post(profileHandler.updateProfile);
+
+  app.route('/update-profile-photo')
+    .all(isAuthenticated)
+    .post(profileHandler.updateProfilePhoto);
+
+  app.route('/update-profile-email')
+    .all(isAuthenticated)
+    .post(profileHandler.updateProfileEmail);
+
+  app.route('/update-profile-password')
+    .all(isAuthenticated)
+    .post(profileHandler.updateProfilePassword);
 
   // Stripe Connect - Custom Option Way 
   app.route('/authorize')

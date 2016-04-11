@@ -1,7 +1,7 @@
-import path from 'path';
-import formidable from 'formidable';
-import fs from 'fs';
+// import path from 'path';
+// import fs from 'fs';
 import cloudinary from 'cloudinary';
+import formidable from 'formidable';
 import Project from '../models/project';
 import { getDayTilEnd, getFundingPercentage, validateStringLength } from '../helpers/helpers';
 import { 
@@ -11,11 +11,11 @@ import {
   checkLocation
 } from '../helpers/validations';
 
-cloudinary.config({
-  cloud_name: process.env.CLOUD_NAME,
-  api_key: process.env.CLOUD_API,
-  api_secret: process.env.CLOUD_SECRET
-});
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.CLOUD_API,
+//   api_secret: process.env.CLOUD_SECRET
+// });
 
 const projectHandler = {
   getProjectList(req, res) {
@@ -83,8 +83,6 @@ const projectHandler = {
     // parse the incoming request containing the form data
     form.parse(req, (err, fields, files) => {
 
-      console.log('fields: ', fields);
-
       let endingDate = new Date(fields.funding_end_date);
       let deliveryDate = new Date(fields.estimated_delivery);
 
@@ -134,8 +132,6 @@ const projectHandler = {
       if (files.cover_photo.size === 0) {
         errors.push('Cover photo is missing!');
       }
-
-      console.log('Errors: ', errors);
       
       // Final check
       if (errors.length > 0) {
@@ -143,42 +139,34 @@ const projectHandler = {
         return res.redirect('/create-project');
       }
 
-      // if (files.cover_photo.size > 0) {
-        cloudinary.uploader.upload(files.cover_photo.path, (data) => {
+      cloudinary.uploader.upload(files.cover_photo.path, (data) => {
 
-          let newProject = new Project({
-            createdBy: req.user,
-            project_name: fields.project_name,
-            short_description: fields.short_description,
-            long_description: fields.long_description,
-            funding_goal: fields.funding_goal,
-            funding_end_date: endingDate,
-            file_path: data.secure_url,
-            estimated_delivery: deliveryDate,
-            location: fields.location
-          });
-
-          // Save in Database
-          newProject.save((err, result) => {
-            if (err) {
-              // console.log('save err: ', err);
-              req.flash('danger', 'Something went wrong, project creation failed.');
-              return res.redirect('/create-project');
-
-            } else {
-              // console.log('saved! ', result);
-              req.flash('success','Project created!');
-              return res.redirect('/projects');
-            }
-          });
+        let newProject = new Project({
+          createdBy: req.user,
+          project_name: fields.project_name,
+          short_description: fields.short_description,
+          long_description: fields.long_description,
+          funding_goal: fields.funding_goal,
+          funding_end_date: endingDate,
+          file_path: data.secure_url,
+          estimated_delivery: deliveryDate,
+          location: fields.location
         });
 
-      // } 
-      // else {
+        // Save in Database
+        newProject.save((err, result) => {
+          if (err) {
+            // console.log('save err: ', err);
+            req.flash('danger', 'Something went wrong, project creation failed.');
+            return res.redirect('/create-project');
 
-      //   req.flash('danger', 'Cover photo is missing!');
-      //   return res.redirect('/create-project');
-      // }
+          } else {
+            // console.log('saved! ', result);
+            req.flash('success','Project created!');
+            return res.redirect('/projects');
+          }
+        });
+      });
 
     });
 
@@ -190,6 +178,7 @@ const projectHandler = {
     });
 
   }
+
 }
 
 export default projectHandler;

@@ -11,7 +11,6 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import flash from 'connect-flash';
 import passport from 'passport';
-// import { mongoConfig } from './config';
 
 export default (app) => {
   app.set('views', path.join(__dirname, '../views'));
@@ -24,10 +23,10 @@ export default (app) => {
   app.use(cookieParser());
 
   app.use(session({
-    'secret': process.env.SESSION_SECRET, // || mongoConfig.secretKey,
+    'secret': process.env.SESSION_SECRET,
     'cookie': {'maxAge': 1209600000},
     'store': new MongoStore({
-      url: process.env.MONGOLAB_URI, // || mongoConfig.db,
+      url: process.env.MONGOLAB_URI,
       autoReconnect: true
     }),
     'resave': true,
@@ -56,17 +55,11 @@ export default (app) => {
 
   // Custom flash middleware
   app.use(function(req, res, next){
-    
-    
     // if there's a flash message in the session request, make it available in the response, then delete it
     if (req.session.flash) {
-      console.log('req.session.flash ', req.session.flash);
       res.locals.sessionFlashKey = Object.keys(req.session.flash)[0];
       res.locals.sessionFlashArray = req.session.flash[Object.keys(req.session.flash)];
     }
-    console.log('res.locals.sessionFlashKey ', res.locals.sessionFlashKey);
-    console.log('res.locals.sessionFlashArray ', res.locals.sessionFlashArray);
-
     res.locals.sessionFlash = req.session.flash;
     delete req.session.flash;
     next();

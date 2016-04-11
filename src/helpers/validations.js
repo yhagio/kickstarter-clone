@@ -156,3 +156,21 @@ export const checkLocation = (location) => {
 
   return null;
 }
+
+// check if the string exceeds the limit 
+// can be empty
+export const checkStrLength = (text, limit, subject) => {
+  let errorMessage = '';
+  if (text.trim().length > limit) {
+    errorMessage = `${subject} cannot be longer then ${limit} characters.`;
+  } else {
+    errorMessage = null;
+  }
+  return errorMessage;
+}
+
+// check website
+// can be empty
+export const checkWebsite = (website) => {
+
+}

@@ -1,3 +1,5 @@
+import crypto from 'crypto';
+
 // Check if user is logged in
 export function isLoggedIn(req, res, next){
   if (!req.isAuthenticated()) {
@@ -71,4 +73,9 @@ export function validateStringLength(text, limit, subject) {
     errorMessage = null;
   }
   return errorMessage;
+}
+
+export function getGravatarURL(email, size=200) {
+  const md5 = crypto.createHash('md5').update(email).digest('hex');
+  return 'https://gravatar.com/avatar/' + md5 + '?s=' + size + '&d=retro';
 }

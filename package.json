@@ -23,6 +23,7 @@
     "compression": "^1.6.1",
     "connect-mongo": "^1.1.0",
     "cookie-parser": "^1.4.1",
+    "crypto": "0.0.3",
     "express": "^4.13.4",
     "express-flash": "0.0.2",
     "express-handlebars": "^3.0.0",

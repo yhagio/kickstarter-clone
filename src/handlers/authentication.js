@@ -4,6 +4,7 @@ import { isAuthenticated } from '../helpers/passport-config';
 import User from '../models/user';
 import qs from 'querystring';
 import request from 'request';
+import { getGravatarURL } from '../helpers/helpers';
 import { 
   checkName,
   checkEmail,
@@ -57,7 +58,8 @@ const authHandler = {
           let userObj = new User({
             name: req.body.signupName,
             email: req.body.signupEmail,
-            password: req.body.signupPassword
+            password: req.body.signupPassword,
+            photo: getGravatarURL(req.body.signupEmail)
           });
 
           // Check if user already exists

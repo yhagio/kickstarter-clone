@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="max-width: 600px">
   
   <form action="/update-profile" method="POST" class="panel panel-primary" style="padding: 0 15px">
     <div class="form-group">
@@ -28,33 +28,35 @@
     <div class="form-group">
       <label class="control-label" for="bio">Biography</label>
       <textarea
-        class="form-control"
         id="bio"
+        class="form-control"
         name="bio"
         rows="5"
         maxlength="300"
-        placeholder="Max 300 words"></textarea>
+        placeholder="Max 300 words">{{ user.bio }}</textarea>
     </div>
 
     <div class="form-group">
-      <label class="control-label" for="profile-website">Website</label>
+      <label class="control-label" for="profileWebsite">Website</label>
       <input
-        id="profile-website"
-        name="profile-website"
+        id="profileWebsite"
+        class="form-control"
+        name="profileWebsite"
         type="text"
         maxlength="120"
-        class="form-control"
+        value="{{ user.website }}"
         placeholder="Your website or blog URL" />
     </div>
 
     <div class="form-group">
-      <label class="control-label" for="profile-location">Location</label>
+      <label class="control-label" for="profileLocation">Location</label>
       <input
-        id="profile-location"
-        name="profile-location"
+        id="profileLocation"
+        class="form-control"
+        name="profileLocation"
         type="text"
         maxlength="40"
-        class="form-control"
+        value="{{ user.location }}"
         placeholder="City, Country" />
     </div>
 
@@ -65,9 +67,35 @@
 
   <hr />
 
+  <form action="/update-profile-photo" method="POST" class="panel panel-primary" style="padding: 0 15px" enctype="multipart/form-data">
+    <div class="form-group">
+      <h2>Upload Profile Photo</h2>
+    </div>
+
+    <div class="form-group">
+      <label for="profilePhoto" class="control-label">User Photo</label>
+      <div class="">
+        <input
+          id="profilePhoto"
+          class="form-control"
+          type="file"
+          name="profilePhoto" />
+      </div>
+      <span class="form-note">If you click "CHANGE PHOTO" without selecting a photo, reset the user photo to Gravatar.</span>
+    </div>
+
+    <div class="form-group">
+      <button id="uploadPhoto" type="submit" class="btn btn-info btn-block pledge-button">CHANGE PHOTO</button>
+    </div>
+    <hr />
+
+  </form>
+
+  <hr />
+
   <form action="/update-profile-email" method="POST" class="panel panel-primary" style="padding: 0 15px">
     <div class="form-group">
-      <h2>Update Eamil</h2>
+      <h2>Update Email</h2>
     </div>
     
     <div id="profile-email-errors-box" class="form-group profile-errors">
