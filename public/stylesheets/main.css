@@ -46,8 +46,7 @@ nav.navbar.navbar-default {
 }
 
 /* Errors Form */
-.signup-errors,
-.project-errors {
+.form-errors {
   background: rgba(240,0,0,0.48);
   font-weight: bold;
   border-radius: 10px;

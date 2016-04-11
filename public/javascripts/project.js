@@ -1,30 +1,30 @@
 'use strict';
 
-function checkStrLength(e, subject, limit, element_id) {
-  var errorMsg = "";
-  if (!document.getElementById(element_id).value) {
-    return subject + ' required';
-  }
-  var data = document.getElementById(element_id).value.trim();
+// function checkStrLength(e, subject, limit, element_id) {
+//   var errorMsg = "";
+//   if (!document.getElementById(element_id).value) {
+//     return subject + ' required';
+//   }
+//   var data = document.getElementById(element_id).value.trim();
   
 
-  if(data.length < 1) {
-    errorMsg += subject + ' required';
-  }
+//   if(data.length < 1) {
+//     errorMsg += subject + ' required';
+//   }
 
-  if(data.length > limit){
-    errorMsg += subject + ' should be shorter than ' + limit;
-  }
+//   if(data.length > limit){
+//     errorMsg += subject + ' should be shorter than ' + limit;
+//   }
 
-  if(errorMsg.length > 0){
-    if(e){
-      e.preventDefault();
-    }
+//   if(errorMsg.length > 0){
+//     if(e){
+//       e.preventDefault();
+//     }
 
-    return errorMsg;
-  }
-  return null;
-}
+//     return errorMsg;
+//   }
+//   return null;
+// }
 
 function checkCoverPhoto(e) {
   var data = document.getElementById('cover_photo').value;

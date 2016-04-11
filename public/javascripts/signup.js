@@ -1,118 +1,5 @@
 'use strict';
 
-// Check Name
-function checkName(e){
-  var name = document.getElementById('signupName').value.trim();
-  var errorMsg = "";
-
-  if(name.length < 1) {
-    errorMsg += 'Name required';
-  }
-
-  if(name.length > 30){
-    errorMsg += 'Name should be shorter than 30';
-  }
-
-  if(errorMsg.length > 0){
-    if(e){
-      e.preventDefault();
-    }
-
-    return errorMsg;
-  }
-  return null;
-}
-
-// Validate Email
-function checkEmail(e){
-  var email = document.getElementById('signupEmail').value.trim();
-  var errorMsg = "";
-
-  if (!email.match(/^\S+@\S+\.\S+$/)) {
-    errorMsg += "Email must be in valid format";
-  }
-
-  if (errorMsg.length > 0) {
-    if(e){
-      e.preventDefault();
-    }
-    return errorMsg;
-  }
-  return null;
-}
-
-// validate email confirmation
-function checkEmailAgain(e) {
-  var errorMsg = "";
-  var email = document.getElementById('signupEmail').value.trim();
-  var emailAgain = document.getElementById('signupEmailagain').value.trim();
-
-  if (email !== emailAgain) {
-    errorMsg = "Email confirmation doesn't match Email";
-  }
-  
-  if (errorMsg.length > 0) {
-    if(e){
-      e.preventDefault();
-    }
-    return errorMsg;
-  }
-  return null;
-}
-
-// Check Password
-function checkPassword(e) {
-  var password = document.getElementById('signupPassword').value.trim();
-
-  var errors = [];
-
-  if (password.length > 30) {
-    errors.push("Password must be less than 31 chars");
-  }
-
-  if (password.length < 8) {
-    errors.push("Password must be longer than 7 chars");
-  }
-
-  if (!password.match(/\d/g)) {
-    errors.push("Password needs a number");
-  }
-
-  if (!password.match(/[a-z]/g)) {
-    errors.push("Password needs a lowercase letter");
-  }
-
-  if (!password.match(/[A-Z]/g)) {
-    errors.push("Password needs an uppercase letter");
-  }
-
-  if (errors.length > 0) {
-    if(e){
-      e.preventDefault();
-    }
-    return errors;
-  }
-  return null;
-}
-
-function checkPasswordAgain(e) {
-  var errorMsg = "";
-  var password = document.getElementById('signupPassword').value.trim();
-  var passwordAgain = document.getElementById('signupPasswordagain').value.trim();
-
-  if (password !== passwordAgain) {
-    errorMsg = "Password confirmation doesn't match Password";
-  }
-  
-  if (errorMsg.length > 0) {
-    if(e){
-      e.preventDefault();
-    }
-    return errorMsg;
-  }
-  return null;
-}
-
 if (window.location.pathname === '/signup') {
 
   document.getElementById('signup-form').addEventListener('submit', function(e) {
@@ -121,11 +8,11 @@ if (window.location.pathname === '/signup') {
 
     var errors = [];
 
-    var checkNameResult = checkName(e);
-    var checkEmailResult = checkEmail(e);
-    var checkEmailAgainResult = checkEmailAgain(e);
-    var checkPasswordResult = checkPassword(e);
-    var checkPasswordAgainResult = checkPasswordAgain(e);
+    var checkNameResult = checkStrLength(e, 'Name', 50, 'signupName', true);
+    var checkEmailResult = checkEmail(e, 'signupEmail');
+    var checkEmailAgainResult = checkEmailAgain(e, 'signupEmail', 'signupEmailagain');
+    var checkPasswordResult = checkPassword(e, 'signupPassword');
+    var checkPasswordAgainResult = checkPasswordAgain(e, 'signupPassword', 'signupPasswordagain');
 
     // Gather all the errors
     if (checkNameResult !== null) {

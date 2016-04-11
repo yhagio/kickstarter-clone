@@ -1,11 +1,11 @@
 <div class="container" style="max-width: 600px">
   
-  <form action="/update-profile" method="POST" class="panel panel-primary" style="padding: 0 15px">
+  <form id="profileUpdateForm" action="/update-profile" method="POST" class="panel panel-primary" style="padding: 0 15px">
     <div class="form-group">
       <h2>Update Profile</h2>
     </div>
     
-    <div id="profile-errors-box" class="form-group profile-errors">
+    <div id="profile-errors-box" class="form-group form-errors">
       <ul id="profile-errors-list">
 
       </ul>
@@ -93,12 +93,12 @@
 
   <hr />
 
-  <form action="/update-profile-email" method="POST" class="panel panel-primary" style="padding: 0 15px">
+  <form id="emailUpdateForm" action="/update-profile-email" method="POST" class="panel panel-primary" style="padding: 0 15px">
     <div class="form-group">
       <h2>Update Email</h2>
     </div>
     
-    <div id="profile-email-errors-box" class="form-group profile-errors">
+    <div id="profile-email-errors-box" class="form-group form-errors">
       <ul id="profile-email-errors-list">
 
       </ul>
@@ -138,12 +138,12 @@
 
   <hr />
 
-  <form action="/update-profile-password" method="POST" class="panel panel-primary" style="padding: 0 15px">
+  <form id="passwordUpdateForm" action="/update-profile-password" method="POST" class="panel panel-primary" style="padding: 0 15px">
     <div class="form-group">
       <h2>Update Password</h2>
     </div>
     
-    <div id="profile-password-errors-box" class="form-group profile-errors">
+    <div id="profile-password-errors-box" class="form-group form-errors">
       <ul id="profile-password-errors-list">
 
       </ul>
