@@ -67,12 +67,16 @@ sudo npm install -g babel-cli
 
 - [ ] Social - User can share (Twitter, Facebook, Email)
 - [ ] Profile - Public accessible profile page
+- [ ] Category - Category page with list
 
 - [ ] Projects - Search with Elasticsearch (Bonsai)
-- [ ] Projects - Fetch project list with limit & skip (Scale)
 - [ ] Projects - Create Rewards, Display Rewards Page
 - [ ] Payment - User can back projects (Select rewards)
 - [ ] Email - Mailgun Integration (After back a project)
+
+- [ ] Pagination - Fetch project list with limit & skip
+- [ ] Pagination - Fetch comments list with limit & skip
+- [ ] Pagination - Fetch project list at category page with limit & skip
 
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
