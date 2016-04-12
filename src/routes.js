@@ -62,7 +62,11 @@ export default (app) => {
     .get((req, res) => res.render('projects/project-create'))
     .post(projectHandler.postProjectCreate);
 
-  // Prpfile
+  // Public Profile Page
+  app.route('/users/:id')
+    .get(profileHandler.getPublicProfile);
+
+  // Profile
   app.route('/profile')
     .all(isAuthenticated)
     .get(profileHandler.getProfile);
@@ -116,5 +120,8 @@ export default (app) => {
     .all(isAuthenticated)
     .get(projectHandler.getProjectRewardsPage)
     .post(paymentHandler.backProject);    
-    
+  
+  // Display 404 page when user tries to visit undefined routes
+  app.route('*')
+    .get((req, res) => res.render('404'));
 }

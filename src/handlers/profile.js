@@ -15,6 +15,24 @@ import {
 } from '../helpers/validations';
 
 const profileHandler = {
+  getPublicProfile(req, res) {
+    const userId = req.params.id;
+    User.findById(userId, (err, user) => {
+      if (err) {
+        req.flash('danger', 'Could not find the user. Try again.');
+        return res.redirect('/');
+      }
+      console.log('Public User: ', user)
+
+      return res.render(
+        'profile/public-profile', {
+          user: user
+        }
+      );
+      
+    });
+  },
+
   getProfile(req, res) {
     User.findById(req.user._id, (err, user) => {
       if (err) {

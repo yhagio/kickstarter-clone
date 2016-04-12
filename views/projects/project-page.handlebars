@@ -2,7 +2,11 @@
   <div class="col-sm-12" style="border: 0px solid #F00">
     <div class="panel">
       <h1 class="text-center">{{ project.project_name }}</h1>
-      <div class="text-center"> by <strong>{{ project.createdBy.name }}</strong></div>
+      <div class="text-center"> by 
+        <strong>
+          <a href="/users/{{project.createdBy.id}}">{{ project.createdBy.name }}</a>
+        </strong>
+      </div>
     </div>
   </div>
 </div>

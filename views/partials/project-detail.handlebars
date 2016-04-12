@@ -6,7 +6,8 @@
         <img class="img-responsive center-block img-thumbnail" src="{{ this.file_path }}">
       </a>
       <strong>
-        <a href="/projects/{{ this.id }}">{{ this.project_name }}</a> by {{ this.createdBy.name}}
+        <a href="/projects/{{ this.id }}">{{ this.project_name }}</a> by 
+        <a href="/users/{{ this.createdBy.id }}">{{ this.createdBy.name }}</a>
       </strong>
       </br/>
       <span>{{ this.short_description }}</span>
