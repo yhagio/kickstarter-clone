@@ -42,16 +42,66 @@ const projectHandler = {
   },
 
   getProjectPage(req, res) {
-    const populateQuery = [{path: 'createdBy', select: 'name'}, {path: 'comments', populate: {path: 'createdBy'}}]
+    const populateQuery = [
+      {path: 'createdBy', select: 'name'},
+      {path: 'comments', populate: {path: 'createdBy'} }
+    ];
+    
     Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
       }
       
+      // Have to return modified Project data because
+      // I would like to display "delete" button for each comment list
+      // if the logged in user is comment author, in order to do this,
+      // add a property "isCommentAuthor" in each comment object.
+
+      let modifiedComments = [];
+
+      project.comments.map(function(comment) {
+
+        let isCommentAuthor;
+        // Check if the comment author is current user
+        if (comment.createdBy.id === req.user.id) {
+          isCommentAuthor = true;
+        } else {
+          isCommentAuthor = false;
+        }
+
+        modifiedComments.push({
+          _id: comment._id,
+          projectId: comment.projectId,
+          body: comment.body,
+          createdAt: comment.createdAt,
+          createdBy: comment.createdBy,
+          isCommentAuthor: isCommentAuthor
+        });
+      });
+
+      let modifiedProject = {
+        _id: project._id,
+        createdBy: project.createdBy,
+        project_name: project.project_name,
+        short_description: project.short_description,
+        long_description: project.long_description,
+        funding_goal: project.funding_goal,
+        funding_end_date: project.funding_end_date,
+        file_path: project.file_path,
+        current_funding: project.current_funding,
+        estimated_delivery: project.estimated_delivery,
+        location: project.location,
+        category: project.category,
+        backers: project.backers,
+        comments: modifiedComments
+      };
+      
       return res.render(
         'projects/project-page',
-        {project: project, dayTil: getDayTilEnd(project.funding_end_date)}
+        { project: modifiedProject, 
+          dayTil: getDayTilEnd(project.funding_end_date)
+        }
       );
     });
   },

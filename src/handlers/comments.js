@@ -35,7 +35,7 @@ const commentHandler = {
         req.flash('success','Comment created!');
         return res.redirect('/projects/' + req.params.id);
       });
-      
+
     });
   },
 
@@ -43,9 +43,14 @@ const commentHandler = {
     const commentId = req.body.commentId;
     const pathname = req.body.pathname;
 
-    Comment.findOneAndRemove({_id: commentId}, (err, user) => {
+    Comment.findOneAndRemove({_id: commentId, createdBy: req.user}, (err, result) => {
       if (err) {
         req.flash('danger', 'Could not remove the comment. Try again.');
+        return res.send({redirect: pathname});
+      }
+
+      if (result === null) {
+        req.flash('danger', 'Could not remove the comment.');
         return res.send({redirect: pathname});
       }
       

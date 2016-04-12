@@ -2,6 +2,7 @@
   <h1>Comments</h1>
   <div class="">
     {{#if loggedin }}
+
     <form id="commentForm" action="/projects/{{project_id}}/comments" method="POST" class="form-inline row" role="form">
       <div class="col-sm-10 input-group">
        <textarea
@@ -17,33 +18,47 @@
         <button class="btn btn-info form-control comment-btn">Submit</button>
       </div>
     </form>
+
     {{else}}
+
       <p>Need to login to post a comment</p>
+
     {{/if}}
+
   </div>
 
   <hr />
   {{#if comments}}
+
     <ul id="commentList" class="list-group">
+
       {{#each comments}}
+        
         <li class="row list-group-item">
-          <span
-            id="{{this.id}}"
-            class="glyphicon glyphicon-remove pull-right"
-            aria-hidden="true"
-            onClick=removeComment() >
-          </span>
+          {{#if this.isCommentAuthor }}
+            <span
+              id="{{this._id}}"
+              class="glyphicon glyphicon-remove pull-right"
+              aria-hidden="true"
+              onClick=removeComment() >
+            </span>
+          {{/if}}
+
           <div class="pull-left col-sm-2">
             <img src="{{ this.createdBy.photo }}" alt="" style="width:70px; height:70px; border-radius: 50%;">
           </div>
           <div class="col-sm-10"> 
             <p>{{ this.createdBy.name }} - {{ this.createdAt }}</p>
-            <p id="{{this.id}}" contentEditable="true">{{ this.body }}</p>
+            <p>{{ this.body }}</p>
           </div>
       </li>
+
       {{/each}}
+
     </ul>
+
   {{else}}
+
     <ul class="list-group">
       <li class="row list-group-item">
         <div class="pull-left col-sm-2">
@@ -70,5 +85,6 @@
         </div>
       </li>
     </ul>
+
   {{/if}}
 </div>
