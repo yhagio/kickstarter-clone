@@ -1,5 +1,3 @@
-// import path from 'path';
-// import fs from 'fs';
 import cloudinary from 'cloudinary';
 import formidable from 'formidable';
 import Project from '../models/project';
@@ -12,16 +10,12 @@ import {
   checkLocation
 } from '../helpers/validations';
 
-// cloudinary.config({
-//   cloud_name: process.env.CLOUD_NAME,
-//   api_key: process.env.CLOUD_API,
-//   api_secret: process.env.CLOUD_SECRET
-// });
-
 const projectHandler = {
-  getProjectList(req, res) {
-    // console.log('USER: ', req.user);
+  getDiscoverPage(req, res) {
+    return res.render('projects/discover');
+  },
 
+  getProjectList(req, res) {
     Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');
@@ -231,11 +225,31 @@ const projectHandler = {
 
     // log any errors that occur
     form.on('error', (err) => {
-      // console.log('An error has occured: \n' + err);
       req.flash('danger', 'Failed to create project.');
       return res.redirect('/create-project');
     });
 
+  },
+
+  getProjectWithCategory(req, res) {
+    console.log('NAME: ', req.params.name);
+
+    Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
+      if (err) {
+        req.flash('danger', 'Something went wrong. Refresh.');
+        return res.redirect('/projects');
+      }
+
+      projects.forEach((project) => {
+        project.tilEnd = getDayTilEnd(project.funding_end_date);
+        project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
+      });
+
+      return res.render(
+        'projects/project-list',
+        {projects: projects}
+      );
+    });
   }
 
 }

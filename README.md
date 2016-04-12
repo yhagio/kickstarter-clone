@@ -64,10 +64,11 @@ sudo npm install -g babel-cli
 - [X] Payment - Verify user's funding account
 - [X] Social - User can comment
 - [X] Social - User can delete comment
+- [X] Profile - Public accessible profile page
+- [X] 404 Page (Basic)
 
-- [ ] Social - User can share (Twitter, Facebook, Email)
-- [ ] Profile - Public accessible profile page
 - [ ] Category - Category page with list
+- [ ] Social - User can share (Twitter, Facebook, Email)
 
 - [ ] Projects - Search with Elasticsearch (Bonsai)
 - [ ] Projects - Create Rewards, Display Rewards Page

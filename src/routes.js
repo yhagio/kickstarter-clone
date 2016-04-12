@@ -47,6 +47,10 @@ export default (app) => {
   app.route('/privacy')
     .get((req, res) => res.render('authentication/privacy'));
 
+  // Discover Page
+  app.route('/discover')
+    .get(projectHandler.getDiscoverPage);
+
   // Project Lit
   app.route('/projects')
     .get(projectHandler.getProjectList);
@@ -91,6 +95,10 @@ export default (app) => {
   app.route('/update-profile-password')
     .all(isAuthenticated)
     .post(profileHandler.updateProfilePassword);
+
+  // Project + Category Page
+  app.route('/categories/:name')
+    .get(projectHandler.getProjectWithCategory);
 
   // Stripe Connect - Custom Option Way 
   app.route('/authorize')
