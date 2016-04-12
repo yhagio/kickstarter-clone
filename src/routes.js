@@ -2,6 +2,7 @@ import authHandler from './handlers/authentication';
 import projectHandler from './handlers/projects';
 import paymentHandler from './handlers/payment';
 import profileHandler from './handlers/profile';
+import commentHandler from './handlers/comments';
 import { sendNewPassword } from './handlers/resetPassword';
 import { isAuthenticated } from './helpers/passport-config';
 import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
@@ -93,6 +94,10 @@ export default (app) => {
 
   app.route('/oauth/callback')
     .get(authHandler.oauthCallback);
+
+  app.route('/projects/:id/comments')
+    .all(isAuthenticated)
+    .post(commentHandler.postComment);
 
   /* >>>>>>>>> Stripe Connect - Passport Oauth way 
   // http://passportjs.org/docs/oauth

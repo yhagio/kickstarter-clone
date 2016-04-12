@@ -65,6 +65,7 @@ sudo npm install -g babel-cli
 
 - [ ] Social - User can comment (Disqus-like)
 - [ ] Social - User can share (Twitter, Facebook, Email)
+- [ ] Profile - Public accessible profile page
 
 - [ ] Projects - Search with Elasticsearch (Bonsai)
 - [ ] Projects - Fetch project list with limit & skip (Scale)
