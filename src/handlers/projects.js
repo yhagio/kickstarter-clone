@@ -4,6 +4,7 @@ import cloudinary from 'cloudinary';
 import formidable from 'formidable';
 import Project from '../models/project';
 import { getDayTilEnd, getFundingPercentage, validateStringLength } from '../helpers/helpers';
+import { prettyDate } from '../helpers/helpers';
 import { 
   checkFundingGoal,
   checkFundingEndDate,
@@ -44,7 +45,14 @@ const projectHandler = {
   getProjectPage(req, res) {
     const populateQuery = [
       {path: 'createdBy', select: 'name'},
-      {path: 'comments', populate: {path: 'createdBy'} }
+      { path: 'comments', 
+        populate: {
+          path: 'createdBy'
+        },
+        options: { 
+          sort: { 'createdAt': -1 } 
+        }
+      }
     ];
     
     Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
@@ -74,7 +82,7 @@ const projectHandler = {
           _id: comment._id,
           projectId: comment.projectId,
           body: comment.body,
-          createdAt: comment.createdAt,
+          createdAt: prettyDate(comment.createdAt),
           createdBy: comment.createdBy,
           isCommentAuthor: isCommentAuthor
         });

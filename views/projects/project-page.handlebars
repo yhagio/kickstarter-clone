@@ -2,7 +2,7 @@
   <div class="col-sm-12" style="border: 0px solid #F00">
     <div class="panel">
       <h1 class="text-center">{{ project.project_name }}</h1>
-      <div class="text-center"> by {{ project.createdBy.name }}</div>
+      <div class="text-center"> by <strong>{{ project.createdBy.name }}</strong></div>
     </div>
   </div>
 </div>
@@ -23,7 +23,7 @@
       <p class="text-center">{{ project.long_description }}</p>
     </div>
 
-    {{> comments/comments project_id=project.id comments=project.comments}}
+    {{> comments/comments project_id=project._id comments=project.comments}}
 
   </div>
   <div class="col-sm-4" style="border: 0px solid #F00">

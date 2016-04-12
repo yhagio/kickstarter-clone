@@ -143,6 +143,12 @@ li > span.glyphicon:hover {
   cursor: pointer;
 }
 
+.commentCreatedAt {
+  font-style: italic;
+  margin-left: 5px;
+  color: #a3a3a3;
+}
+
 
 /* Flash */
 /*.error {
