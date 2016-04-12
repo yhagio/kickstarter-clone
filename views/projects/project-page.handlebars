@@ -23,7 +23,7 @@
       <p class="text-center">{{ project.long_description }}</p>
     </div>
 
-    {{> comments/comments project_id=project.id }}
+    {{> comments/comments project_id=project.id comments=project.comments}}
 
   </div>
   <div class="col-sm-4" style="border: 0px solid #F00">

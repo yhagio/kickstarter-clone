@@ -42,11 +42,13 @@ const projectHandler = {
   },
 
   getProjectPage(req, res) {
-    Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
+    const populateQuery = [{path: 'createdBy', select: 'name'}, {path: 'comments', populate: {path: 'createdBy'}}]
+    Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
       }
+      console.log(project);
 
       return res.render(
         'projects/project-page',

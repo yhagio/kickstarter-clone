@@ -23,17 +23,16 @@
   </div>
 
   <hr />
-
   {{#if comments}}
     <ul class="list-group">
       {{#each comments}}
         <li class="row list-group-item">
           <div class="pull-left col-sm-2">
-            <img src="{{ comment_user_image }}" alt="" style="width:70px; height:70px; border-radius: 50%;">
+            <img src="{{ this.createdBy.photo }}" alt="" style="width:70px; height:70px; border-radius: 50%;">
           </div>
           <div class="col-sm-10"> 
-            <p>{{ comment_user }} - {{ comment.createdAt }}</p>
-            <p>{{ comment.body }}</p>
+            <p>{{ this.createdBy.name }} - {{ this.createdAt }}</p>
+            <p>{{ this.body }}</p>
           </div>
       </li>
       {{/each}}
