@@ -63,9 +63,7 @@ sudo npm install -g babel-cli
 - [X] Email - Mailgun Integration (Forgot password)
 - [X] Payment - Verify user's funding account
 - [X] Social - User can comment
-- [ ] Social - User reply to a comment
-- [ ] Social - User can delete comment
-- [ ] Social - Inline editable comment (contentEditable)
+- [X] Social - User can delete comment
 
 - [ ] Social - User can share (Twitter, Facebook, Email)
 - [ ] Profile - Public accessible profile page
@@ -83,6 +81,8 @@ sudo npm install -g babel-cli
 - [ ] PerfMatters - Compile, faster insight speed
 
 Consider:
+- [ ] Social - User reply to a comment
+- [ ] Social - Inline editable comment (contentEditable)
 - [ ] Authentication - User can delete account
 - [ ] Stripe / Payment account update (Credit Card info)
 
