@@ -2,6 +2,10 @@ html, body {
   font-family: 'Helvetica Neue', Helvetica, Arial;
 }
 
+li {
+  list-style: none;
+}
+
 .main {
   margin-top: 60px;
 }
@@ -122,6 +126,9 @@ nav.navbar.navbar-default {
   margin-left: 10px;
   font-size: 1.1em;
 }
+
+/* Comments */
+
 
 /* Flash */
 /*.error {
