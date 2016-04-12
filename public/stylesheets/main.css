@@ -139,6 +139,10 @@ nav.navbar.navbar-default {
   font-size: 1.2em;
 }
 
+li > span.glyphicon:hover {
+  cursor: pointer;
+}
+
 
 /* Flash */
 /*.error {

@@ -99,6 +99,10 @@ export default (app) => {
     .all(isAuthenticated)
     .post(commentHandler.postComment);
 
+  app.route('/delete-comment')
+    .all(isAuthenticated)
+    .post(commentHandler.deleteComment);
+
   /* >>>>>>>>> Stripe Connect - Passport Oauth way 
   // http://passportjs.org/docs/oauth
   app.route('/authorize')

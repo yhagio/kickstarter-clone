@@ -62,8 +62,11 @@ sudo npm install -g babel-cli
 - [X] Authentication - User can update profile (Name, Email, Bio, Password)
 - [X] Email - Mailgun Integration (Forgot password)
 - [X] Payment - Verify user's funding account
+- [X] Social - User can comment
+- [ ] Social - User reply to a comment
+- [ ] Social - User can delete comment
+- [ ] Social - Inline editable comment (contentEditable)
 
-- [ ] Social - User can comment (Disqus-like)
 - [ ] Social - User can share (Twitter, Facebook, Email)
 - [ ] Profile - Public accessible profile page
 
@@ -75,6 +78,7 @@ sudo npm install -g babel-cli
 
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
+- [ ] Projects - Expiration (Disable Payment)
 - [ ] Email - Notification
 - [ ] PerfMatters - Compile, faster insight speed
 

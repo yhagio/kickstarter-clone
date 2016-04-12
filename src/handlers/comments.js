@@ -4,7 +4,6 @@ import { validateStringLength } from '../helpers/helpers';
 
 const commentHandler = {
   postComment(req, res) {
-    console.log(req.params.id, req.user, req.body.commentInput);
     // Check if it has comment body
     const commentCheckResult = validateStringLength(req.body.commentInput, 300, 'Comment');
 
@@ -27,7 +26,6 @@ const commentHandler = {
       }
 
       // Connect the comment model ref to Project model
-      console.log('========\n', result);
       const update = { $addToSet: { comments: result} };
       Project.findOneAndUpdate({_id: req.params.id}, update, (error, data) => {
         if (error) {
@@ -37,9 +35,22 @@ const commentHandler = {
         req.flash('success','Comment created!');
         return res.redirect('/projects/' + req.params.id);
       });
+      
+    });
+  },
 
-      // req.flash('success','Comment created!');
-      // return res.redirect('/projects/' + req.params.id);
+  deleteComment(req, res) {
+    const commentId = req.body.commentId;
+    const pathname = req.body.pathname;
+
+    Comment.findOneAndRemove({_id: commentId}, (err, user) => {
+      if (err) {
+        req.flash('danger', 'Could not remove the comment. Try again.');
+        return res.send({redirect: pathname});
+      }
+      
+      req.flash('success','Comment removed!');
+      return res.send({redirect: pathname});
     });
   }
 };

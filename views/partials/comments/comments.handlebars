@@ -24,15 +24,21 @@
 
   <hr />
   {{#if comments}}
-    <ul class="list-group">
+    <ul id="commentList" class="list-group">
       {{#each comments}}
         <li class="row list-group-item">
+          <span
+            id="{{this.id}}"
+            class="glyphicon glyphicon-remove pull-right"
+            aria-hidden="true"
+            onClick=removeComment() >
+          </span>
           <div class="pull-left col-sm-2">
             <img src="{{ this.createdBy.photo }}" alt="" style="width:70px; height:70px; border-radius: 50%;">
           </div>
           <div class="col-sm-10"> 
             <p>{{ this.createdBy.name }} - {{ this.createdAt }}</p>
-            <p>{{ this.body }}</p>
+            <p id="{{this.id}}" contentEditable="true">{{ this.body }}</p>
           </div>
       </li>
       {{/each}}

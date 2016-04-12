@@ -48,8 +48,7 @@ const projectHandler = {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
       }
-      console.log(project);
-
+      
       return res.render(
         'projects/project-page',
         {project: project, dayTil: getDayTilEnd(project.funding_end_date)}
