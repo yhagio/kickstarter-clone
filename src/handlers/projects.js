@@ -1,20 +1,32 @@
 import cloudinary from 'cloudinary';
 import formidable from 'formidable';
 import Project from '../models/project';
+import Reward from '../models/reward';
 import { getDayTilEnd, getFundingPercentage, validateStringLength } from '../helpers/helpers';
 import { prettyDate } from '../helpers/helpers';
 import { 
   checkFundingGoal,
   checkFundingEndDate,
   checkEstimatedDelivery,
-  checkLocation
+  checkLocation,
+  checkStrLength
 } from '../helpers/validations';
 
+/***** 
+  TODO: Make sure not to over publish the data
+*****/
+
+
+
 const projectHandler = {
+  // Discover projects where use can choose a category to see
+  // the projects
   getDiscoverPage(req, res) {
     return res.render('projects/discover');
   },
 
+  // **** MAY BE REMOVED ****
+  // General project list (No category)
   getProjectList(req, res) {
     Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
       if (err) {
@@ -36,6 +48,7 @@ const projectHandler = {
     });
   },
 
+  // Individual Project Page
   getProjectPage(req, res) {
     const populateQuery = [
       {path: 'createdBy', select: 'name'},
@@ -108,9 +121,15 @@ const projectHandler = {
     });
   },
 
-  // Where user back a project
+  // Project Rewards (User can back a project)Page
+  // Display the list of rewards user can choose
   getProjectRewardsPage(req, res) {
-    Project.findOne({_id: req.params.id}).populate('createdBy', 'name').exec((err, project) => {
+    const populateQuery = [
+      { path: 'createdBy', select: 'name' },
+      { path: 'rewards' }
+    ];
+
+    Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
@@ -123,6 +142,64 @@ const projectHandler = {
     });
   },
 
+  createRewards(req, res) {
+    console.log('**** createRewards ***\n', req.body, req.params.id);
+    // Check fields
+    let errors = [];
+
+    const checkDeliveryDateResult = checkEstimatedDelivery(req.body.estimatedDelivery);
+    const checkDescResult = checkStrLength(req.body.description, 300, 'Description');
+
+    if (req.body.rewardAmount <= 0 || isNaN(req.body.rewardAmount)) {
+      errors.push('Amount should be greater then $0 and number');
+    }
+    if (checkDeliveryDateResult !== null) {
+      errors.push(checkDeliveryDateResult);
+    }
+    if (checkDescResult !== null) {
+      errors.push(checkDescResult);
+    }
+
+    if (errors.length > 0) {
+      req.flash('danger', errors);
+      return res.redirect(`/projects/${req.params.id}/rewards`);
+    }
+
+    // Save it to Reward model
+    let newReward = new Reward({
+      projectId: req.params.id,
+      creatorId: req.user.id,
+      amount: req.body.rewardAmount,
+      shippingDetails: req.body.shippingDetails,
+      estimatedDelivery: req.body.estimatedDelivery,
+      description: req.body.description,
+    });
+
+    newReward.save((err, reward) => {
+      if (err) {
+        req.flash('danger', 'Could not save the reward. Try again.');
+        return res.redirect(`/projects/${req.params.id}/rewards`);
+      }
+
+      console.log('**** Created reward: \n', reward);
+      
+      // Update the project with new rewards
+      const update = { $addToSet: { rewards: reward} };
+
+      Project.findOneAndUpdate({_id: req.params.id}, update, (error, result) => {
+        if (error) {
+          req.flash('danger', 'Something went wrong. Updating project failed.');
+          return res.redirect(`/projects/${req.params.id}/rewards`);
+        }
+        req.flash('success','Reward created!');
+        return res.redirect(`/projects/${req.params.id}/rewards`);
+      });
+
+    });
+    
+  },
+
+  // Create a project by authorized seller
   postProjectCreate(req, res) {
 
     if (!req.user) {
@@ -231,9 +308,8 @@ const projectHandler = {
 
   },
 
+  // Display the projects of a chosen category
   getProjectWithCategory(req, res) {
-    console.log('NAME: ', req.params.name);
-
     Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');

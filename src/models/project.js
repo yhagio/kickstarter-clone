@@ -58,14 +58,18 @@ const projectSchema = new Mongoose.Schema({
     required: true
   },
 
-  backers: [{
-    type: Mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+  backerUserIds: [{
+    type: String
   }],
 
   comments: [{
     type: Mongoose.Schema.Types.ObjectId,
     ref: 'Comment'
+  }],
+
+  rewards: [{
+    type: Mongoose.Schema.Types.ObjectId,
+    ref: 'Reward'
   }]
 
 });

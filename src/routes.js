@@ -123,7 +123,7 @@ export default (app) => {
     .get(authHandler.oauthCallBackPassport);
   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
   
-
+  // Project rewards
   app.route('/projects/:id/rewards')
     .all(isAuthenticated)
     .get(projectHandler.getProjectRewardsPage)
