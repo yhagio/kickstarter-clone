@@ -34,18 +34,20 @@
         data-show-faces="true">
       </div> --}}
 
-    {{!-- Your share button code --}}
+    {{!-- Share buttons --}}
     <ul class="list-inline">
+      {{!-- Facebook share button --}}
       <li>
         <div 
           class="fb-share-button" 
-          data-href="https://obscure-meadow-67002.herokuapp.com/" 
+          data-href="https://obscure-meadow-67002.herokuapp.com/{{ project._id }}" 
           data-mobile_iframe="true"
           data-layout="button_count"></div>
       </li>
+      {{!-- Twitter share button --}}
       <li style="vertical-align: top">
         <div style="display: inline">
-          <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://obscure-meadow-67002.herokuapp.com/" data-text="Awesome crowdfunding web app open sourced!" data-via="yuichihagio">Tweet</a>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://obscure-meadow-67002.herokuapp.com/projects/{{ project._id }}" data-text="{{ project.short_description }}" data-via="yuichihagio">Tweet</a>
         </div>
       </li>
     </ul>
@@ -68,7 +70,7 @@
     </div>
 
     <div class="panel">
-      <a href="/projects/{{ project.id }}/rewards" class="btn pledge-button">Back the project</a>
+      <a href="/projects/{{ project._id }}/rewards" class="btn pledge-button">Back the project</a>
     </div>
 
   </div>
