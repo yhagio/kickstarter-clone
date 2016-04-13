@@ -128,6 +128,9 @@ nav.navbar.navbar-default {
 }
 
 /* Comments */
+.round-edge {
+  border-radius: 10px;
+}
 .comment-textarea {
   border-radius: 10px;
   resize: vertical;

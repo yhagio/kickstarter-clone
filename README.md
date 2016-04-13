@@ -68,7 +68,7 @@ sudo npm install -g babel-cli
 - [X] 404 Page (Basic)
 
 - [X] Category - Category page with list
-- [ ] Social - User can share (Twitter, Facebook, Email)
+- [ ] Social - User can share (Twitter and Facebook) - Need to modify link
 
 - [ ] Projects - Search with Elasticsearch (Bonsai)
 - [ ] Projects - Create Rewards, Display Rewards Page
