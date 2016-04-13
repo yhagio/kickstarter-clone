@@ -2,6 +2,12 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta property="og:url"           content="https://obscure-meadow-67002.herokuapp.com/" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="KickstarterClone" />
+  <meta property="og:description"   content="Crowdfunding for people" />
+  <meta property="og:image"         content="http://res.cloudinary.com/dck7vqmjo/image/upload/v1459690100/sample.jpg" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" media="screen">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap-theme.min.css" media="screen">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
@@ -26,5 +32,28 @@
   <script src="/javascripts/project.js"></script>
   <script src="/javascripts/profile.js"></script>
   <script src="/javascripts/comment.js"></script>
+
+  {{!-- Load Facebook SDK for JavaScript --}}
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '560833364124033',
+        xfbml      : true,
+        version    : 'v2.6'
+      });
+    };
+
+    (function(d, s, id){
+       var js, fjs = d.getElementsByTagName(s)[0];
+       if (d.getElementById(id)) {return;}
+       js = d.createElement(s); js.id = id;
+       js.src = "//connect.facebook.net/en_US/sdk.js";
+       fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+
+  {{!-- Twitter SDK --}}
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
 </body>
 </html>

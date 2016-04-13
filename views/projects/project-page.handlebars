@@ -27,6 +27,29 @@
       <p class="text-center">{{ project.long_description }}</p>
     </div>
 
+  {{!--     <div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+      </div> --}}
+
+    {{!-- Your share button code --}}
+    <ul class="list-inline">
+      <li>
+        <div 
+          class="fb-share-button" 
+          data-href="https://obscure-meadow-67002.herokuapp.com/" 
+          data-mobile_iframe="true"
+          data-layout="button_count"></div>
+      </li>
+      <li style="vertical-align: top">
+        <div style="display: inline">
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://obscure-meadow-67002.herokuapp.com/" data-text="Awesome crowdfunding web app open sourced!" data-via="yuichihagio">Tweet</a>
+        </div>
+      </li>
+    </ul>
+
     {{> comments/comments project_id=project._id comments=project.comments}}
 
   </div>

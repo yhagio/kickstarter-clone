@@ -67,7 +67,7 @@ sudo npm install -g babel-cli
 - [X] Profile - Public accessible profile page
 - [X] 404 Page (Basic)
 
-- [ ] Category - Category page with list
+- [X] Category - Category page with list
 - [ ] Social - User can share (Twitter, Facebook, Email)
 
 - [ ] Projects - Search with Elasticsearch (Bonsai)
