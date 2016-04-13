@@ -70,8 +70,8 @@ sudo npm install -g babel-cli
 - [X] Category - Category page with list
 - [ ] Social - User can share (Twitter and Facebook) - Need to modify link
 
-- [ ] Projects - Search with Elasticsearch (Bonsai)
 - [ ] Projects - Create Rewards, Display Rewards Page
+- [ ] Projects - Search with Elasticsearch (Bonsai)
 - [ ] Payment - User can back projects (Select rewards)
 - [ ] Email - Mailgun Integration (After back a project)
 
