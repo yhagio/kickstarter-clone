@@ -105,7 +105,7 @@ const projectHandler = {
         funding_end_date: project.funding_end_date,
         file_path: project.file_path,
         current_funding: project.current_funding,
-        estimated_delivery: project.estimated_delivery,
+        // estimated_delivery: project.estimated_delivery,
         location: project.location,
         category: project.category,
         backers: project.backers,
@@ -135,20 +135,54 @@ const projectHandler = {
         return res.redirect('/');
       }
 
-      return res.render(
-        'projects/project-rewards',
-        {project: project}
-      );
+      return res.render('projects/project-rewards', {project: project});
     });
   },
 
+  // Display create reward form for authorized creator of the project
+  getRewardForm(req, res) {
+    // Check if the logged-in user is the creator
+    Project.findOne({_id: req.params.id, createdBy: req.user}, (err, project) => {
+      if (err) {
+        req.flash('danger', 'Cannot find the project.');
+        return res.redirect(`/projects/${req.params.id}`);
+      }
+      if (!project) {
+        req.flash('danger', 'Not authorized or cannot find the project.');
+        return res.redirect(`/projects/${req.params.id}`);
+      }
+      return res.render('projects/reward-create', {project: project});
+    });
+  },
+
+  getChosenRewardPage(req, res) {
+    Reward.findById(req.params.rewardid, (err, reward) => {
+      if (err) {
+        req.flash('danger', 'Cannot find the reward.');
+        return res.redirect(`/projects/${req.params.projectid}/rewards`);
+      }
+      if (!reward) {
+        req.flash('danger', 'Cannot find the project reward.');
+        return res.redirect(`/projects/${req.params.projectid}/rewards`);
+      }
+      Project.findById(req.params.projectid, (error, project) => {
+        if (error) {
+          req.flash('danger', 'Cannot find the project.');
+          return res.redirect(`/projects/${req.params.projectid}/rewards`);
+        }
+        return res.render('projects/project-pay-reward', {reward: reward, project: project}); 
+      });    
+    });
+  },
+
+  // Create rewards & Update the project as well (3 Steps)
   createRewards(req, res) {
-    console.log('**** createRewards ***\n', req.body, req.params.id);
-    // Check fields
+    // console.log('**** createRewards ***\n', req.body, req.params.id);
+    // 1. Check fields
     let errors = [];
 
     const checkDeliveryDateResult = checkEstimatedDelivery(req.body.estimatedDelivery);
-    const checkDescResult = checkStrLength(req.body.description, 300, 'Description');
+    const checkDescResult = checkStrLength(req.body.rewardDesc, 300, 'Description');
 
     if (req.body.rewardAmount <= 0 || isNaN(req.body.rewardAmount)) {
       errors.push('Amount should be greater then $0 and number');
@@ -162,37 +196,40 @@ const projectHandler = {
 
     if (errors.length > 0) {
       req.flash('danger', errors);
-      return res.redirect(`/projects/${req.params.id}/rewards`);
+      return res.redirect(`/projects/${req.params.id}/create-reward`);
     }
 
-    // Save it to Reward model
+    // 2. Save it to Reward model
     let newReward = new Reward({
       projectId: req.params.id,
       creatorId: req.user.id,
       amount: req.body.rewardAmount,
       shippingDetails: req.body.shippingDetails,
       estimatedDelivery: req.body.estimatedDelivery,
-      description: req.body.description,
+      description: req.body.rewardDesc,
     });
+
+    // console.log('*** newReward \n', newReward);
 
     newReward.save((err, reward) => {
       if (err) {
         req.flash('danger', 'Could not save the reward. Try again.');
-        return res.redirect(`/projects/${req.params.id}/rewards`);
+        return res.redirect(`/projects/${req.params.id}/create-reward`);
       }
 
-      console.log('**** Created reward: \n', reward);
+      // console.log('**** Created reward: \n', reward);
       
-      // Update the project with new rewards
+      // 3. Update the project with new rewards
       const update = { $addToSet: { rewards: reward} };
 
       Project.findOneAndUpdate({_id: req.params.id}, update, (error, result) => {
         if (error) {
           req.flash('danger', 'Something went wrong. Updating project failed.');
-          return res.redirect(`/projects/${req.params.id}/rewards`);
+          return res.redirect(`/projects/${req.params.id}/create-reward`);
         }
+        console.log('result: ', result)
         req.flash('success','Reward created!');
-        return res.redirect(`/projects/${req.params.id}/rewards`);
+        return res.redirect(`/projects/${req.params.id}/create-reward`);
       });
 
     });
@@ -229,7 +266,7 @@ const projectHandler = {
       const checkLongDescriptionResult = validateStringLength(fields.long_description, 400, 'Long Description');
       const checkFundingGoalResult = checkFundingGoal(fields.funding_goal);
       const checkFundingEndDateResult = checkFundingEndDate(endingDate);
-      const checkEstimatedDeliveryResult = checkEstimatedDelivery(deliveryDate);
+      // const checkEstimatedDeliveryResult = checkEstimatedDelivery(deliveryDate);
       const checkLocationResult = checkLocation(fields.location);
 
       // Check fields
@@ -251,9 +288,9 @@ const projectHandler = {
       if (checkFundingEndDateResult !== null) {
         errors.push(checkFundingEndDateResult);
       }
-      if (checkEstimatedDeliveryResult !== null) {
-        errors.push(checkEstimatedDeliveryResult);
-      }
+      // if (checkEstimatedDeliveryResult !== null) {
+      //   errors.push(checkEstimatedDeliveryResult);
+      // }
       // Check location
       if (checkLocationResult !== null) {
         errors.push(checkLocationResult);
@@ -279,7 +316,7 @@ const projectHandler = {
           funding_goal: fields.funding_goal,
           funding_end_date: endingDate,
           file_path: data.secure_url,
-          estimated_delivery: deliveryDate,
+          // estimated_delivery: deliveryDate,
           location: fields.location
         });
 

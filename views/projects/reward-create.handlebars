@@ -1,0 +1,81 @@
+<div class="project-form-box">
+
+  <form id="reward-form" class="form-horizontal" method="POST" action="/projects/{{ project.id }}/create-reward">
+
+    <div class="form-group">
+      <h3 style="color: #888">{{ project.project_name }}</h3>
+      <h2>Create Reward</h2>
+    </div>
+    
+    <div id="reward-errors-box" class="form-group reward-errors">
+      <ul id="reward-errors-list">
+
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label for="rewardAmount" class="col-sm-2 control-label">Amount($)</label>
+      <div class="col-sm-2">
+        <input 
+          type="number"
+          class="form-control"
+          id="rewardAmount"
+          name="rewardAmount"
+          min="0"
+          placeholder="$"
+          required />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="shippingDetails" class="col-sm-2 control-label">Shipping Details</label>
+      <div class="col-sm-10">
+        <select class="form-control" name="shippingDetails">
+          <option value="none">No Shipping Involved</option>
+          <option value="restricted">Only ships to certain countries</option>
+          <option value="unrestricted">Ships anywhere in the world</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="estimatedDelivery" class="col-sm-2 control-label">Estimated Delivery</label>
+
+      <div class='col-sm-3 input-group date' id='datetimepicker2' style="padding-left: 15px">
+        <input
+          type='text'
+          class="form-control"
+          id="estimatedDelivery"
+          name="estimatedDelivery"
+          required />
+        <span class="input-group-addon">
+          <span class="glyphicon glyphicon-calendar"></span>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="rewardDesc" class="col-sm-2 control-label">Description</label>
+      <div class="col-sm-10">
+        <textarea
+          class="form-control"
+          id="rewardDesc"
+          name="rewardDesc"
+          rows="10"
+          maxlength="400"
+          placeholder="Max 400 words"
+          required ></textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn pledge-button">CREATE</button>
+      </div>
+    </div>
+  </form>
+  
+  <hr />
+  
+  <a href="/projects/{{ project.id }}/rewards" class="btn pledge-button">Rewards Page</a>
+</div>

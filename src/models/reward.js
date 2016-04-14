@@ -1,10 +1,10 @@
 import Mongoose from 'mongoose';
 
 const rewardsSchema = new Mongoose.Schema({
-  projectId: {
-    type: String,
-    required: true
-  },
+  // projectId: {
+  //   type: String,
+  //   required: true
+  // },
 
   creatorId: {
     type: String,

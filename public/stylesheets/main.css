@@ -99,7 +99,7 @@ nav.navbar.navbar-default {
 /* Project form */
 .project-form-box {
   max-width: 600px;
-  margin: auto;
+  margin: 10px auto 20px;
 }
 
 /* Stripe Form Button */

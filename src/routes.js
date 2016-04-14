@@ -122,12 +122,25 @@ export default (app) => {
   app.route('/oauth/callback')
     .get(authHandler.oauthCallBackPassport);
   <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
-  
+
+  // Create Reward (Only creator can do it)
+  app.route('/projects/:id/create-reward')
+    .all(isAuthenticated)
+    .all(connectOAuthed)
+    .get(projectHandler.getRewardForm)
+    .post(projectHandler.createRewards);
+
   // Project rewards
   app.route('/projects/:id/rewards')
     .all(isAuthenticated)
-    .get(projectHandler.getProjectRewardsPage)
-    .post(paymentHandler.backProject);    
+    .get(projectHandler.getProjectRewardsPage);
+    // .post(paymentHandler.backProject);  
+
+  // Pay for chosen reward for the project
+  app.route('/projects/:projectid/rewards/:rewardid')
+    .all(isAuthenticated)
+    .get(projectHandler.getChosenRewardPage)
+    .post(paymentHandler.backProject);   
   
   // Display 404 page when user tries to visit undefined routes
   app.route('*')

@@ -43,10 +43,10 @@ const projectSchema = new Mongoose.Schema({
     'default': 0
   },
 
-  'estimated_delivery': {
-    'type': Date,
-    'required': true
-  },
+  // 'estimated_delivery': {
+  //   'type': Date,
+  //   'required': true
+  // },
 
   location: {
     type: String,
