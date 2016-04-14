@@ -7,7 +7,8 @@
         <p class=""> by {{ project.createdBy.name }}</p>
         <h3>Choose your reward</h3>
       </div>
-
+      
+      {{#if project.rewards}}
       <ul class="list-group">
         {{#each project.rewards}}
           <a href="/projects/{{ ../project.id }}/rewards/{{ this.id }}" class="list-group-item">
@@ -17,6 +18,17 @@
           </a>
         {{/each}}
       </ul>
+      {{else}}
+        <div class="text-center">
+          <p>No rewards are created yet.</p>
+        <div>
+      {{/if}}
+
+      {{#if isCreator }}
+        <div class="text-center">
+          <a href="/projects/{{project.id}}/create-reward" class="">Create Reward</a>
+        </div>
+      {{/if}}
 
 {{!--
       <div class="panel-body">

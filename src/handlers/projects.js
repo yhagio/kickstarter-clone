@@ -139,8 +139,12 @@ const projectHandler = {
       project.rewards.forEach((reward) => {
         reward.numBackers = reward.backers.length;
       });
-      
-      return res.render('projects/project-rewards', {project: project});
+
+      let isCreator = false;
+      if(req.user.id == project.createdBy._id) {
+        isCreator = true;
+      }
+      return res.render('projects/project-rewards', {project: project, isCreator: isCreator});
     });
   },
 
