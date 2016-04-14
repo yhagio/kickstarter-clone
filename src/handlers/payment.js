@@ -1,5 +1,6 @@
 import User from '../models/user';
 import Project from '../models/project';
+import Reward from '../models/reward';
 
 var stripe = require('stripe')(process.env.STRIPE_API_KEY);
 
@@ -7,7 +8,7 @@ const paymentHandler = {
   // User needs to login to the platform to be able to back a project
   backProject(req, res) {
 
-    console.log('***Back Project\n', req.body);
+    // console.log('***Back Project\n', req.body);
 
     // 1. Need to find "connected stripe account id" of the project creator
     // Retrieve the id by populating 'user.stripe' fields
@@ -29,18 +30,43 @@ const paymentHandler = {
         currency: 'cad',
         source: req.body.stripeToken,
         description: req.body.chosenDescription,
-        application_fee: 100
+        application_fee: req.body.chosenAmount * 0.1 * 100 // 7%
       }, {
         stripe_account: project.createdBy.stripe.stripe_user_id
       }, function(error, charge) {
         if (error) {
 
-          console.log('Stripe Charge Failed: \n', error);
+          // console.log('Stripe Charge Failed: \n', error);
           req.flash('danger', error.message);
           return res.redirect(`/projects/${req.params.projectid}/rewards`);
         }
 
-        console.log('Charge Complete: \n', charge);
+        if (!charge) {
+          req.flash('danger', 'Charge did not go through.');
+          return res.redirect(`/projects/${req.params.projectid}/rewards`);
+        }
+
+        // Update reward
+        const rewardUpdate = {$addToSet : { backers: req.user }};
+        Reward.findOneAndUpdate({_id: req.params.rewardid}, rewardUpdate, (rewardErr, result1) => {
+          if (rewardErr) {
+            req.flash('danger', 'Could not update reward backers.');
+            return res.redirect(`/projects/${req.params.projectid}/rewards`);
+          }
+          console.log('*** Reward Update \n', result1);
+        });
+        
+        // Update project
+        const projectUpdate = {$addToSet: { backerUserIds: req.user.id }};
+        Project.findOneAndUpdate({_id: req.params.projectid}, projectUpdate, (projectErr, result2) => {
+          if (projectErr) {
+            req.flash('danger', 'Could not update reward backers.');
+            return res.redirect(`/projects/${req.params.projectid}/rewards`);
+          }
+          console.log('*** Project Update \n', result2);
+        });
+
+        // console.log('Charge Complete: \n', charge);
         req.flash('success', 'Successfully backed the project!');
         return res.redirect(`/projects/${req.params.projectid}`);
       });

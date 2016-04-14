@@ -108,14 +108,15 @@ const projectHandler = {
         // estimated_delivery: project.estimated_delivery,
         location: project.location,
         category: project.category,
-        backers: project.backers,
+        backerUserIds: project.backerUserIds,
         comments: modifiedComments
       };
       
       return res.render(
         'projects/project-page',
         { project: modifiedProject, 
-          dayTil: getDayTilEnd(project.funding_end_date)
+          dayTil: getDayTilEnd(project.funding_end_date),
+          numBackers: project.backerUserIds.length
         }
       );
     });
@@ -135,6 +136,10 @@ const projectHandler = {
         return res.redirect('/');
       }
 
+      project.rewards.forEach((reward) => {
+        reward.numBackers = reward.backers.length;
+      });
+      
       return res.render('projects/project-rewards', {project: project});
     });
   },
@@ -227,7 +232,7 @@ const projectHandler = {
           req.flash('danger', 'Something went wrong. Updating project failed.');
           return res.redirect(`/projects/${req.params.id}/create-reward`);
         }
-        console.log('result: ', result)
+        // console.log('result: ', result)
         req.flash('success','Reward created!');
         return res.redirect(`/projects/${req.params.id}/create-reward`);
       });
@@ -302,6 +307,7 @@ const projectHandler = {
       
       // Final check
       if (errors.length > 0) {
+        console.log('Errors:', errors);
         req.flash('danger', errors);
         return res.redirect('/create-project');
       }
@@ -313,6 +319,7 @@ const projectHandler = {
           project_name: fields.project_name,
           short_description: fields.short_description,
           long_description: fields.long_description,
+          category: fields.category,
           funding_goal: fields.funding_goal,
           funding_end_date: endingDate,
           file_path: data.secure_url,
@@ -323,12 +330,12 @@ const projectHandler = {
         // Save in Database
         newProject.save((err, result) => {
           if (err) {
-            // console.log('save err: ', err);
+            console.log('save err: ', err);
             req.flash('danger', 'Something went wrong, project creation failed.');
             return res.redirect('/create-project');
 
           } else {
-            // console.log('saved! ', result);
+            console.log('saved! ', result);
             req.flash('success','Project created!');
             return res.redirect('/projects');
           }

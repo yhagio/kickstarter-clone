@@ -12,6 +12,43 @@ $(function () {
   $('#datetimepicker2').datetimepicker();
 });
 
+
+function getDayTilEnd(endDate) {
+  var timeDiff = new Date(endDate).getTime() - new Date().getTime();
+  if (timeDiff <= 0) {
+    return '0 seconds';
+  }
+  var day = timeDiff / (1000 * 3600 * 24);
+  if (day >= 2) {
+    return parseInt(day) + ' days';
+  }
+
+  if (day < 1) { // in hours
+    var hours = timeDiff / (60 * 60 * 1000);
+    if (hours < 1) {
+      return parseInt(timeDiff / (60 * 1000)) + ' minutes';
+    }
+    if (hours >= 2) {
+      return parseInt(hours) + ' hours';
+    }
+    return '1 hour';
+  }
+  return '1 day';
+}
+
+// Prettify the estimated delivery date
+$('.project-end-date').each(function(i, el){ 
+  console.log(el.innerHTML) 
+  el.innerHTML = getDayTilEnd(el.innerHTML) + '<br /> left';
+});
+
+var dateList = $('.date-item'); 
+(function(){
+  $('.date-item').each(function(index, elem) {
+    elem.innerHTML = moment(new Date(elem.innerHTML)).format("MMM Do, YYYY");
+  });
+})();
+
 // Reset innerHTML value of an element
 function resetInnerHTML(elementID){
   return document.getElementById(elementID).innerHTML = "";

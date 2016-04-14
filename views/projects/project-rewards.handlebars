@@ -1,20 +1,20 @@
 <div class="sub-container">
   <div class="row">
     <div class="panel panel-default">
-
-      <h1 class="text-center">{{ project.project_name }}</h1>
-      <div class="text-center"> by {{ project.createdBy.name }}</div>
       
-      <h3>Choose your reward</h3>
+      <div class="text-center">
+        <h1 class="">{{ project.project_name }}</h1>
+        <p class=""> by {{ project.createdBy.name }}</p>
+        <h3>Choose your reward</h3>
+      </div>
 
-      <ul>
+      <ul class="list-group">
         {{#each project.rewards}}
-          <li>
-            <a href="/projects/{{ ../project.id }}/rewards/{{ this.id }}">
-              <p>${{ this.amount }}</p>
-              <p>{{ this.description }}</p>
-            </a>
-          </li>
+          <a href="/projects/{{ ../project.id }}/rewards/{{ this.id }}" class="list-group-item">
+            <h1>${{ this.amount }} <small style="font-size: 0.5em">- {{ this.numBackers }} backers</small></h1>
+            <p>{{ this.description }}</p>
+            <p class="date-item">Estimated Delivery: {{ this.estimatedDelivery }}</p>
+          </a>
         {{/each}}
       </ul>
 

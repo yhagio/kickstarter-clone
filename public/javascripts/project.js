@@ -137,7 +137,7 @@ if (window.location.pathname === '/create-project') {
     var checkcCoverPhotoResult = checkCoverPhoto(e);
     var checkFundingResult = checkFundingGoal(e);
     var checkEndDateResult = checkDate(e, 'funding_end_date', 'Funding End Date');
-    var checkDeliveryDateResult = checkDate(e, 'estimated_delivery', 'Estimate Delivery Date');
+    // var checkDeliveryDateResult = checkDate(e, 'estimated_delivery', 'Estimate Delivery Date');
     var checkLocationResult = checkLocation(e);
 
     // Gather all the errors
@@ -159,15 +159,16 @@ if (window.location.pathname === '/create-project') {
     if (checkEndDateResult !== null) {
       errors.push(checkEndDateResult);
     }
-    if (checkDeliveryDateResult !== null) {
-      errors.push(checkDeliveryDateResult);
-    }
+    // if (checkDeliveryDateResult !== null) {
+    //   errors.push(checkDeliveryDateResult);
+    // }
     if (checkLocationResult !== null) {
       errors.push(checkLocationResult);
     }
 
     // Display the errors
     if (errors.length > 0) {
+      // console.log(errors);
       document.getElementById('project-errors-box').className += ' show';
       window.scrollTo(0, 0);
     }
