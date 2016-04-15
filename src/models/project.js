@@ -1,4 +1,5 @@
 import Mongoose from 'mongoose';
+import mongoosastic from 'mongoosastic';
 
 const projectSchema = new Mongoose.Schema({
   createdBy: {
@@ -72,6 +73,12 @@ const projectSchema = new Mongoose.Schema({
     ref: 'Reward'
   }]
 
+});
+
+projectSchema.plugin(mongoosastic, {
+  hosts: [
+    'localhost:9200' // Port to use elasticsearch
+  ]
 });
 
 const Project = Mongoose.model('Project', projectSchema);

@@ -129,3 +129,21 @@ Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
 Elastic Search hosting
 - https://facetflow.com/#plans
 - Bonsai
+
+Installation Step for Elasticsearch
+```
+audo apt-get update
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+sudo apt-get update
+sudo apt-get install elasticsearch
+
+sudo apt-get update
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:openjdk-r/ppa
+sudo apt-get update
+sudo apt-get install openjdk-8-jdk
+
+sudo service elasticsearch start 
+sudo service elasticsearch restart
+```
