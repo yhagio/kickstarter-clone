@@ -3,6 +3,7 @@ import projectHandler from './handlers/projects';
 import paymentHandler from './handlers/payment';
 import profileHandler from './handlers/profile';
 import commentHandler from './handlers/comments';
+import searchHandler from './handlers/search';
 import { sendNewPassword } from './handlers/resetPassword';
 import { isAuthenticated } from './helpers/passport-config';
 import { isLoggedIn, connectOAuthed, isOauthed } from './helpers/helpers';
@@ -141,6 +142,13 @@ export default (app) => {
     .all(isAuthenticated)
     .get(projectHandler.getChosenRewardPage)
     .post(paymentHandler.backProject);   
+
+  // Search Projects
+  app.route('/search')
+    .get(searchHandler.getSearchResult)
+    .post((req, res) => {
+      res.redirect('/search?q=' + req.body.q);
+    });
   
   // Display 404 page when user tries to visit undefined routes
   app.route('*')

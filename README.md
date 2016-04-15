@@ -71,13 +71,14 @@ sudo npm install -g babel-cli
 - [X] Projects - Create Rewards, Display Rewards Page
 - [X] Payment - User can back projects (Select rewards)
 
-- [ ] Projects - Search with Elasticsearch (Bonsai)
+- [X] Search - Search projects with Elasticsearch
 - [ ] Email - Mailgun Integration (After back a project)
 
 - [ ] Pagination - Fetch project list with limit & skip
 - [ ] Pagination - Fetch comments list with limit & skip
 - [ ] Pagination - Fetch project list at category page with limit & skip
 
+- [ ] Search - Heroku x Bonsai
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
 - [ ] Projects - Expiration (Disable Payment)

@@ -73,6 +73,10 @@ export function prettyDate(date) {
 
 // Calculate percentage of funding backed
 export function getFundingPercentage(goal$, current$) {
+  console.log(goal$, current$);
+  if (current$ == 0) {
+    return 0;
+  }
   return (current$ / goal$) * 100;
 }
 
