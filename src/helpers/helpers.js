@@ -1,6 +1,14 @@
 import crypto from 'crypto';
 import moment from 'moment';
 
+// Check URL
+export function checkURL(url) {
+  if (/^(http|https)?:\/\//.test(url)) {
+    return url;
+  }
+  return `https://${url}`;
+}
+
 // Check if user is logged in
 export function isLoggedIn(req, res, next){
   if (!req.isAuthenticated()) {

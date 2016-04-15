@@ -4,21 +4,26 @@
 
     <div class="row" style="margin-top: 30px">
       <a class="pull-left col-sm-3" href="#">
-        <img class="img-circle" src="{{user.photo}}" style="width: 200px;height:200px;">
+        <img class="img-circle" src="{{ user.photo }}" style="width: 200px;height:200px;">
       </a>
       <div class="profile-section col-sm-9">
         <h2 class="media-heading">{{ user.name }}</h2>
 
         <div class="profile-sub-section">
           <p class="profile-details">Backed 150 Projects</p>
-          <p class="profile-details"><em>{{ user.location }}</em></p>
-          <a href="{{ user.website }}" class="profile-details label label-info">Website</a>
+          {{#if user.website }}
+            <p class="profile-details"><em>{{ user.location }}</em></p>
+          {{/if}}
+          {{#if user.website }}
+            <a href="{{ user.website }}" class="profile-details label label-info">Website</a>
+          {{/if}}
         </div>
-         
-        <div class="profile-bio">
-          <h5>{{ user.bio }}</h5>
-        </div> 
-          
+        
+        {{#if user.bio }}
+          <div class="profile-bio">
+            <h5>{{ user.bio }}</h5>
+          </div> 
+        {{/if}}
       </div>
     </div>
 
@@ -39,6 +44,18 @@
       <img src="images/blue-on-light.png" alt="Connect with Stripe">
     </a>
   {{/if}}
+  
+  <hr />
+  <h3>Backed Projects</h3>
+  <ul class="list-group">
+  {{#each user.backedProjects }}
+    {{#each this.rewards}}
+      <div class="list-group-item">
+        <a href="/projects/{{ ../this.id }}">{{ ../this.project_name}}</a> - ${{this.amount}} - {{this.description}}
+      </div>
+    {{/each}}
+  {{/each}}
+  </ul>
   
 
 </div>

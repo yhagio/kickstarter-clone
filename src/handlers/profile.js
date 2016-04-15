@@ -4,7 +4,8 @@ import bcrypt from 'bcrypt';
 import User from '../models/user';
 import { 
   isOauthed,
-  getGravatarURL
+  getGravatarURL,
+  checkURL
 } from '../helpers/helpers';
 import { 
   checkStrLength,
@@ -34,7 +35,14 @@ const profileHandler = {
   },
 
   getProfile(req, res) {
-    User.findById(req.user._id, (err, user) => {
+    const populateQuery = {
+      path: 'backedProjects',
+      populate: {
+        path: 'rewards',
+        match: { backers: req.user }
+      }
+    }
+    User.findById(req.user._id).populate(populateQuery).exec((err, user) => {
       if (err) {
         req.flash('danger', 'Could not find the user. Try again.');
         return res.redirect('/');
@@ -43,6 +51,12 @@ const profileHandler = {
       if (req.path == '/profile/edit') {
         return res.render('profile/profile-edit', { user: user });
       } else {
+        // console.log(' **** \n', user.backedProjects);
+        if ( user.backedProjects ) {
+          user.backedProjects.forEach(function(project) {
+            console.log(project.rewards.amount);
+          });
+        }
         return res.render(
           'profile/profile', {
             user: user,
@@ -87,7 +101,7 @@ const profileHandler = {
     const update = { 
       name: req.body.profileName,
       bio: req.body.bio,
-      website: req.body.profileWebsite,
+      website: checkURL(req.body.profileWebsite),
       location: req.body.profileLocation
     };
 

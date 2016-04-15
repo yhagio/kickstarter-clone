@@ -66,13 +66,12 @@ sudo npm install -g babel-cli
 - [X] Social - User can delete comment
 - [X] Profile - Public accessible profile page
 - [X] 404 Page (Basic)
-
 - [X] Category - Category page with list
-- [ ] Social - User can share (Twitter and Facebook) - Need to modify link
+- [X] Social - User can share (Twitter and Facebook)
+- [X] Projects - Create Rewards, Display Rewards Page
+- [X] Payment - User can back projects (Select rewards)
 
-- [ ] Projects - Create Rewards, Display Rewards Page
 - [ ] Projects - Search with Elasticsearch (Bonsai)
-- [ ] Payment - User can back projects (Select rewards)
 - [ ] Email - Mailgun Integration (After back a project)
 
 - [ ] Pagination - Fetch project list with limit & skip
@@ -82,8 +81,13 @@ sudo npm install -g babel-cli
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown
 - [ ] Projects - Expiration (Disable Payment)
+- [ ] Projects - Announcement tabs
 - [ ] Email - Notification
 - [ ] PerfMatters - Compile, faster insight speed
+
+- [ ] Limit - rewards items
+- [ ] Check over publishing data to client
+- [ ] Admin area
 
 Consider:
 - [ ] Social - User reply to a comment

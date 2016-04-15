@@ -53,7 +53,7 @@ const paymentHandler = {
             req.flash('danger', 'Could not update reward backers.');
             return res.redirect(`/projects/${req.params.projectid}/rewards`);
           }
-          console.log('*** Reward Update \n', result1);
+          // console.log('*** Reward Update \n', result1);
         });
         
         // Update project
@@ -63,8 +63,17 @@ const paymentHandler = {
             req.flash('danger', 'Could not update reward backers.');
             return res.redirect(`/projects/${req.params.projectid}/rewards`);
           }
-          console.log('*** Project Update \n', result2);
+          // console.log('*** Project Update \n', result2);
         });
+
+        const userUpdate = {$addToSet: { backedProjects: project }};
+        User.findOneAndUpdate({_id: req.user.id}, userUpdate, (projectErr, result2) => {
+          if (projectErr) {
+            req.flash('danger', 'Could not update backed projects.');
+            return res.redirect(`/projects/${req.params.projectid}/rewards`);
+          }
+          // console.log('*** Project Update \n', result2);
+        }); 
 
         // console.log('Charge Complete: \n', charge);
         req.flash('success', 'Successfully backed the project!');
