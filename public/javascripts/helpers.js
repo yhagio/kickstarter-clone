@@ -36,11 +36,11 @@ function getDayTilEnd(endDate) {
   return '1 day';
 }
 
-// Prettify the estimated delivery date
-$('.project-end-date').each(function(i, el){ 
-  console.log(el.innerHTML) 
-  el.innerHTML = getDayTilEnd(el.innerHTML) + '<br /> left';
-});
+// ===== Prettify the estimated delivery date
+// $('.project-end-date').each(function(i, el){ 
+//   console.log(el.innerHTML) 
+//   el.innerHTML = getDayTilEnd(el.innerHTML) + '<br /> left';
+// });
 
 var dateList = $('.date-item'); 
 (function(){

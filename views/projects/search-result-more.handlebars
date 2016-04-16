@@ -1,0 +1,23 @@
+{{#each products }}
+  <div class="col-sm-4 project-detail">
+    <div class="project-card text-center">
+      <div class="project-info">
+        <a href="/projects/{{this._id}}">
+          <img class="img-responsive center-block img-thumbnail" src="{{ this._source.file_path }}">
+        </a>
+        <strong>
+          <a href="/projects/{{ this._id }}">{{ this._source.project_name }}</a> 
+        </strong>
+        </br/>
+        <span>{{ this._source.short_description }}</span>
+      </div>
+      <div class="project-stats">
+        <div class="row">
+          <div class="col-sm-4 text-center">{{ this._source.fundingPercentage }}% <br/> funded </div>
+          <div class="col-sm-4 text-center">${{ this._source.current_funding }} <br/> pledged </div>
+          <div class="col-sm-4 text-center project-end-date">{{ this._source.tilEnd }} <br />left</div>
+        </div>
+      </div>
+    </div>
+  </div>
+{{/each}}

@@ -33,7 +33,7 @@ export default (app) => {
     'saveUninitialized': true
   }));
 
-  app.use(morgan('combined'));
+  app.use(morgan('dev'));
   app.use(helmet());
   app.use(flash());
   app.use(passport.initialize());

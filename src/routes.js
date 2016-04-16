@@ -146,9 +146,7 @@ export default (app) => {
   // Search Projects
   app.route('/search')
     .get(searchHandler.getSearchResult)
-    .post((req, res) => {
-      res.redirect('/search?q=' + req.body.q);
-    });
+    .post(searchHandler.postSearch);
   
   // Display 404 page when user tries to visit undefined routes
   app.route('*')

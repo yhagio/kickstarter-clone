@@ -1,22 +1,23 @@
-
-<div class="col-sm-4 project-detail">
-  <div class="project-card text-center">
-    <div class="project-info">
-      <a href="/projects/{{this.id}}">
-        <img class="img-responsive center-block img-thumbnail" src="{{ this.file_path }}">
-      </a>
-      <strong>
-        <a href="/projects/{{ this.id }}">{{ this.project_name }}</a> by 
-        <a href="/users/{{ this.createdBy.id }}">{{ this.createdBy.name }}</a>
-      </strong>
-      </br/>
-      <span>{{ this.short_description }}</span>
-    </div>
-    <div class="project-stats">
-      <div class="row">
-        <div class="col-sm-4 text-center">{{ fundingPercentage }}% <br/> funded </div>
-        <div class="col-sm-4 text-center">${{ this.current_funding }} <br/> pledged </div>
-        <div class="col-sm-4 text-center project-end-date">{{ this.funding_end_date }}</div>
+<div class="row">
+  <div class="col-sm-4 project-detail">
+    <div class="project-card text-center">
+      <div class="project-info">
+        <a href="/projects/{{this.id}}">
+          <img class="img-responsive center-block img-thumbnail" src="{{ this.file_path }}">
+        </a>
+        <strong>
+          <a href="/projects/{{ this.id }}">{{ this.project_name }}</a> by 
+          <a href="/users/{{ this.createdBy.id }}">{{ this.createdBy.name }}</a>
+        </strong>
+        </br/>
+        <span>{{ this.short_description }}</span>
+      </div>
+      <div class="project-stats">
+        <div class="row">
+          <div class="col-sm-4 text-center">{{ fundingPercentage }}% <br/> funded </div>
+          <div class="col-sm-4 text-center">${{ this.current_funding }} <br/> pledged </div>
+          <div class="col-sm-4 text-center project-end-date">{{ this.tilEnd }} <br />left</div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,31 +1,43 @@
 <div class="projects">
-  <h1>Search Result</h1>
-  {{#if data }}
-    {{#each data }}
-      <div class="col-sm-4 project-detail">
-        <div class="project-card text-center">
-          <div class="project-info">
-            <a href="/projects/{{this._id}}">
-              <img class="img-responsive center-block img-thumbnail" src="{{ this._source.file_path }}">
-            </a>
-            <strong>
-              <a href="/projects/{{ this._id }}">{{ this._source.project_name }}</a> 
-{{!--               by 
-              <a href="/users/{{ this._source.createdBy.id }}">{{ this._source.createdBy.name }}</a> --}}
-            </strong>
-            </br/>
-            <span>{{ this._source.short_description }}</span>
-          </div>
-          <div class="project-stats">
-            <div class="row">
-              <div class="col-sm-4 text-center">{{ this._source.fundingPercentage }}% <br/> funded </div>
-              <div class="col-sm-4 text-center">${{ this._source.current_funding }} <br/> pledged </div>
-              <div class="col-sm-4 text-center project-end-date">{{ this._source.funding_end_date }}</div>
+  <h2>Search Result for "<span id="search-query">{{ query }}</span>"</h2>
+  
+  {{#if products }}
+    <div id="project-result-box" class="row">
+      {{#each products }}
+        <div class="col-sm-4 project-detail">
+          <div class="project-card text-center">
+            <div class="project-info">
+              <a href="/projects/{{this._id}}">
+                <img class="img-responsive center-block img-thumbnail" src="{{ this._source.file_path }}">
+              </a>
+              <strong>
+                <a href="/projects/{{ this._id }}">{{ this._source.project_name }}</a> 
+              </strong>
+              </br/>
+              <span>{{ this._source.short_description }}</span>
+            </div>
+            <div class="project-stats">
+              <div class="row">
+                <div class="col-sm-4 text-center">{{ this._source.fundingPercentage }}% <br/> funded </div>
+                <div class="col-sm-4 text-center">${{ this._source.current_funding }} <br/> pledged </div>
+                <div class="col-sm-4 text-center project-end-date">{{ this._source.tilEnd }} <br />left</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    {{/each}}
+      {{/each}}
+    </div>
+    
+    <hr /> 
+
+    <button id="loadMoreResult" class="btn btn-info btn-lg" >Load More</button>
+{{!-- 
+    <ul id="search-page-list" class="pagination text-center pagination-lg">
+      {{#each pages}}
+        <li><a id="page-{{ this }}">{{ this }}</a></li>
+      {{/each}}
+    </ul> --}}
+
   {{else}}
     <h3>No project found.</h3>
   {{/if}}
