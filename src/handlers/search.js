@@ -5,29 +5,42 @@ import {
 
 
 const searchHandler = {
-  // /search?q=searchQuery&page=1
-  // /search?q=search
+
   postSearch(req, res) {
+    // Initial search from the form does not contain "page" so assign it 1
     let page = req.body.page || 1;
-    console.log('PAGE ? ===>\n', page);
+    // Redirect with 2 queries (search query & page number)
     res.redirect('/search?q=' + req.body.q + '&page=' + page);
   },
 
   getSearchResult(req, res) {
     console.log("req.query: \n", req.query);
 
-    let perPage = 1;
-    let page = req.query.page || 1;
-    // let skipNum = req.query.skip || 0;
-    // skipNum *= 2;
-    
+    // .i.e
+    // per page = 5
+    // P.1 = 1-5
+    // P.2 = 6-10
+    // P.3 = 11-15
+
+    let page = 0;
+    if (req.query.page <= 1) {
+      page = 0;
+    } else {
+      page = req.query.page 
+    }
+
+    let perPage = 20;
+    // let page = req.query.page || 0;
+
     let searchOptions = {
-      from: perPage * (page - 1),
+      from: perPage * page,
       size: perPage, 
       sort: { 
         'funding_end_date': 'asc'
       }
     };
+
+    console.log('*** searchOptions \n', searchOptions);
 
     if (req.query.q) {
 
@@ -38,7 +51,7 @@ const searchHandler = {
         }
       }, searchOptions, (err, results) => {
         if (err) {
-          console.log('err: \n\n', err ,'\n');
+          console.log('*** err: \n\n', err ,'\n');
           req.flash('danger', 'Search error. Please try again.');
           return res.redirect('/projects');
         }
@@ -51,7 +64,7 @@ const searchHandler = {
           project._source.fundingPercentage = getFundingPercentage(project._source.funding_goal, project._source.current_funding);
         });
 
-        if (page == 1) {
+        if (page == 0) {
           // When user searched and the initial page of the result
           return res.render('projects/search-result', {
             products: data,
@@ -67,41 +80,11 @@ const searchHandler = {
 
         }
 
-        // Project.count().exec(function(err2, count) {
-        //   if (err2) {
-        //     console.log('err2: ', err2);
-        //     req.flash('danger', 'Error occured. Please try again.');
-        //     return res.redirect('/projects');
-        //   }
-          
-        //   console.log('COUNT: ', count);
-        //   console.log('PAGE: ', page);
-        //   console.log('QUERY: ', req.query.q);
-          
-        //   let pages = [];
-        //   for(let i = 1; i <= (count / perPage); i++) {
-        //     pages.push(i);
-        //   }
-
-        //   console.log('PAGES Array: ', pages);
-        //   console.log('DATA: ', data);
-
-        //   return res.render('projects/search-result', {
-        //     products: data,
-        //     pages: pages,
-        //     query: req.query.q
-        //   });
-        // });
-
       });
 
     } else {
       return;
     }
-  },
-
-  loadMoreResult(req, res) {
-
   }
 
 };

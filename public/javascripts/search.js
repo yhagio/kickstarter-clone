@@ -1,24 +1,3 @@
-// if (window.location.pathname === '/search') {
-
-//   document.getElementById("search-page-list").addEventListener("click",function(e) {
-
-//     if(e.target && e.target.nodeName == "A") {
-
-//       // console.log(e.target.id + " was clicked");
-//       // console.log('val: ', e.target.textContent);
-//       // console.log('query: ', $('#search-query').text());
-//       // console.log('URL: ', window.location);
-
-//       window.location.search = '?q=' + $('#search-query').text() + '&page=' + e.target.textContent;
-//     }
-//   });
-// }
-
-
-
-
-
-
 'use strict';
 // Counting number that 'Load More' button is clicked
 // in order to determine how many projects to skip in server
@@ -41,13 +20,15 @@ document.getElementById('loadMoreResult').addEventListener('click', function(e) 
     },
     url: "/search?q=" + $('#search-query').text() + '&page=' + pageNum,
     success: function(data){
-      // Display the additional projects loaded
       if(data){
+        console.log('*** DATA \n', data);
+        // Update URL without reloading the page
         history.pushState(null, null, '/search?q=' + $('#search-query').text() + '&page=' + pageNum);
+        // Display the additional projects loaded
         $('#project-result-box').append(data);
-
-        // window.location.search = '?q=' + $('#search-query').text() + '&page=' + e.target.textContent;
       } else {
+        console.log('NO DATA');
+        $('#loadMoreResult').removeClass('btn-info').addClass('disabled').text('No More');
         // If no more projects, change the color of 'Load More' button
         // to indicate that there are no more projects to load
       }
