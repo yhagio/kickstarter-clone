@@ -60,7 +60,6 @@ function checkDate(e, target_id, subject) {
     if(e){
       e.preventDefault();
     }
-
     return errorMsg;
   }
   return null;
