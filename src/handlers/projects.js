@@ -2,7 +2,10 @@ import cloudinary from 'cloudinary';
 import formidable from 'formidable';
 import Project from '../models/project';
 import Reward from '../models/reward';
-import { getDayTilEnd, getFundingPercentage, validateStringLength } from '../helpers/helpers';
+import { 
+  getDayTilEnd,
+  getFundingPercentage,
+  validateStringLength } from '../helpers/helpers';
 import { prettyDate } from '../helpers/helpers';
 import { 
   checkFundingGoal,
@@ -16,8 +19,6 @@ import {
   TODO: Make sure not to over publish the data
 *****/
 
-
-
 const projectHandler = {
   // Discover projects where use can choose a category to see
   // the projects
@@ -28,7 +29,13 @@ const projectHandler = {
   // **** MAY BE REMOVED ****
   // General project list (No category)
   getProjectList(req, res) {
-    Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
+    let skipNum = req.query.skipNum || 0;
+
+    Project
+    .find({})
+    .populate('createdBy', 'name')
+    .skip(skipNum * 20)
+    .limit(20).exec((err, projects) => {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');
         return res.redirect('/');
@@ -40,15 +47,26 @@ const projectHandler = {
       });
       
       // TODO: progressbar percentage
+      if (skipNum == 0) {
+        // Initial load
+        return res.render(
+          'projects/project-list',
+          {projects: projects}
+        );  
+      } else {
+        // When user clicks "Load More" button at projects page
+        return res.render(
+          'projects/project-list-more',
+          { projects: projects,
+            layout: false }
+        );
+      }
 
-      return res.render(
-        'projects/project-list',
-        {projects: projects}
-      );
     });
   },
 
   // Individual Project Page
+  // TODO: Limit the number of comments
   getProjectPage(req, res) {
     const populateQuery = [
       {path: 'createdBy', select: 'name'},
@@ -62,7 +80,10 @@ const projectHandler = {
       }
     ];
     
-    Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
+    Project
+    .findOne({_id: req.params.id})
+    .populate(populateQuery)
+    .exec((err, project) => {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
@@ -124,13 +145,17 @@ const projectHandler = {
 
   // Project Rewards (User can back a project)Page
   // Display the list of rewards user can choose
+  // TODO: Limit the number of rewards that can be created
   getProjectRewardsPage(req, res) {
     const populateQuery = [
       { path: 'createdBy', select: 'name' },
       { path: 'rewards' }
     ];
 
-    Project.findOne({_id: req.params.id}).populate(populateQuery).exec((err, project) => {
+    Project
+    .findOne({_id: req.params.id})
+    .populate(populateQuery)
+    .exec((err, project) => {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
@@ -358,7 +383,14 @@ const projectHandler = {
 
   // Display the projects of a chosen category
   getProjectWithCategory(req, res) {
-    Project.find({}).populate('createdBy', 'name').limit(20).exec((err, projects) => {
+    let categoryName = req.params.name;
+    let skipNum = req.query.skipNum || 0;
+
+    Project
+    .find({'category': categoryName})
+    .populate('createdBy', 'name')
+    .skip(skipNum * 20)
+    .limit(20).exec((err, projects) => {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');
         return res.redirect('/projects');
@@ -369,10 +401,21 @@ const projectHandler = {
         project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
       });
 
-      return res.render(
-        'projects/project-list',
-        {projects: projects}
-      );
+      if (skipNum == 0) {
+        // Initial load
+        return res.render(
+          'projects/project-list',
+          {projects: projects}
+        );  
+      } else {
+        // When user clicks "Load More" button
+        return res.render(
+          'projects/project-list-more',
+          { projects: projects,
+            layout: false }
+        );
+      }
+      
     });
   }
 

@@ -70,14 +70,12 @@ sudo npm install -g babel-cli
 - [X] Social - User can share (Twitter and Facebook)
 - [X] Projects - Create Rewards, Display Rewards Page
 - [X] Payment - User can back projects (Select rewards)
-
 - [X] Search - Search projects with Elasticsearch
-- [ ] Email - Mailgun Integration (After back a project)
-
-- [ ] Pagination - Fetch project list with limit & skip
+- [X] Pagination - Fetch project list with limit & skip
+- [X] Pagination - Fetch project list at category page with limit & skip
 - [ ] Pagination - Fetch comments list with limit & skip
-- [ ] Pagination - Fetch project list at category page with limit & skip
 
+- [ ] Email - Mailgun Integration (After back a project)
 - [ ] Search - Heroku x Bonsai
 - [ ] Projects - Video integration instead of cover photos
 - [ ] Projects - Real time countdown

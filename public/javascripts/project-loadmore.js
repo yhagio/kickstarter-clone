@@ -1,33 +1,30 @@
 'use strict';
 // Counting number that 'Load More' button is clicked
 // in order to determine how many projects to skip in server
-var pageNum = 1;
+var skipNum = 1;
 
-if (window.location.pathname === '/search') {
+if (window.location.pathname === '/projects' || window.location.pathname.indexOf('categories') >= 0) {
   // Load More functionality
-  document.getElementById('loadMoreResult').addEventListener('click', function(e) {
+  document.getElementById('loadMoreProjects').addEventListener('click', function(e) {
     e.preventDefault();
 
-    pageNum++;
+    skipNum++;
 
     // Get the additional event data from server
     $.ajax({
-      type: "POST",
+      type: "GET",
       data: {
-        q: $('#search-query').text(),
-        page: pageNum
+        skipNum: skipNum
       },
-      url: "/search?q=" + $('#search-query').text() + '&page=' + pageNum,
+      url: "/projects",
       success: function(data){
         if(data){
           console.log('*** DATA \n', data);
-          // Update URL without reloading the page
-          history.pushState(null, null, '/search?q=' + $('#search-query').text() + '&page=' + pageNum);
           // Display the additional projects loaded
-          $('#project-result-box').append(data);
+          $('#projects-box').append(data);
         } else {
           console.log('NO DATA');
-          $('#loadMoreResult').removeClass('btn-info').addClass('disabled').text('No More');
+          $('#loadMoreProjects').removeClass('btn-info').addClass('disabled').text('No More');
           // If no more projects, change the color of 'Load More' button
           // to indicate that there are no more projects to load
         }
@@ -39,4 +36,5 @@ if (window.location.pathname === '/search') {
     })
 
   }, false);
+
 }

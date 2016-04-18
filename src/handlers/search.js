@@ -14,7 +14,7 @@ const searchHandler = {
   },
 
   getSearchResult(req, res) {
-    console.log("req.query: \n", req.query);
+    // console.log("req.query: \n", req.query);
 
     // .i.e
     // per page = 5
@@ -40,7 +40,7 @@ const searchHandler = {
       }
     };
 
-    console.log('*** searchOptions \n', searchOptions);
+    // console.log('*** searchOptions \n', searchOptions);
 
     if (req.query.q) {
 
@@ -51,7 +51,7 @@ const searchHandler = {
         }
       }, searchOptions, (err, results) => {
         if (err) {
-          console.log('*** err: \n\n', err ,'\n');
+          // console.log('*** err: \n\n', err ,'\n');
           req.flash('danger', 'Search error. Please try again.');
           return res.redirect('/projects');
         }

@@ -1,5 +1,13 @@
 <div class="projects">
-  {{#each projects}}
-    {{> project-detail }}
-  {{/each}}
+  {{#if projects}}
+    <div id="projects-box" class="row">
+      {{#each projects}}
+        {{> project-detail }}
+      {{/each}}
+    </div>
+    <hr /> 
+    <button id="loadMoreProjects" class="btn btn-info btn-lg" >Load More</button>
+  {{else}}
+    <h3>No project yet.</h3>
+  {{/if}}
 </div>
