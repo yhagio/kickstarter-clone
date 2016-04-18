@@ -1,16 +1,3 @@
-// Cloudinary Config
-export const cloudinaryConfig = {
-  cloud_name: 'dck7vqmjo',
-  api_key: '212221598268727',
-  api_secret: 'yLpApv4IuH_EeA8Ei-Z257bJ_74'
-}
-
-export const mongoConfig = {
-  db: 'mongodb://yuiyuilily609:KenzaRiani4631@ds015730.mlab.com:15730/kickstarterclone',
-  secretKey: "kickstarterclone_secret"
-}
-
-
 /* DEVELOPMENT
 
 === MongoLab ===
@@ -35,6 +22,7 @@ export MAILGUN_DOMAIN=yuichidev.mailgun.org
 
 sudo service elasticsearch restart
 npm run dev
+
 */
 
 /* DO THIS BEFORE Deployment to Heroku

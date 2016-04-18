@@ -127,11 +127,10 @@ Attempt code: https://gist.github.com/yhagio/451b0fe564980a0374ddcf9d254d9163
 - Commenting (Fetch comments at Profile, ProjectPage - Skip / Limit)
 - Share (Facebook, Twitter, Email, Linkedin, etc)
 
-Elastic Search hosting
-- https://facetflow.com/#plans
-- Bonsai
+**Elastic Search with Heroku**
+- [Bonsai + Heroku guide](https://docs.bonsai.io/docs/nodejs)
 
-Installation Step for Elasticsearch
+Installation Steps for Elasticsearch for development
 ```
 audo apt-get update
 wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -

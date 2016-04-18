@@ -15,8 +15,6 @@ document.getElementById('loadMoreResult').addEventListener('click', function(e) 
     data: {
       q: $('#search-query').text(),
       page: pageNum
-      // query: $('#search-query').text(),
-      // skip: pageNum
     },
     url: "/search?q=" + $('#search-query').text() + '&page=' + pageNum,
     success: function(data){
