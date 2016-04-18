@@ -90,22 +90,22 @@ const projectSchema = new Mongoose.Schema({
 });
 
 // Heroku
-// projectSchema.plugin(mongoosastic, {
-//   host: elasticConnection.hostname,
-//   auth: elasticConnection.auth,
-//   port: '',
-//   protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
-// });
+projectSchema.plugin(mongoosastic, {
+  host: elasticConnection.hostname,
+  auth: elasticConnection.auth,
+  port: '',
+  protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
+});
 
 // Development
-projectSchema.plugin(mongoosastic, {
-  hosts: [
-    'localhost:9200'
-  ]
-  // populate: [
-  //   {path: 'createdBy'}
-  // ]
-});
+// projectSchema.plugin(mongoosastic, {
+//   hosts: [
+//     'localhost:9200'
+//   ]
+//   // populate: [
+//   //   {path: 'createdBy'}
+//   // ]
+// });
 
 const Project = Mongoose.model('Project', projectSchema);
 export default Project;
