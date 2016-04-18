@@ -18,7 +18,6 @@ function removeComment(e) {
 var commentSkipNum = 0;
 
 if (window.location.pathname.indexOf('projects/') >= 0) {
-  console.log(window.location.pathname);
 
   // Load More functionality
   document.getElementById('loadMoreComments').addEventListener('click', function(e) {

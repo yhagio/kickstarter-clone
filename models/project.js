@@ -16,22 +16,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var url = require('url');
 var elasticConnection = url.parse(process.env.BONSAI_URL);
-// console.log('elasticConnection: ', elasticConnection);
-// var elasticsearch = require('elasticsearch');
-// var client = new elasticsearch.Client({host: process.env.BONSAI_URL, log: 'trace'});
-// // Test the connection...
-// client.ping({
-//     requestTimeout: 30000,
-//     hello: "elasticsearch"
-//   },
-//   function (error) {
-//     if (error) {
-//       console.error('elasticsearch cluster is down!');
-//     } else {
-//       console.log('All is well');
-//     }
-//   }
-// );
 
 // import User from './user';
 
@@ -119,21 +103,21 @@ var projectSchema = new _mongoose2.default.Schema({
 
 });
 
-projectSchema.plugin(_mongoosastic2.default, {
-  host: elasticConnection.hostname,
-  auth: elasticConnection.auth,
-  port: '',
-  protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
-});
-
+// Heroku
 // projectSchema.plugin(mongoosastic, {
-//   hosts: [
-//     'localhost:9200'
-//   ]
-//   // populate: [
-//   //   {path: 'createdBy'}
-//   // ]
+//   host: elasticConnection.hostname,
+//   auth: elasticConnection.auth,
+//   port: '',
+//   protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
 // });
+
+// Development
+projectSchema.plugin(_mongoosastic2.default, {
+  hosts: ['localhost:9200']
+  // populate: [
+  //   {path: 'createdBy'}
+  // ]
+});
 
 var Project = _mongoose2.default.model('Project', projectSchema);
 exports.default = Project;

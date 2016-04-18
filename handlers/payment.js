@@ -25,7 +25,7 @@ var paymentHandler = {
 
   backProject: function backProject(req, res) {
 
-    // console.log('***Back Project\n', req.body);
+    console.log('*** Back Project ***\n', req.body);
 
     // 1. Need to find "connected stripe account id" of the project creator
     // Retrieve the id by populating 'user.stripe' fields
@@ -33,6 +33,8 @@ var paymentHandler = {
 
     _project2.default.findById(req.params.projectid).populate(populateQuery).exec(function (err, project) {
       if (err) {
+        console.log('*** Back Project Err ***\n', err);
+
         req.flash('danger', 'Could not find the project / user. Try again.');
         return res.redirect('/projects/' + req.params.projectid + '/rewards');
       }
@@ -50,7 +52,7 @@ var paymentHandler = {
       }, function (error, charge) {
         if (error) {
 
-          // console.log('Stripe Charge Failed: \n', error);
+          console.log('*** Stripe Charge Failed ***\n', error);
           req.flash('danger', error.message);
           return res.redirect('/projects/' + req.params.projectid + '/rewards');
         }
@@ -59,6 +61,8 @@ var paymentHandler = {
           req.flash('danger', 'Charge did not go through.');
           return res.redirect('/projects/' + req.params.projectid + '/rewards');
         }
+
+        console.log('*** Stripe Charge created ***\n', charge);
 
         // Update reward
         var rewardUpdate = { $addToSet: { backers: req.user } };
