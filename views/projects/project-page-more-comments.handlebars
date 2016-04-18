@@ -1,0 +1,27 @@
+{{#each comments}}
+  
+  <li class="row list-group-item">
+    {{#if this.isCommentAuthor }}
+      <span
+        id="{{this._id}}"
+        class="glyphicon glyphicon-remove pull-right"
+        aria-hidden="true"
+        onClick=removeComment() >
+      </span>
+    {{/if}}
+
+    <div class="pull-left col-sm-2">
+      <img src="{{ this.createdBy.photo }}" alt="" style="width:70px; height:70px; border-radius: 50%;">
+    </div>
+    <div class="col-sm-10"> 
+      <p>
+        <strong>
+          <a href="/users/{{ this.createdBy.id }}">{{ this.createdBy.name }}</a>
+        </strong> 
+        <span class="commentCreatedAt">{{ this.createdAt }}</span>
+      </p>
+      <p>{{ this.body }}</p>
+    </div>
+  </li>
+
+{{/each}}

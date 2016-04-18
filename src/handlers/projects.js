@@ -1,6 +1,7 @@
 import cloudinary from 'cloudinary';
 import formidable from 'formidable';
 import Project from '../models/project';
+import Comment from '../models/comment';
 import Reward from '../models/reward';
 import { 
   getDayTilEnd,
@@ -66,86 +67,114 @@ const projectHandler = {
   },
 
   // Individual Project Page
-  // TODO: Limit the number of comments
   getProjectPage(req, res) {
-    const populateQuery = [
-      {path: 'createdBy', select: 'name'},
-      { path: 'comments', 
-        populate: {
-          path: 'createdBy'
-        },
-        options: { 
-          sort: { 'createdAt': -1 } 
-        }
-      }
-    ];
-    
-    Project
-    .findOne({_id: req.params.id})
-    .populate(populateQuery)
-    .exec((err, project) => {
-      if (err) {
-        req.flash('danger', 'No project found.');
-        return res.redirect('/');
-      }
-      
-      // Have to return modified Project data because
-      // I would like to display "delete" button for each comment list
-      // if the logged in user is comment author, in order to do this,
-      // add a property "isCommentAuthor" in each comment object.
+    let commentSkipNum = req.query.commentSkipNum || 0;
 
-      let modifiedComments = [];
-
-      project.comments.map(function(comment) {
-
-        let isCommentAuthor;
-        // Check if the comment author is current user
-        if (comment.createdBy.id === req.user.id) {
-          isCommentAuthor = true;
-        } else {
-          isCommentAuthor = false;
+    if (commentSkipNum > 0) {
+      // Load more comments case
+      // When user clicks "Load More" button
+      Comment
+      .find({projectId: req.params.id})
+      .skip(commentSkipNum * 10)
+      .limit(10)
+      .exec((error, loadedComments) => {
+        if (error) {
+          req.flash('danger', 'Something went wrong on loading comments.');
+          return res.redirect(`/projects/${req.params.id}`);
         }
 
-        modifiedComments.push({
-          _id: comment._id,
-          projectId: comment.projectId,
-          body: comment.body,
-          createdAt: prettyDate(comment.createdAt),
-          createdBy: comment.createdBy,
-          isCommentAuthor: isCommentAuthor
-        });
+        return res.render(
+          'projects/project-page-more-comments',
+          { project: loadedComments,
+            layout: false
+          }
+        ); 
       });
 
-      let modifiedProject = {
-        _id: project._id,
-        createdBy: project.createdBy,
-        project_name: project.project_name,
-        short_description: project.short_description,
-        long_description: project.long_description,
-        funding_goal: project.funding_goal,
-        funding_end_date: project.funding_end_date,
-        file_path: project.file_path,
-        current_funding: project.current_funding,
-        // estimated_delivery: project.estimated_delivery,
-        location: project.location,
-        category: project.category,
-        backerUserIds: project.backerUserIds,
-        comments: modifiedComments
-      };
-      
-      return res.render(
-        'projects/project-page',
-        { project: modifiedProject, 
-          dayTil: getDayTilEnd(project.funding_end_date),
-          numBackers: project.backerUserIds.length
+    } else {
+      // 1st time loading the project page
+      const populateQuery = [
+        {path: 'createdBy', select: 'name'},
+        { path: 'comments', 
+          populate: {
+            path: 'createdBy'
+          },
+          options: { 
+            skip: commentSkipNum,
+            limit: 10,
+            sort: { 'createdAt': -1 } ,
+          }
         }
-      );
-    });
+      ];
+      
+      Project
+      .findOne({_id: req.params.id})
+      .populate(populateQuery)
+      .exec((err, project) => {
+        if (err) {
+          req.flash('danger', 'No project found.');
+          return res.redirect('/');
+        }
+        
+        // Have to return modified Project data because
+        // I would like to display "delete" button for each comment list
+        // if the logged in user is comment author, in order to do this,
+        // add a property "isCommentAuthor" in each comment object.
+
+        let modifiedComments = [];
+
+        project.comments.map(function(comment) {
+
+          let isCommentAuthor;
+          // Check if the comment author is current user
+          if (comment.createdBy.id === req.user.id) {
+            isCommentAuthor = true;
+          } else {
+            isCommentAuthor = false;
+          }
+
+          modifiedComments.push({
+            _id: comment._id,
+            projectId: comment.projectId,
+            body: comment.body,
+            createdAt: prettyDate(comment.createdAt),
+            createdBy: comment.createdBy,
+            isCommentAuthor: isCommentAuthor
+          });
+        });
+
+        let modifiedProject = {
+          _id: project._id,
+          createdBy: project.createdBy,
+          project_name: project.project_name,
+          short_description: project.short_description,
+          long_description: project.long_description,
+          funding_goal: project.funding_goal,
+          funding_end_date: project.funding_end_date,
+          file_path: project.file_path,
+          current_funding: project.current_funding,
+          // estimated_delivery: project.estimated_delivery,
+          location: project.location,
+          category: project.category,
+          backerUserIds: project.backerUserIds,
+          comments: modifiedComments
+        };
+
+        return res.render(
+          'projects/project-page',
+          { project: modifiedProject, 
+            dayTil: getDayTilEnd(project.funding_end_date),
+            numBackers: project.backerUserIds.length
+          }
+        );
+
+      });
+
+    }
   },
 
   // Project Rewards (User can back a project)Page
   // Display the list of rewards user can choose
-  // TODO: Limit the number of rewards that can be created
   getProjectRewardsPage(req, res) {
     const populateQuery = [
       { path: 'createdBy', select: 'name' },

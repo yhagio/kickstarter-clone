@@ -1,7 +1,7 @@
 'use strict';
 // Counting number that 'Load More' button is clicked
 // in order to determine how many projects to skip in server
-var skipNum = 1;
+var skipNum = 0;
 
 if (window.location.pathname === '/projects' || window.location.pathname.indexOf('categories') >= 0) {
   // Load More functionality
