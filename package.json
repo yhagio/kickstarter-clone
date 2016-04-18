@@ -8,6 +8,7 @@
     "npm": "3.8.5"
   },
   "scripts": {
+    "start": "node build/index.js",
     "build": "rm -rf build && babel src -d build",
     "prod": "rm -rf build && babel src -d build && forever start build/index.js",
     "dev": "rm -rf build && babel src -d build && node build/index.js",
