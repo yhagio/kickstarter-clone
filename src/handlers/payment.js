@@ -63,8 +63,11 @@ const paymentHandler = {
           // console.log('*** Reward Update \n', result1);
         });
         
-        // Update project
-        const projectUpdate = {$addToSet: { backerUserIds: req.user.id }};
+        // Update project (backerUserIds & current_funding)
+        const projectUpdate = {
+          $addToSet: { backerUserIds: req.user.id },
+          $inc: { current_funding: charge.amount - charge.fee}
+        };
         Project.findOneAndUpdate({_id: req.params.projectid}, projectUpdate, (projectErr, result2) => {
           if (projectErr) {
             req.flash('danger', 'Could not update reward backers.');

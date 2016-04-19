@@ -96,6 +96,12 @@ nav.navbar.navbar-default {
   margin-top: 10px;
 }
 
+/* Progress Bar */
+.progress-bar-custom-style {
+  margin: 5px 7px;
+  height: 15px;
+}
+
 /* Project form */
 .project-form-box {
   max-width: 600px;

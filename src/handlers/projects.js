@@ -45,6 +45,7 @@ const projectHandler = {
       projects.forEach((project) => {
         project.tilEnd = getDayTilEnd(project.funding_end_date);
         project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
+        project.currentFunds = Math.floor(project.current_funding / 100);
       });
       
       // TODO: progressbar percentage
@@ -164,7 +165,8 @@ const projectHandler = {
           'projects/project-page',
           { project: modifiedProject, 
             dayTil: getDayTilEnd(project.funding_end_date),
-            numBackers: project.backerUserIds.length
+            numBackers: project.backerUserIds.length,
+            currentFunds: Math.floor(project.current_funding / 100)
           }
         );
 
@@ -378,7 +380,7 @@ const projectHandler = {
           short_description: fields.short_description,
           long_description: fields.long_description,
           category: fields.category,
-          funding_goal: fields.funding_goal,
+          funding_goal: fields.funding_goal * 100,
           funding_end_date: endingDate,
           file_path: data.secure_url,
           // estimated_delivery: deliveryDate,
@@ -428,6 +430,7 @@ const projectHandler = {
       projects.forEach((project) => {
         project.tilEnd = getDayTilEnd(project.funding_end_date);
         project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
+        project.currentFunds = Math.floor(project.current_funding / 100);
       });
 
       if (skipNum == 0) {

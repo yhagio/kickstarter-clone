@@ -6,6 +6,7 @@
       {{#each products }}
         <div class="col-sm-4 project-detail">
           <div class="project-card text-center">
+          
             <div class="project-info">
               <a href="/projects/{{this._id}}">
                 <img class="img-responsive center-block img-thumbnail" src="{{ this._source.file_path }}">
@@ -16,13 +17,21 @@
               </br/>
               <span>{{ this._source.short_description }}</span>
             </div>
+
+            <div class="progress progress-bar-custom-style" >
+              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ this._source.fundingPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ this._source.fundingPercentage }}%;">
+                <span class="sr-only">{{ this._source.fundingPercentage }}% Complete</span>
+              </div>
+            </div>
+
             <div class="project-stats">
               <div class="row">
                 <div class="col-sm-4 text-center">{{ this._source.fundingPercentage }}% <br/> funded </div>
-                <div class="col-sm-4 text-center">${{ this._source.current_funding }} <br/> pledged </div>
+                <div class="col-sm-4 text-center">${{ this._source.currentFunds }} <br/> pledged </div>
                 <div class="col-sm-4 text-center project-end-date">{{ this._source.tilEnd }} <br />left</div>
               </div>
             </div>
+
           </div>
         </div>
       {{/each}}

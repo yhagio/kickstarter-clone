@@ -24,6 +24,7 @@
 - [X] Pagination - Fetch project list at category page with limit & skip
 - [X] Pagination - Fetch comments list with limit & skip
 - [X] Search - Heroku x Bonsai
+- [X] Projects - Progress Bar
 
 - [ ] Email - Mailgun Integration (After back a project)
 - [ ] Projects - Video integration instead of cover photos

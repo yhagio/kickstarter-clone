@@ -14,7 +14,7 @@ const searchHandler = {
   },
 
   getSearchResult(req, res) {
-    // console.log("req.query: \n", req.query);
+    console.log("req.query: \n", req.query);
 
     // .i.e
     // per page = 5
@@ -51,7 +51,7 @@ const searchHandler = {
         }
       }, searchOptions, (err, results) => {
         if (err) {
-          // console.log('*** err: \n\n', err ,'\n');
+          console.log('*** err: \n\n', err ,'\n');
           req.flash('danger', 'Search error. Please try again.');
           return res.redirect('/projects');
         }
@@ -62,6 +62,7 @@ const searchHandler = {
         data.forEach((project) => {
           project._source.tilEnd = getDayTilEnd(project._source.funding_end_date);
           project._source.fundingPercentage = getFundingPercentage(project._source.funding_goal, project._source.current_funding);
+          project._source.currentFunds = Math.floor(project._source.current_funding / 100);
         });
 
         if (page == 0) {

@@ -1,17 +1,10 @@
-var url = require('url');
-var elasticConnection = url.parse(process.env.BONSAI_URL);
-
 import Mongoose from 'mongoose';
 import mongoosastic from 'mongoosastic';
-// import User from './user';
 
 const projectSchema = new Mongoose.Schema({
   'createdBy': {
   	'type': Mongoose.Schema.Types.ObjectId,
     'ref': 'User'
-    // 'es_schema': User, 
-    // 'es_select': 'name',
-    // 'es_indexed': true
   },
 
   'project_name': {
@@ -89,23 +82,28 @@ const projectSchema = new Mongoose.Schema({
 
 });
 
-// Heroku
-projectSchema.plugin(mongoosastic, {
-  host: elasticConnection.hostname,
-  auth: elasticConnection.auth,
-  port: '',
-  protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
-});
+if (process.env.NODE_ENV === 'production') {
+  var url = require('url');
+  var elasticConnection = url.parse(process.env.BONSAI_URL);
+  // Heroku Add-on Bonsai (Production)
+  projectSchema.plugin(_mongoosastic2.default, {
+    host: elasticConnection.hostname,
+    auth: elasticConnection.auth,
+    port: '',
+    protocol: elasticConnection.protocol === 'https:' ? 'http' : 'https'
+  });
+} else {
+  // Local (Development)
+  projectSchema.plugin(mongoosastic, {
+    hosts: [
+      'localhost:9200'
+    ]
+    // populate: [
+    //   {path: 'createdBy'}
+    // ]
+  });
+}
 
-// Development
-// projectSchema.plugin(mongoosastic, {
-//   hosts: [
-//     'localhost:9200'
-//   ]
-//   // populate: [
-//   //   {path: 'createdBy'}
-//   // ]
-// });
 
 const Project = Mongoose.model('Project', projectSchema);
 export default Project;

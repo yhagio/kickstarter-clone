@@ -10,11 +10,18 @@
       </strong>
       </br/>
       <span>{{ this.short_description }}</span>
+
+    <div class="progress progress-bar-custom-style" >
+      <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ fundingPercentage }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ fundingPercentage }}%;">
+        <span class="sr-only">{{ fundingPercentage }}% Complete</span>
+      </div>
+    </div>
+
     </div>
     <div class="project-stats">
       <div class="row">
         <div class="col-sm-4 text-center">{{ fundingPercentage }}% <br/> funded </div>
-        <div class="col-sm-4 text-center">${{ this.current_funding }} <br/> pledged </div>
+        <div class="col-sm-4 text-center">${{ currentFunds }} <br/> pledged </div>
         <div class="col-sm-4 text-center project-end-date">{{ this.tilEnd }} <br />left</div>
       </div>
     </div>
