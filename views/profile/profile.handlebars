@@ -1,12 +1,15 @@
 <div class="contianer">
 
-  <div class="col-lg-5">
+    <div class="row" style="margin: 50px 10px 0 10px">
 
-    <div class="row" style="margin-top: 30px">
-      <a class="pull-left col-sm-3" href="#">
-        <img class="img-circle" src="{{ user.photo }}" style="width: 200px;height:200px;">
+      <a class="pull-left col-sm-4 col-md-3" href="#">
+        <img 
+          class="img-circle"
+          src="{{ user.photo }}"
+          style="width: 200px; height:200px;">
       </a>
-      <div class="profile-section col-sm-9">
+
+      <div class="profile-section col-sm-8 col-md-9">
         <h2 class="media-heading">{{ user.name }}</h2>
 
         <div class="profile-sub-section">
@@ -27,35 +30,36 @@
       </div>
     </div>
 
-  </div>
   <hr />
   
-  <a href="/profile/edit" class="btn pledge-button">Update Profile</a>
+  <div style="padding: 10px">
+    <a href="/profile/edit" class="btn pledge-button">Update Profile</a>
 
-  <hr />
-  {{#if isOauthed }}
-    <p>Authorized. You can create a project</p>
-    <a href="/create-project" class="btn pledge-button">Create Project</a>
-  {{ else }}
-    <h4>Would you like to create a project?</h4>
-    <p>* You need to have a Stripe account, if you don't have one, sign up Stripe <a href="https://www.stripe.com/"><strong>HERE</strong></a></p>
-    <p>Connect your Stripe account with our platform.</p>
-    <a href="/authorize">
-      <img src="images/blue-on-light.png" alt="Connect with Stripe">
-    </a>
-  {{/if}}
-  
-  <hr />
-  <h3>Backed Projects</h3>
-  <ul class="list-group">
-  {{#each user.backedProjects }}
-    {{#each this.rewards}}
-      <div class="list-group-item">
-        <a href="/projects/{{ ../this.id }}">{{ ../this.project_name}}</a> - ${{this.amount}} - {{this.description}}
-      </div>
+    <hr />
+    {{#if isOauthed }}
+      <p>Authorized. You can create a project</p>
+      <a href="/create-project" class="btn pledge-button">Create Project</a>
+    {{ else }}
+      <h4>Would you like to create a project?</h4>
+      <p>* You need to have a Stripe account, if you don't have one, sign up Stripe <a href="https://www.stripe.com/"><strong>HERE</strong></a></p>
+      <p>Connect your Stripe account with our platform.</p>
+      <a href="/authorize">
+        <img src="images/blue-on-light.png" alt="Connect with Stripe">
+      </a>
+    {{/if}}
+    
+    <hr />
+    <h3>Backed Projects</h3>
+    <ul class="list-group">
+    {{#each user.backedProjects }}
+      {{#each this.rewards}}
+        <div class="list-group-item">
+          <a href="/projects/{{ ../this.id }}">{{ ../this.project_name}}</a> - ${{this.amount}} - {{this.description}}
+        </div>
+      {{/each}}
     {{/each}}
-  {{/each}}
-  </ul>
-  
+    </ul>
+  </div>
+
 
 </div>

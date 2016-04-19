@@ -25,22 +25,28 @@
 - [X] Pagination - Fetch comments list with limit & skip
 - [X] Search - Heroku x Bonsai
 - [X] Projects - Progress Bar
+- [X] Projects - Expiration (Disable Payment)
+
+- [ ] Sorting improvement (expired projects)
+- [ ] Mobile Web friendly (Responsive)
+- [ ] Minimize file sizes, image sizes
+- [ ] Pagespeed insights check
+
+- [ ] Expired project - funding success or unsuccess tag
+- [ ] Projects - Video integration instead of cover photos
+- [ ] Projects - Announcement tabs
+- [ ] Projects - Comment - reply to someone, creator tag
 
 - [ ] Email - Mailgun Integration (After back a project)
-- [ ] Projects - Video integration instead of cover photos
-- [ ] Projects - Real time countdown
-- [ ] Projects - Expiration (Disable Payment)
-- [ ] Projects - Announcement tabs
-- [ ] Email - Notification
-- [ ] PerfMatters - Compile, faster insight speed
 
 - [ ] Limit - rewards items
 - [ ] Check over publishing data to client
-- [ ] Admin area
+- [ ] Profile - Admin area (Projects created, Manage)
 
-Consider:
-- [ ] Social - User reply to a comment
-- [ ] Social - Inline editable comment (contentEditable)
+- [ ] Projects - Real time countdown
+
+Maybe:
+- [] Social - Inline editable comment (contentEditable)
 - [ ] Authentication - User can delete account
 - [ ] Stripe / Payment account update (Credit Card info)
 

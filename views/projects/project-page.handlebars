@@ -69,12 +69,16 @@
       {{#if isProjectActive }}
         <span class="project-progress"> {{ dayTil }} </span> left
       {{else}}
-        Expired
+        Funding ended.
       {{/if}}
     </div>
 
     <div class="panel">
-      <a href="/projects/{{ project._id }}/rewards" class="btn pledge-button">Back the project</a>
+      {{#if isProjectActive }}
+        <a href="/projects/{{ project._id }}/rewards" class="btn pledge-button">Back the project</a>
+      {{else}}
+        <a href="#" class="btn btn-default disabled">No rewards available</a>
+      {{/if}}
     </div>
 
   </div>

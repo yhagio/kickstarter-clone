@@ -194,6 +194,11 @@ const projectHandler = {
         return res.redirect('/');
       }
 
+      if(new Date() > project.funding_end_date) {
+        req.flash('danger', 'Project funding ended.');
+        return res.redirect(`/projects/${req.params.id}`);
+      }
+
       project.rewards.forEach((reward) => {
         reward.numBackers = reward.backers.length;
       });
