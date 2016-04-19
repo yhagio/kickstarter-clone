@@ -1,7 +1,7 @@
 {
   "name": "kickstarterclone",
   "version": "1.0.0",
-  "description": "Kickstarter Clone",
+  "description": "Kickstarter Clone, crowdfunding for people",
   "main": "build/index.js",
   "engines": {
     "node": "4.4.2",
