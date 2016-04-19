@@ -15,7 +15,13 @@
         <div class="row">
           <div class="col-sm-4 text-center">{{ this._source.fundingPercentage }}% <br/> funded </div>
           <div class="col-sm-4 text-center">${{ this._source.current_funding }} <br/> pledged </div>
-          <div class="col-sm-4 text-center project-end-date">{{ this._source.tilEnd }} <br />left</div>
+          <div class="col-sm-4 text-center project-end-date">
+            {{#if this._source.isProjectActive }}
+              {{ this._source.tilEnd }} <br />left
+            {{else}}
+              Expired
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>

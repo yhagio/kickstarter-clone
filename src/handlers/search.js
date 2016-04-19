@@ -63,6 +63,7 @@ const searchHandler = {
           project._source.tilEnd = getDayTilEnd(project._source.funding_end_date);
           project._source.fundingPercentage = getFundingPercentage(project._source.funding_goal, project._source.current_funding);
           project._source.currentFunds = Math.floor(project._source.current_funding / 100);
+          project._source.isProjectActive = (new Date() < project._source.funding_end_date);
         });
 
         if (page == 0) {

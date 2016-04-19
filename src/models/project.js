@@ -24,7 +24,8 @@ const projectSchema = new Mongoose.Schema({
   'long_description': {
     'type': String,
     'unique': true,
-    'required': true
+    'required': true,
+    'es_indexed':true
   },
 
   'funding_goal': {
@@ -57,7 +58,8 @@ const projectSchema = new Mongoose.Schema({
 
   location: {
     type: String,
-    required: true
+    required: true,
+    'es_indexed':true
   },
 
   category: {

@@ -46,6 +46,7 @@ const projectHandler = {
         project.tilEnd = getDayTilEnd(project.funding_end_date);
         project.fundingPercentage = getFundingPercentage(project.funding_goal, project.current_funding);
         project.currentFunds = Math.floor(project.current_funding / 100);
+        project.isProjectActive = (new Date() < project.funding_end_date);
       });
       
       // TODO: progressbar percentage
@@ -166,7 +167,8 @@ const projectHandler = {
           { project: modifiedProject, 
             dayTil: getDayTilEnd(project.funding_end_date),
             numBackers: project.backerUserIds.length,
-            currentFunds: Math.floor(project.current_funding / 100)
+            currentFunds: Math.floor(project.current_funding / 100),
+            isProjectActive: (new Date() < project.funding_end_date)
           }
         );
 
