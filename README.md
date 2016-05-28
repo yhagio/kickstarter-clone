@@ -66,8 +66,6 @@ like MONGOLAB_URI, CLOUD_API, etc
 - Then, change in the file `express-config.js` from `(__dirname, '../views'))` to `(__dirname, '/views'))`
 - Then push to Heroku
 
-Deployed at [Heroku](https://obscure-meadow-67002.herokuapp.com/)
-
 **Elastic Search with Heroku**
 - [Bonsai + Heroku add-on guide](https://docs.bonsai.io/docs/nodejs)
 
