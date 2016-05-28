@@ -14,9 +14,9 @@ export default (app) => {
   app.route('/')
     .get((req, res) => res.render('home'));
 
-  // Home
-  app.route('/about')
-    .get((req, res) => res.render('about'));
+  // About
+  // app.route('/about')
+    // .get((req, res) => res.render('about'));
 
   // Sign up
   app.route('/signup')

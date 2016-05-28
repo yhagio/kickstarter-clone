@@ -37,6 +37,7 @@ const searchHandler = {
       size: perPage, 
       sort: { 
         'funding_end_date': 'asc'
+        // 'createdAt': -1 
       }
     };
 

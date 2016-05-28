@@ -36,7 +36,9 @@ const projectHandler = {
     .find({})
     .populate('createdBy', 'name')
     .skip(skipNum * 20)
-    .limit(20).exec((err, projects) => {
+    .limit(20)
+    // .sort({ 'createdAt': -1 })
+    .exec((err, projects) => {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');
         return res.redirect('/');

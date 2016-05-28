@@ -80,7 +80,12 @@ const projectSchema = new Mongoose.Schema({
   rewards: [{
     type: Mongoose.Schema.Types.ObjectId,
     ref: 'Reward'
-  }]
+  }],
+
+  createdAt: {
+    type: Date,
+    default: Date.now 
+  }
 
 });
 

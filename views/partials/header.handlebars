@@ -13,13 +13,14 @@
     <div id="navbar" class="navbar-collapse collapse">
 
       <ul class="nav navbar-nav">
+        <li class=""><a href="/projects">All Projects</a></li>
         <li class=""><a href="/discover">Discover</a></li>
         {{#if loggedin }}
           {{#if canCreateProject}}
             <li class=""><a href="/create-project">Start a project</a></li>
           {{/if}}
         {{/if}}
-        <li class=""><a href="/about">About</a></li>
+        {{!-- <li class=""><a href="/about">About</a></li> --}}
       </ul>
 
       <form id="search-bar" class="navbar-form navbar-nav" role="search" method="POST" action="/search/">
