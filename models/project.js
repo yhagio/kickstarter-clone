@@ -106,7 +106,7 @@ if (process.env.NODE_ENV === 'production') {
   var url = require('url');
   var elasticConnection = url.parse(process.env.BONSAI_URL);
   // Heroku Add-on Bonsai (Production)
-  projectSchema.plugin(_mongoosastic2.default, {
+  projectSchema.plugin(_mongoosastic3.default, {
     host: elasticConnection.hostname,
     auth: elasticConnection.auth,
     port: '',
