@@ -48,7 +48,9 @@ var projectHandler = {
   getProjectList: function getProjectList(req, res) {
     var skipNum = req.query.skipNum || 0;
 
-    _project2.default.find({}).populate('createdBy', 'name').skip(skipNum * 20).limit(20).exec(function (err, projects) {
+    _project2.default.find({}).populate('createdBy', 'name').skip(skipNum * 20).limit(20)
+    // .sort({ 'createdAt': -1 })
+    .exec(function (err, projects) {
       if (err) {
         req.flash('danger', 'Something went wrong. Refresh.');
         return res.redirect('/');
@@ -57,6 +59,8 @@ var projectHandler = {
       projects.forEach(function (project) {
         project.tilEnd = (0, _helpers.getDayTilEnd)(project.funding_end_date);
         project.fundingPercentage = (0, _helpers.getFundingPercentage)(project.funding_goal, project.current_funding);
+        project.currentFunds = Math.floor(project.current_funding / 100);
+        project.isProjectActive = new Date() < project.funding_end_date;
       });
 
       // TODO: progressbar percentage
@@ -154,7 +158,9 @@ var projectHandler = {
 
         return res.render('projects/project-page', { project: modifiedProject,
           dayTil: (0, _helpers.getDayTilEnd)(project.funding_end_date),
-          numBackers: project.backerUserIds.length
+          numBackers: project.backerUserIds.length,
+          currentFunds: Math.floor(project.current_funding / 100),
+          isProjectActive: new Date() < project.funding_end_date
         });
       });
     }
@@ -170,6 +176,11 @@ var projectHandler = {
       if (err) {
         req.flash('danger', 'No project found.');
         return res.redirect('/');
+      }
+
+      if (new Date() > project.funding_end_date) {
+        req.flash('danger', 'Project funding ended.');
+        return res.redirect('/projects/' + req.params.id);
       }
 
       project.rewards.forEach(function (reward) {
@@ -360,7 +371,7 @@ var projectHandler = {
           short_description: fields.short_description,
           long_description: fields.long_description,
           category: fields.category,
-          funding_goal: fields.funding_goal,
+          funding_goal: fields.funding_goal * 100,
           funding_end_date: endingDate,
           file_path: data.secure_url,
           // estimated_delivery: deliveryDate,
@@ -404,6 +415,7 @@ var projectHandler = {
       projects.forEach(function (project) {
         project.tilEnd = (0, _helpers.getDayTilEnd)(project.funding_end_date);
         project.fundingPercentage = (0, _helpers.getFundingPercentage)(project.funding_goal, project.current_funding);
+        project.currentFunds = Math.floor(project.current_funding / 100);
       });
 
       if (skipNum == 0) {

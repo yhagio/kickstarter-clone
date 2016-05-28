@@ -98,7 +98,7 @@ function getFundingPercentage(goal$, current$) {
   if (current$ == 0) {
     return 0;
   }
-  return current$ / goal$ * 100;
+  return Math.floor(current$ / goal$ * 100);
 }
 
 // Check String length

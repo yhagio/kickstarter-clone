@@ -74,8 +74,11 @@ var paymentHandler = {
           // console.log('*** Reward Update \n', result1);
         });
 
-        // Update project
-        var projectUpdate = { $addToSet: { backerUserIds: req.user.id } };
+        // Update project (backerUserIds & current_funding)
+        var projectUpdate = {
+          $addToSet: { backerUserIds: req.user.id },
+          $inc: { current_funding: charge.amount - charge.fee }
+        };
         _project2.default.findOneAndUpdate({ _id: req.params.projectid }, projectUpdate, function (projectErr, result2) {
           if (projectErr) {
             req.flash('danger', 'Could not update reward backers.');

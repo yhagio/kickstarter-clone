@@ -46,10 +46,9 @@ exports.default = function (app) {
     return res.render('home');
   });
 
-  // Home
-  app.route('/about').get(function (req, res) {
-    return res.render('about');
-  });
+  // About
+  // app.route('/about')
+  // .get((req, res) => res.render('about'));
 
   // Sign up
   app.route('/signup').all(_helpers.isLoggedIn).get(function (req, res) {

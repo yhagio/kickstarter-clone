@@ -20,7 +20,7 @@ var searchHandler = {
     res.redirect('/search?q=' + req.body.q + '&page=' + page);
   },
   getSearchResult: function getSearchResult(req, res) {
-    // console.log("req.query: \n", req.query);
+    console.log("req.query: \n", req.query);
 
     // .i.e
     // per page = 5
@@ -43,6 +43,7 @@ var searchHandler = {
       size: perPage,
       sort: {
         'funding_end_date': 'asc'
+        // 'createdAt': -1
       }
     };
 
@@ -56,7 +57,7 @@ var searchHandler = {
         }
       }, searchOptions, function (err, results) {
         if (err) {
-          // console.log('*** err: \n\n', err ,'\n');
+          console.log('*** err: \n\n', err, '\n');
           req.flash('danger', 'Search error. Please try again.');
           return res.redirect('/projects');
         }
@@ -67,6 +68,8 @@ var searchHandler = {
         data.forEach(function (project) {
           project._source.tilEnd = (0, _helpers.getDayTilEnd)(project._source.funding_end_date);
           project._source.fundingPercentage = (0, _helpers.getFundingPercentage)(project._source.funding_goal, project._source.current_funding);
+          project._source.currentFunds = Math.floor(project._source.current_funding / 100);
+          project._source.isProjectActive = new Date() < project._source.funding_end_date;
         });
 
         if (page == 0) {
